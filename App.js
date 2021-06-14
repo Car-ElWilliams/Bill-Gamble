@@ -1,16 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import LoadingScreen from './components/LoadingScreen.js';
+import LoadingScreen from './components/LoadingScreen';
+import Context from './Context';
+
 export default function App() {
+	const [progressDone, setProgressDone] = useState(true);
+
 	return (
-		<PaperProvider>
-			<View style={styles.container}>
-				<LoadingScreen />
-				{/*<StatusBar style='auto' />*/}
-			</View>
-		</PaperProvider>
+		<Context.Provider value={{ progressDone, setProgressDone }}>
+			<PaperProvider>
+				<View style={styles.container}>
+					{progressDone && <LoadingScreen progress='' />}
+					<View>Hello</View>
+					{/*<StatusBar style='auto' />*/}
+				</View>
+			</PaperProvider>
+		</Context.Provider>
 	);
 }
 

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
 import LoadingImage from '../assets/bill-gamble-logo.png';
 import { ProgressBar, Colors } from 'react-native-paper';
+import Context from '../Context';
 
-export default function LoadingScreen() {
+export default function LoadingScreen(props) {
+	//UseContext
+	const { progressDone, setProgressDone } = useContext(Context);
+
+	//Variables
 	const [progressLoadTime, setProgressLoadTime] = useState(0);
 
+	//Functions
+
 	useEffect(() => {
+		let mounted = true;
+
 		setTimeout(() => {
 			setProgressLoadTime(0.2);
 		}, 1000);
@@ -15,21 +24,15 @@ export default function LoadingScreen() {
 		}, 1500);
 		setTimeout(() => {
 			setProgressLoadTime(1);
+			setProgressDone(false);
 		}, 2700);
 	}, []);
-
-	if (progressLoadTime === 1) {
-		console.log('done');
-	}
 
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
-				{/*<View id='LoadingBar' style={styles.LoadingBar}>*/}
-				{/*<Animated.View style={styles.InnerLoadingBar}></Animated.View>*/}
-				{/*</View>*/}
 			</ImageBackground>
 			<ProgressBar
 				style={styles.LoadingBar}
