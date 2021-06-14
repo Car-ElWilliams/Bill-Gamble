@@ -3,13 +3,6 @@ import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native'
 import LoadingImage from '../assets/bill-gamble-logo.png';
 
 export default function LoadingScreen() {
-	let animation = useRef(new Animated.Value(0));
-
-	const width = animation.current.interpolate({
-		inputRange: [0, 100],
-		outputRange: ['0%', '100%'],
-		extrapolate: 'clamp',
-	});
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
@@ -59,7 +52,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 10,
 		height: '170%',
-		width,
+		width: '10%',
 		backgroundColor: 'blue',
 		borderColor: 'transparent',
 		top: -2,
