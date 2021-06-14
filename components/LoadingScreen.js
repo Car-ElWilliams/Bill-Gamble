@@ -1,24 +1,42 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
 import LoadingImage from '../assets/bill-gamble-logo.png';
+import { ProgressBar, Colors } from 'react-native-paper';
 
 export default function LoadingScreen() {
-	let animation = useRef(new Animated.Value(0));
+	const [progressLoadTime, setProgressLoadTime] = useState(0);
 
-	const width = animation.current.interpolate({
-		inputRange: [0, 100],
-		outputRange: ['0%', '100%'],
-		extrapolate: 'clamp',
-	});
+	useEffect(() => {
+		setTimeout(() => {
+			setProgressLoadTime(0.2);
+		}, 1000);
+		setTimeout(() => {
+			setProgressLoadTime(0.6);
+		}, 1500);
+		setTimeout(() => {
+			setProgressLoadTime(1);
+		}, 2700);
+	}, []);
+
+	if (progressLoadTime === 1) {
+		console.log('done');
+	}
+
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
-				<View id='LoadingBar' style={styles.LoadingBar}>
-					<Animated.View style={styles.InnerLoadingBar}></Animated.View>
-				</View>
+				{/*<View id='LoadingBar' style={styles.LoadingBar}>*/}
+				{/*<Animated.View style={styles.InnerLoadingBar}></Animated.View>*/}
+				{/*</View>*/}
 			</ImageBackground>
+			<ProgressBar
+				style={styles.LoadingBar}
+				progress={progressLoadTime}
+				color={Colors.blue400}
+				//indeterminate={true}
+			/>
 		</View>
 	);
 }
@@ -45,26 +63,9 @@ const styles = StyleSheet.create({
 	},
 
 	LoadingBar: {
-		borderWidth: 2,
-		borderRadius: 10,
-		height: '1%',
-		width: '60%',
 		backgroundColor: 'white',
-		borderColor: 'transparent',
-		marginTop: '2%',
-	},
-
-	InnerLoadingBar: {
-		position: 'absolute',
-		borderWidth: 2,
 		borderRadius: 10,
-		height: '170%',
-		width,
-		backgroundColor: 'blue',
-		borderColor: 'transparent',
-		top: -2,
-		left: -2,
-		alignItems: 'flex-start',
+		height: 5,
 	},
 
 	LoadingBarText: {
