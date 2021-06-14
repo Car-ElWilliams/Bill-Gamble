@@ -6,7 +6,7 @@ import Context from '../Context';
 export default function Home(props) {
 	return (
 		<View style={styles.HomeContainer}>
-			<Text>Choose Risk Level</Text>
+			<Text style={styles.Header}>Choose Risk Level</Text>
 			<Button mode='contained' color='green'>
 				Normal
 			</Button>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
-	header: {
-		fontSize: 30,
+	Header: {
+		fontSize: 50,
 	},
 });
