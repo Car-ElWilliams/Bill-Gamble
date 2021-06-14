@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import LoadingScreen from './components/LoadingScreen';
 import Context from './Context';
+import Home from './components/Home';
 
 export default function App() {
 	const [progressDone, setProgressDone] = useState(true);
@@ -12,8 +13,8 @@ export default function App() {
 		<Context.Provider value={{ progressDone, setProgressDone }}>
 			<PaperProvider>
 				<View style={styles.container}>
-					{progressDone && <LoadingScreen progress='' />}
-					<View>Hello</View>
+					{progressDone && <LoadingScreen />}
+					{!progressDone && <Home />}
 					{/*<StatusBar style='auto' />*/}
 				</View>
 			</PaperProvider>
@@ -27,6 +28,5 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'center',
 	},
 });
