@@ -2,21 +2,46 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from './components/LoadingScreen';
 import Context from './Context';
-import Home from './components/Home';
+import Home from './routes/Home';
+import InputSelections from './routes/InputSelections';
+
+const Stack = createStackNavigator();
 
 export default function App() {
 	const [progressDone, setProgressDone] = useState(true);
+	const [billValue, setBillValue] = useState(true);
 
 	return (
-		<Context.Provider value={{ progressDone, setProgressDone }}>
+		<Context.Provider value={{ progressDone, setProgressDone, billValue, setBillValue }}>
 			<PaperProvider>
-				<View style={styles.container}>
-					{progressDone && <LoadingScreen />}
-					{!progressDone && <Home />}
-					{/*<StatusBar style='auto' />*/}
-				</View>
+				<NavigationContainer>
+					<Stack.Navigator screenOptions={{ headerShown: true }}>
+						{/*<View style={styles.container}>*/}
+						{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
+						<Stack.Screen
+							name='Home'
+							component={Home}
+							//options={{
+							//	title: 'My home',
+							//	headerStyle: { backgroundColor: 'red', display: 'none' },
+							//	headerTintColor: '#fff',
+							//	headerTitleStyle: {
+							//		fontWeight: 'bold',
+							//		fontSize: 25,
+							//	},
+							//}}
+						/>
+						<Stack.Screen name='InputSelections' component={InputSelections} />
+						{/*{progressDone && <LoadingScreen />}*/}
+						{/*{!progressDone && <Home />}*/}
+						{/*<StatusBar style='auto' />*/}
+						{/*</View>*/}
+					</Stack.Navigator>
+				</NavigationContainer>
 			</PaperProvider>
 		</Context.Provider>
 	);

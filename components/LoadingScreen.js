@@ -34,12 +34,7 @@ export default function LoadingScreen(props) {
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
 			</ImageBackground>
-			<ProgressBar
-				style={styles.LoadingBar}
-				progress={progressLoadTime}
-				color={Colors.blue400}
-				//indeterminate={true}
-			/>
+			<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
 		</View>
 	);
 }
