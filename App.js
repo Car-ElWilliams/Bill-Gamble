@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from './components/LoadingScreen';
 import Context from './Context';
-import Home from './routes/Home';
+import Home from './routes/Home.js';
 import InputSelections from './routes/InputSelections';
 
 const Stack = createStackNavigator();
