@@ -49,12 +49,11 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function removePlayer(playerToRemove, indexToRemove) {
-		console.log('START', playerToRemove, indexToRemove);
-		setPlayerArray(previousState => {
-			console.log('PREVIOUS STATE:', previousState);
-			//previousState.slice(1);
-			console.log('New array after slice is', playerArray);
-		});
+		return setPlayerArray(
+			playerArray.filter(player => {
+				return player !== playerToRemove;
+			})
+		);
 	}
 	return (
 		<View style={styles.container}>
