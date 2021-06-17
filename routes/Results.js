@@ -18,7 +18,11 @@ export default function Results({ navigation }) {
 	useEffect(() => {
 		console.log(amountToPay, evenPay);
 		console.log(amountToPay.reduce((a, b) => a + b, 0));
+		console.log('shuffled array: ' + shuffleArray(amountToPay));
+		console.log(Math.floor(Math.random() * (100 - 0)) / 100);
 	}, [amountToPay, evenPay]);
+
+	//Normal Mode
 
 	function randomizeNormalResults() {
 		const RandomPayOrEvenPay = Math.floor(Math.random() * 3) + 1;
@@ -26,13 +30,13 @@ export default function Results({ navigation }) {
 		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
 
 		if (RandomPayOrEvenPay === 1 || RandomPayOrEvenPay === 2) {
-			//66% chance of splitting evenly
 			return normalModeRandomPay();
 		}
-		return normalModeEvenPay();
+		//33% chance of splitting evenly
+		return RiskyAndNormalEvenPay();
 	}
 
-	function normalModeEvenPay() {
+	function RiskyAndNormalEvenPay() {
 		const playerAmount = allPlayerNames.length;
 		const split = billValue / playerAmount;
 
@@ -111,6 +115,109 @@ export default function Results({ navigation }) {
 		}
 	}
 
+	// Risky Mode
+
+	function randomizeRiskyResults() {
+		const RandomPayOrEvenPay = Math.floor(Math.random() * 101);
+
+		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
+
+		if (RandomPayOrEvenPay === 50) {
+			//1% chance of splitting evenly
+			return RiskyAndNormalEvenPay();
+		}
+		return riskyModeRandomPay();
+	}
+
+	function riskyModeRandomPay() {
+		let randomDecimal = Math.floor(Math.random() * (100 - 0)) / 100;
+
+		const howManyPlayers = allPlayerNames.length;
+
+		let max = billValue;
+
+		let player1;
+		let player2;
+		let player3;
+		let player4;
+		let player5;
+		let player6;
+
+		switch (howManyPlayers) {
+			case 2:
+				player1 = randomBetween(0, randomDecimal * billValue);
+				player2 = max - player1;
+				setAmountToPay([player1, player2]);
+
+				break;
+
+			case 3:
+				player1 = randomBetween(0, billValue);
+				player2 = randomBetween(0, billValue - player1);
+				player3 = max - player1 - player2;
+				setAmountToPay([player1, player2, player3]);
+
+				break;
+			//Fix minus resuts below and above
+			case 4:
+				player1 = randomBetween(0, billValue);
+				player2 = randomBetween(0, billValue - player1);
+				player3 = randomBetween(0, billValue - player1 - player2);
+				player4 = max - player1 - player2 - player3;
+				setAmountToPay([player1, player2, player3, player4]);
+
+				break;
+
+			case 5:
+				player1 = randomBetween(0, billValue);
+				player2 = randomBetween(0, billValue - player1);
+				player3 = randomBetween(0, billValue - player1 - player2);
+				player4 = randomBetween(0, billValue - player1 - player2 - player3);
+
+				player5 = max - player1 - player2 - player3 - player4;
+				setAmountToPay([player1, player2, player3, player4, player5]);
+
+				break;
+
+			case 6:
+				player1 = randomBetween(0, billValue);
+				player2 = randomBetween(0, billValue - player1);
+				player3 = randomBetween(0, billValue - player1 - player2);
+				player4 = randomBetween(0, billValue - player1 - player2 - player3);
+
+				player5 = randomBetween(0, billValue - player1 - player2 - player3 - player4);
+				player6 = max - player1 - player2 - player3 - player4 - player5;
+				setAmountToPay([player1, player2, player3, player4, player5, player6]);
+
+				break;
+
+			default:
+				break;
+		}
+
+		function randomBetween(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+		return shuffleArray(amountToPay);
+	}
+
+	// SHuffle Array
+
+	function shuffleArray(array) {
+		//Fisher Yates Baby!
+		var currentIndex = array.length,
+			randomIndex;
+
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+
+			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+		}
+		console.log(array);
+		return [array];
+	}
+
 	useEffect(() => {
 		setTimeout(() => {
 			setCountdownNumber(2);
@@ -120,7 +227,8 @@ export default function Results({ navigation }) {
 					setCountdownNumber('GO');
 					setTimeout(() => {
 						setCountdownNumber(null);
-						randomizeNormalResults();
+						//randomizeNormalResults();
+						randomizeRiskyResults();
 					}, 500);
 				}, 1000);
 			}, 1000);
