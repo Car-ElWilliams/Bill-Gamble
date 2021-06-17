@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
 			>
 				Normal
 			</Button>
-			<Text>Chances of splitting the bill equally is higher</Text>
+			<Text>Chances of splitting the bill equally is much higher</Text>
 
 			<Button
 				mode='contained'

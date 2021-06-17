@@ -7,6 +7,7 @@ import Context from '../Context';
 export default function BillAmount({ route, navigation }) {
 	//UseContext
 	const { billValue, setBillValue } = useContext(Context);
+	const { setAllPlayerNames } = useContext(Context);
 
 	//? Variables
 
@@ -55,6 +56,11 @@ export default function BillAmount({ route, navigation }) {
 			})
 		);
 	}
+
+	function submitAllPlayers() {
+		setAllPlayerNames(playerArray);
+	}
+
 	return (
 		<View style={styles.container}>
 			{risky ? (
@@ -129,7 +135,13 @@ export default function BillAmount({ route, navigation }) {
 					>
 						Add
 					</Button>
-					<Button>Done</Button>
+					<Button
+						onPress={() => {
+							return [submitAllPlayers(), navigation.navigate('Chicken')];
+						}}
+					>
+						Done
+					</Button>
 					<View>{playerArray.length !== 0 && renderPlayers()}</View>
 				</View>
 			)}
