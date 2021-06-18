@@ -17,7 +17,7 @@ export default function BillAmount({ route, navigation }) {
 	const [playerNumberCount, setPlayerNumberCount] = useState(1);
 
 	const [billValidation, setBillValidation] = useState(false);
-	const [currentBillValue, setCurrentBillValue] = useState(null);
+	const [currentBillValue, setCurrentBillValue] = useState('');
 
 	const { bill } = route.params;
 
@@ -93,16 +93,13 @@ export default function BillAmount({ route, navigation }) {
 							}
 						}}
 						error={billValidation}
+						value={currentBillValue}
 					></TextInput>
 					<Button
 						onPress={() => {
 							return [
 								setBillValue(currentBillValue),
-								//setWhichPage(() => ({
-								//	bill: false,
-								//	players: true,
-								//	chicken: false,
-								//})),
+
 								navigation.setParams({ bill: false, players: true }),
 								console.log(route.params),
 							];

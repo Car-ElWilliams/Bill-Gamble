@@ -136,8 +136,6 @@ export default function Results({ navigation }) {
 	}
 
 	function riskyModeRandomPay() {
-		let randomDecimal = Math.floor(Math.random() * (100 - 0)) / 100;
-
 		const howManyPlayers = allPlayerNames.length;
 
 		let max = billValue;
@@ -206,8 +204,6 @@ export default function Results({ navigation }) {
 		return shuffleArray(amountToPay);
 	}
 
-	// SHuffle Array
-
 	function shuffleArray(array) {
 		//Fisher Yates Baby!
 		var currentIndex = array.length,
@@ -219,12 +215,14 @@ export default function Results({ navigation }) {
 
 			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 		}
+
 		console.log(array);
 		setAmountToPay(array);
 
 		updateIsShuffleDone(true);
 
 		console.log('amountToPay after shuffle', amountToPay);
+
 		return true;
 	}
 

@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper';
 import Context from '../Context';
 
 export default function Home({ navigation }) {
-	const { riskyLevel, setriskyLevel } = useContext(Context);
+	const { setriskyLevel } = useContext(Context);
 
 	return (
 		<View style={styles.HomeContainer}>
