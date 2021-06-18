@@ -8,6 +8,7 @@ export default function BillAmount({ route, navigation }) {
 	//UseContext
 	const { billValue, setBillValue } = useContext(Context);
 	const { setAllPlayerNames } = useContext(Context);
+	const { riskyLevel } = useContext(Context);
 
 	//? Variables
 
@@ -18,7 +19,7 @@ export default function BillAmount({ route, navigation }) {
 	const [billValidation, setBillValidation] = useState(false);
 	const [currentBillValue, setCurrentBillValue] = useState(null);
 
-	const { risky, bill } = route.params;
+	const { bill } = route.params;
 
 	//? Not getting this to work?
 	//const addButton = useRef();
@@ -63,7 +64,7 @@ export default function BillAmount({ route, navigation }) {
 
 	return (
 		<View style={styles.container}>
-			{risky ? (
+			{riskyLevel ? (
 				<View id='Banner-Risky' style={{ backgroundColor: 'red', height: '15%' }}>
 					<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: High</Text>
 				</View>

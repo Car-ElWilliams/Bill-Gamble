@@ -17,6 +17,7 @@ export default function App() {
 	const [progressDone, setProgressDone] = useState(true);
 	const [billValue, setBillValue] = useState(true);
 	const [allPlayerNames, setAllPlayerNames] = useState('');
+	const [riskyLevel, setriskyLevel] = useState('');
 
 	return (
 		<Context.Provider
@@ -27,6 +28,8 @@ export default function App() {
 				setBillValue,
 				allPlayerNames,
 				setAllPlayerNames,
+				riskyLevel,
+				setriskyLevel,
 			}}
 		>
 			<PaperProvider>

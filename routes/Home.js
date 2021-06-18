@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
 import { Button } from 'react-native-paper';
+import Context from '../Context';
 
 export default function Home({ navigation }) {
+	const { riskyLevel, setriskyLevel } = useContext(Context);
+
 	return (
 		<View style={styles.HomeContainer}>
 			<Text style={styles.Header}>Choose Risk Level</Text>
 			<Button
 				mode='contained'
 				color='green'
-				onPress={() =>
-					navigation.navigate('InputSelections', {
-						risky: false,
-
-						bill: 'bill',
-					})
-				}
+				onPress={() => {
+					return [
+						navigation.navigate('InputSelections', {
+							risky: false,
+							bill: 'bill',
+						}),
+						setriskyLevel(false),
+					];
+				}}
 			>
 				Normal
 			</Button>
@@ -24,12 +29,15 @@ export default function Home({ navigation }) {
 			<Button
 				mode='contained'
 				color='red'
-				onPress={() =>
-					navigation.navigate('InputSelections', {
-						risky: true,
-						bill: 'bill',
-					})
-				}
+				onPress={() => {
+					return [
+						navigation.navigate('InputSelections', {
+							risky: true,
+							bill: 'bill',
+						}),
+						setriskyLevel(true),
+					];
+				}}
 			>
 				Risky
 			</Button>

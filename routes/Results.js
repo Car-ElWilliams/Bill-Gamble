@@ -4,20 +4,26 @@ import { Button } from 'react-native-paper';
 import Context from '../Context';
 
 export default function Results({ navigation }) {
+	//Todo shuffle array not rendering
+	//Todo useEffect console.log makes values be seen without it nothing renders
+
 	//? Variables
 	const [countdownNumber, setCountdownNumber] = useState(3);
 
 	const { allPlayerNames, setAllPlayerNames } = useContext(Context);
 	const { billValue, setBillValue } = useContext(Context);
+	const { riskyLevel } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
 	const [amountToPay, setAmountToPay] = useState([]);
+	const [isShuffleDone, updateIsShuffleDone] = useState(false);
 
 	//!Functions
 
 	useEffect(() => {
 		console.log(amountToPay, evenPay);
 		console.log(amountToPay.reduce((a, b) => a + b, 0));
+		//THis one is making the result appear
 		console.log('shuffled array: ' + shuffleArray(amountToPay));
 		console.log(Math.floor(Math.random() * (100 - 0)) / 100);
 	}, [amountToPay, evenPay]);
@@ -145,7 +151,7 @@ export default function Results({ navigation }) {
 
 		switch (howManyPlayers) {
 			case 2:
-				player1 = randomBetween(0, randomDecimal * billValue);
+				player1 = randomBetween(0, billValue);
 				player2 = max - player1;
 				setAmountToPay([player1, player2]);
 
@@ -184,7 +190,6 @@ export default function Results({ navigation }) {
 				player2 = randomBetween(0, billValue - player1);
 				player3 = randomBetween(0, billValue - player1 - player2);
 				player4 = randomBetween(0, billValue - player1 - player2 - player3);
-
 				player5 = randomBetween(0, billValue - player1 - player2 - player3 - player4);
 				player6 = max - player1 - player2 - player3 - player4 - player5;
 				setAmountToPay([player1, player2, player3, player4, player5, player6]);
@@ -215,7 +220,12 @@ export default function Results({ navigation }) {
 			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 		}
 		console.log(array);
-		return [array];
+		setAmountToPay(array);
+
+		updateIsShuffleDone(true);
+
+		console.log('amountToPay after shuffle', amountToPay);
+		return true;
 	}
 
 	useEffect(() => {
@@ -227,20 +237,31 @@ export default function Results({ navigation }) {
 					setCountdownNumber('GO');
 					setTimeout(() => {
 						setCountdownNumber(null);
-						//randomizeNormalResults();
-						randomizeRiskyResults();
+						if (riskyLevel) {
+							console.log('riskylevel');
+							return randomizeRiskyResults();
+						}
+						console.log('normalLevel');
+						return randomizeNormalResults();
 					}, 500);
 				}, 1000);
 			}, 1000);
 		}, 1000);
 	}, []);
-
 	return (
 		<View style={styles.HomeContainer}>
 			{countdownNumber !== null && <Text>{countdownNumber}</Text>}
-			{countdownNumber === null && (
+			{countdownNumber === null && isShuffleDone && (
 				<View>
-					<Text>Results</Text>
+					{allPlayerNames.map((player, i) => {
+						return (
+							<View key={player + i}>
+								<Text>
+									{player} will pay {amountToPay[i]}
+								</Text>
+							</View>
+						);
+					})}
 				</View>
 			)}
 
