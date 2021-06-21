@@ -4,6 +4,21 @@ import { Button } from 'react-native-paper';
 import Context from '../Context';
 
 export default function Home({ navigation }) {
+	useEffect(() => {
+		abba();
+	}, []);
+
+	const [joke, setJoke] = useState('');
+
+	const abba = async () => {
+		try {
+			let data = await fetch('https://api.chucknorris.io/jokes/random');
+			let json = await data.json();
+			setJoke(json.value);
+		} catch {
+			console.log(error.message);
+		}
+	};
 	const { setriskyLevel } = useContext(Context);
 
 	return (
@@ -42,6 +57,11 @@ export default function Home({ navigation }) {
 				Risky
 			</Button>
 			<Text>For the greedy and the brave</Text>
+
+			{/*Remove this after assignment:*/}
+			<View style={styles.deleteMe}>
+				<Text>{joke}</Text>
+			</View>
 		</View>
 	);
 }
@@ -54,5 +74,8 @@ const styles = StyleSheet.create({
 	},
 	Header: {
 		fontSize: 50,
+	},
+	deleteMe: {
+		marginTop: 100,
 	},
 });
