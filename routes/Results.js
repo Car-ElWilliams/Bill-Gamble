@@ -15,18 +15,28 @@ export default function Results({ navigation }) {
 	const { riskyLevel } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
-	const [amountToPay, setAmountToPay] = useState([]);
-	const [isShuffleDone, updateIsShuffleDone] = useState(false);
+	const [amountToPay, setAmountToPay] = useState('');
+
+	const [launchRiskyFunctions, setLaunchRiskyFunctions] = useState(false);
+	const [launchNormalFunctions, setLaunchNormalFunctions] = useState(false);
 
 	//!Functions
 
 	useEffect(() => {
-		console.log(amountToPay, evenPay);
-		console.log(amountToPay.reduce((a, b) => a + b, 0));
+		//console.log(amountToPay, evenPay);
+		//console.log(amountToPay.reduce((a, b) => a + b, 0));
 		//THis one is making the result appear
-		console.log('shuffled array: ' + shuffleArray(amountToPay));
-		console.log(Math.floor(Math.random() * (100 - 0)) / 100);
+		//console.log('shuffled array: ' + shuffleArray(amountToPay));
+		//console.log(Math.floor(Math.random() * (100 - 0)) / 100);
 	}, [amountToPay, evenPay]);
+
+	useEffect(() => {
+		randomizeRiskyResults();
+	}, [launchRiskyFunctions]);
+
+	useEffect(() => {
+		randomizeNormalResults();
+	}, [launchNormalFunctions]);
 
 	//Normal Mode
 
@@ -63,7 +73,7 @@ export default function Results({ navigation }) {
 		let player5;
 		let player6;
 
-		console.log('howManyPlayers', howManyPlayers);
+		console.log('howManyPlayers:', howManyPlayers);
 		console.log(Math.floor((0.8 / howManyPlayers) * billValue));
 
 		switch (howManyPlayers) {
@@ -153,7 +163,7 @@ export default function Results({ navigation }) {
 			case 2:
 				player1 = randomBetween(0, billValue);
 				player2 = max - player1;
-				setAmountToPay([player1, player2]);
+				setAmountToPay(shuffleArray([player1, player2]));
 
 				break;
 
@@ -161,7 +171,7 @@ export default function Results({ navigation }) {
 				player1 = randomBetween(0, billValue);
 				player2 = randomBetween(0, billValue - player1);
 				player3 = max - player1 - player2;
-				setAmountToPay([player1, player2, player3]);
+				setAmountToPay(shuffleArray([player1, player2, player3]));
 
 				break;
 			//Fix minus resuts below and above
@@ -170,7 +180,7 @@ export default function Results({ navigation }) {
 				player2 = randomBetween(0, billValue - player1);
 				player3 = randomBetween(0, billValue - player1 - player2);
 				player4 = max - player1 - player2 - player3;
-				setAmountToPay([player1, player2, player3, player4]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4]));
 
 				break;
 
@@ -181,7 +191,7 @@ export default function Results({ navigation }) {
 				player4 = randomBetween(0, billValue - player1 - player2 - player3);
 
 				player5 = max - player1 - player2 - player3 - player4;
-				setAmountToPay([player1, player2, player3, player4, player5]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5]));
 
 				break;
 
@@ -192,7 +202,7 @@ export default function Results({ navigation }) {
 				player4 = randomBetween(0, billValue - player1 - player2 - player3);
 				player5 = randomBetween(0, billValue - player1 - player2 - player3 - player4);
 				player6 = max - player1 - player2 - player3 - player4 - player5;
-				setAmountToPay([player1, player2, player3, player4, player5, player6]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5, player6]));
 
 				break;
 
@@ -200,32 +210,24 @@ export default function Results({ navigation }) {
 				break;
 		}
 
+		function shuffleArray(array) {
+			//Fisher Yates Baby!
+
+			console.log('array coming in', array);
+			var currentIndex = array.length,
+				randomIndex;
+			while (0 !== currentIndex) {
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex--;
+				[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+			}
+			console.log('array coming out', array);
+			return array;
+		}
+
 		function randomBetween(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		}
-		return shuffleArray(amountToPay);
-	}
-
-	// SHuffle Array
-
-	function shuffleArray(array) {
-		//Fisher Yates Baby!
-		var currentIndex = array.length,
-			randomIndex;
-
-		while (0 !== currentIndex) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex--;
-
-			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-		}
-		console.log(array);
-		setAmountToPay(array);
-
-		updateIsShuffleDone(true);
-
-		console.log('amountToPay after shuffle', amountToPay);
-		return true;
 	}
 
 	useEffect(() => {
@@ -241,10 +243,12 @@ export default function Results({ navigation }) {
 							setCountdownNumber(null);
 							if (riskyLevel) {
 								console.log('riskylevel');
-								return randomizeRiskyResults();
+								launchRiskyFunctions;
+								setLaunchRiskyFunctions(true);
+							} else {
+								setLaunchNormalFunctions(true);
+								console.log('normalLevel');
 							}
-							console.log('normalLevel');
-							return randomizeNormalResults();
 						}, 500);
 					}, 1000);
 				}, 1000);
@@ -259,7 +263,7 @@ export default function Results({ navigation }) {
 	return (
 		<View style={styles.HomeContainer}>
 			{countdownNumber !== null && <Text>{countdownNumber}</Text>}
-			{countdownNumber === null && isShuffleDone && (
+			{countdownNumber === null && (
 				<View>
 					{allPlayerNames.map((player, i) => {
 						return (
