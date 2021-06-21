@@ -229,25 +229,33 @@ export default function Results({ navigation }) {
 	}
 
 	useEffect(() => {
-		setTimeout(() => {
-			setCountdownNumber(2);
+		let mounted = true;
+		if (mounted) {
 			setTimeout(() => {
-				setCountdownNumber(1);
+				setCountdownNumber(2);
 				setTimeout(() => {
-					setCountdownNumber('GO');
+					setCountdownNumber(1);
 					setTimeout(() => {
-						setCountdownNumber(null);
-						if (riskyLevel) {
-							console.log('riskylevel');
-							return randomizeRiskyResults();
-						}
-						console.log('normalLevel');
-						return randomizeNormalResults();
-					}, 500);
+						setCountdownNumber('GO');
+						setTimeout(() => {
+							setCountdownNumber(null);
+							if (riskyLevel) {
+								console.log('riskylevel');
+								return randomizeRiskyResults();
+							}
+							console.log('normalLevel');
+							return randomizeNormalResults();
+						}, 500);
+					}, 1000);
 				}, 1000);
 			}, 1000);
-		}, 1000);
+		}
+
+		return () => {
+			mounted = false;
+		};
 	}, []);
+
 	return (
 		<View style={styles.HomeContainer}>
 			{countdownNumber !== null && <Text>{countdownNumber}</Text>}

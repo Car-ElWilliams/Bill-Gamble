@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 	LoadingText: {
 		color: '#fff',
 		fontSize: 70,
-		fontFamily: 'Menlo',
+		fontFamily: 'Roboto',
 		textAlign: 'center',
 		marginTop: '25%',
 		marginBottom: '75%',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 	LoadingBarText: {
 		color: '#fff',
 		fontSize: 35,
-		fontFamily: 'Menlo',
+		fontFamily: 'Roboto',
 		textAlign: 'center',
 		//marginTop: '75%',
 	},
