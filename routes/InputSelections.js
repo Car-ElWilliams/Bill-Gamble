@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import Context from '../Context';
+import Ads from '../components/Ads';
 
 export default function BillAmount({ route, navigation }) {
 	//UseContext
@@ -11,6 +12,7 @@ export default function BillAmount({ route, navigation }) {
 	const { riskyLevel } = useContext(Context);
 
 	//? Variables
+	const playerInputRef = useRef();
 
 	const [getPlayersFromInput, setGetplayersFromInput] = useState('');
 	const [playerArray, setPlayerArray] = useState([]);
@@ -20,6 +22,8 @@ export default function BillAmount({ route, navigation }) {
 	const [currentBillValue, setCurrentBillValue] = useState('');
 
 	const { bill } = route.params;
+
+	const [disableButton, setDisableButton] = useState(true);
 
 	//? Not getting this to work?
 	//const addButton = useRef();
@@ -32,7 +36,8 @@ export default function BillAmount({ route, navigation }) {
 	useEffect(() => {
 		console.log(playerArray);
 		setPlayerNumberCount(playerArray.length + 1);
-	}, [playerArray]);
+		enableAddButton();
+	}, [playerArray, setPlayerArray]);
 
 	function renderPlayers() {
 		return [
@@ -51,15 +56,31 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function removePlayer(playerToRemove, indexToRemove) {
-		return setPlayerArray(
-			playerArray.filter(player => {
-				return player !== playerToRemove;
-			})
-		);
+		return [
+			setPlayerArray(
+				playerArray.filter(player => {
+					return player !== playerToRemove;
+				})
+			),
+		];
 	}
 
 	function submitAllPlayers() {
 		setAllPlayerNames(playerArray);
+	}
+
+	const clearText = useCallback(() => {
+		playerInputRef.current.setNativeProps({ text: '' });
+	});
+
+	function enableAddButton() {
+		console.log(playerArray.length);
+		console.log(disableButton);
+		if (playerArray.length > 1) {
+			console.log('setttt');
+			return setDisableButton(false);
+		}
+		return setDisableButton(true);
 	}
 
 	return (
@@ -114,19 +135,25 @@ export default function BillAmount({ route, navigation }) {
 			{route.params.players && (
 				<View id=''>
 					<TextInput
+						ref={playerInputRef}
 						label={`Enter player ${playerNumberCount} name`}
 						placeholder='Erik'
+						autoFocus={true}
 						onChangeText={e => {
 							setGetplayersFromInput(e);
+						}}
+						onSubmitEditing={() => {
+							return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
 						}}
 						value={getPlayersFromInput}
 					></TextInput>
 					<Button
 						onPress={() => {
 							return [
-								//setPlayerNumberCount(playerNumberCount + 1),
 								console.log(playerNumberCount),
 								setPlayerArray([...playerArray, getPlayersFromInput]),
+								clearText(),
+								//enableAddButton(),
 							];
 						}}
 						returnKeyType='next'
@@ -134,6 +161,7 @@ export default function BillAmount({ route, navigation }) {
 						Add
 					</Button>
 					<Button
+						disabled={disableButton}
 						onPress={() => {
 							return [submitAllPlayers(), navigation.navigate('Chicken')];
 						}}
@@ -141,6 +169,7 @@ export default function BillAmount({ route, navigation }) {
 						Done
 					</Button>
 					<View>{playerArray.length !== 0 && renderPlayers()}</View>
+					<Ads />
 				</View>
 			)}
 		</View>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
+import Ads from '../components/Ads';
 
 export default function Home({ navigation }) {
 	const { riskyLevel, setriskyLevel } = useContext(Context);
@@ -10,6 +11,7 @@ export default function Home({ navigation }) {
 		<View style={styles.HomeContainer}>
 			<Text style={styles.Header}>Choose Risk Level</Text>
 			<Button
+				style={styles.Buttons}
 				mode='contained'
 				color='green'
 				onPress={() => {
@@ -27,6 +29,7 @@ export default function Home({ navigation }) {
 			<Text>Chances of splitting the bill equally is much higher</Text>
 
 			<Button
+				style={styles.Buttons}
 				mode='contained'
 				color='red'
 				onPress={() => {
@@ -42,6 +45,7 @@ export default function Home({ navigation }) {
 				Risky
 			</Button>
 			<Text>For the greedy and the brave</Text>
+			<Ads />
 		</View>
 	);
 }
@@ -51,8 +55,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	Header: {
-		fontSize: 50,
+		marginTop: 10,
+		fontSize: 35,
+	},
+
+	Buttons: {
+		width: '80%',
+		padding: '3%',
 	},
 });

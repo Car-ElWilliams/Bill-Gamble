@@ -34,12 +34,12 @@ export default function App() {
 		>
 			<PaperProvider>
 				<NavigationContainer>
-					<Stack.Navigator screenOptions={{ headerShown: true }}>
-						{/*<View style={styles.container}>*/}
+					<Stack.Navigator screenOptions={{ headerShown: false }}>
 						{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
 						<Stack.Screen
 							name='Home'
 							component={Home}
+
 							//options={{
 							//	title: 'My home',
 							//	headerStyle: { backgroundColor: 'red', display: 'none' },
@@ -56,19 +56,9 @@ export default function App() {
 						{/*{progressDone && <LoadingScreen />}*/}
 						{/*{!progressDone && <Home />}*/}
 						{/*<StatusBar style='auto' />*/}
-						{/*</View>*/}
 					</Stack.Navigator>
 				</NavigationContainer>
 			</PaperProvider>
 		</Context.Provider>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-});
