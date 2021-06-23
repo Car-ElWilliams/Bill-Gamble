@@ -16,7 +16,7 @@ export default function BillAmount({ route, navigation }) {
 
 	const [getPlayersFromInput, setGetplayersFromInput] = useState('');
 	const [playerArray, setPlayerArray] = useState([]);
-	const [playerNumberCount, setPlayerNumberCount] = useState(1);
+	const [playerNumberCount, setPlayerNumberCount] = useState('');
 
 	const [billValidation, setBillValidation] = useState(false);
 	const [currentBillValue, setCurrentBillValue] = useState('');
@@ -24,6 +24,9 @@ export default function BillAmount({ route, navigation }) {
 	const { bill } = route.params;
 
 	const [disableButton, setDisableButton] = useState(true);
+	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
+
+	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
 
 	//? Not getting this to work?
 	//const addButton = useRef();
@@ -34,10 +37,22 @@ export default function BillAmount({ route, navigation }) {
 	//! Functions
 
 	useEffect(() => {
-		console.log(playerArray);
-		setPlayerNumberCount(playerArray.length + 1);
 		enableAddButton();
-	}, [playerArray, setPlayerArray]);
+
+		if (playerArray.length === 7) {
+			setLabelForPlayers('Max Players Reached');
+		} else {
+			setLabelForPlayers(`Enter player ${playerNumberCount + 1} name`);
+		}
+
+		if (playerArray.length === 7) {
+			setDisablePlayerTextInput(true);
+		} else {
+			setDisablePlayerTextInput(false);
+		}
+
+		console.log(playerArray.length, playerNumberCount);
+	}, [playerArray]);
 
 	function renderPlayers() {
 		return [
@@ -46,7 +61,12 @@ export default function BillAmount({ route, navigation }) {
 				return (
 					<View key={players + i}>
 						<Text>{players}</Text>
-						<Button mode='contained' onPress={() => removePlayer(players, i)}>
+						<Button
+							mode='contained'
+							onPress={() => {
+								return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
+							}}
+						>
 							Remove
 						</Button>
 					</View>
@@ -58,8 +78,12 @@ export default function BillAmount({ route, navigation }) {
 	function removePlayer(playerToRemove, indexToRemove) {
 		return [
 			setPlayerArray(
-				playerArray.filter(player => {
-					return player !== playerToRemove;
+				playerArray.filter((player, index) => {
+					if (indexToRemove === index && playerToRemove === player) {
+						console.log(indexToRemove, index, playerToRemove, player);
+						return index !== indexToRemove;
+					}
+					return playerToRemove === player;
 				})
 			),
 		];
@@ -107,11 +131,9 @@ export default function BillAmount({ route, navigation }) {
 							const regex = new RegExp(/^[0-9\b]+$/);
 
 							if (regex.test(e) || e === '') {
-								console.log(e);
 								setCurrentBillValue(e);
 								setBillValidation(false);
 							} else {
-								console.log('error');
 								setBillValidation(true);
 							}
 						}}
@@ -136,9 +158,10 @@ export default function BillAmount({ route, navigation }) {
 			)}
 			{route.params.players && (
 				<View id=''>
+					<Button onPress={() => navigation.setParams({ bill: true, players: false })}>Back</Button>
 					<TextInput
 						ref={playerInputRef}
-						label={`Enter player ${playerNumberCount} name`}
+						label={labelForPlayers}
 						placeholder='Erik'
 						autoFocus={true}
 						onChangeText={e => {
@@ -148,6 +171,7 @@ export default function BillAmount({ route, navigation }) {
 							return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
 						}}
 						value={getPlayersFromInput}
+						disabled={disablePlayerTextInput}
 					></TextInput>
 					<Button
 						onPress={() => {
@@ -155,10 +179,11 @@ export default function BillAmount({ route, navigation }) {
 								console.log(playerNumberCount),
 								setPlayerArray([...playerArray, getPlayersFromInput]),
 								clearText(),
-								//enableAddButton(),
+								setPlayerNumberCount(playerArray.length + 1),
 							];
 						}}
 						returnKeyType='next'
+						disabled={disablePlayerTextInput}
 					>
 						Add
 					</Button>
