@@ -106,10 +106,12 @@ export default function BillAmount({ route, navigation }) {
 						onChangeText={e => {
 							const regex = new RegExp(/^[0-9\b]+$/);
 
-							if (regex.test(e)) {
+							if (regex.test(e) || e === '') {
+								console.log(e);
 								setCurrentBillValue(e);
 								setBillValidation(false);
 							} else {
+								console.log('error');
 								setBillValidation(true);
 							}
 						}}
