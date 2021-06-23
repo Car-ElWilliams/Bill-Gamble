@@ -150,7 +150,16 @@ export default function BillAmount({ route, navigation }) {
 					>
 						Next
 					</Button>
-					<Text>{billValue}</Text>
+					<Button
+						onPress={() => {
+							return navigation.navigate('Home', {
+								risky: true,
+								bill: 'bill',
+							});
+						}}
+					>
+						Back
+					</Button>
 				</View>
 			)}
 			{route.params.players && (
