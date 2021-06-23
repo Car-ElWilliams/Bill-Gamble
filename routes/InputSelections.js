@@ -25,6 +25,7 @@ export default function BillAmount({ route, navigation }) {
 
 	const [disableButton, setDisableButton] = useState(true);
 	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
+	const [disableNextButton, setDisableNextButton] = useState(true);
 
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
 
@@ -53,6 +54,10 @@ export default function BillAmount({ route, navigation }) {
 
 		console.log(playerArray.length, playerNumberCount);
 	}, [playerArray]);
+
+	useEffect(() => {
+		enableNextButton();
+	}, [currentBillValue]);
 
 	function renderPlayers() {
 		return [
@@ -104,6 +109,16 @@ export default function BillAmount({ route, navigation }) {
 		return setDisableButton(true);
 	}
 
+	function enableNextButton() {
+		const regex = new RegExp(/^[0-9\b]+$/);
+
+		if (currentBillValue === '') {
+			return setDisableNextButton(true);
+		}
+
+		return setDisableNextButton(false);
+	}
+
 	return (
 		<View style={styles.container}>
 			{riskyLevel ? (
@@ -129,9 +144,6 @@ export default function BillAmount({ route, navigation }) {
 
 							if (regex.test(e) || e === '') {
 								setCurrentBillValue(e);
-								setBillValidation(false);
-							} else {
-								setBillValidation(true);
 							}
 						}}
 						error={billValidation}
@@ -146,16 +158,13 @@ export default function BillAmount({ route, navigation }) {
 								console.log(route.params),
 							];
 						}}
-						disabled={billValidation}
+						disabled={disableNextButton}
 					>
 						Next
 					</Button>
 					<Button
 						onPress={() => {
-							return navigation.navigate('Home', {
-								risky: true,
-								bill: 'bill',
-							});
+							return navigation.navigate('Home');
 						}}
 					>
 						Back
