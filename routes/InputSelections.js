@@ -79,11 +79,8 @@ export default function BillAmount({ route, navigation }) {
 		return [
 			setPlayerArray(
 				playerArray.filter((player, index) => {
-					if (indexToRemove === index && playerToRemove === player) {
-						console.log(indexToRemove, index, playerToRemove, player);
-						return index !== indexToRemove;
-					}
-					return playerToRemove === player;
+					//Works...
+					return index !== indexToRemove;
 				})
 			),
 		];
