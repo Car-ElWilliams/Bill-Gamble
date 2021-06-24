@@ -10,23 +10,51 @@ export default function Results({ navigation }) {
 	//? Variables
 	const [countdownNumber, setCountdownNumber] = useState(3);
 
-	const { allPlayerNames, setAllPlayerNames } = useContext(Context);
-	const { billValue, setBillValue } = useContext(Context);
+	const { allPlayerNames } = useContext(Context);
+	const { billValue } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
-	const [amountToPay, setAmountToPay] = useState('');
+	const [amountToPay, setAmountToPay] = useState([]);
 
 	const [launchRiskyFunctions, setLaunchRiskyFunctions] = useState(false);
 	const [launchNormalFunctions, setLaunchNormalFunctions] = useState(false);
 
+	const [winner, setWinner] = useState(null);
+	const [loser, setLoser] = useState(null);
+
 	//!Functions
+	matchPlayerWithPay();
+	function matchPlayerWithPay() {
+		let thePlayers = {};
+
+		for (const [i, playerValue] of allPlayerNames.entries()) {
+			//thePlayers = { ...playerValue[i], ...playerValue };
+
+			let playerIndex = 'player' + i;
+
+			Object.assign(thePlayers, { playerIndex: playerValue });
+			console.log(thePlayers);
+			console.log(i, playerValue, playerIndex);
+		}
+	}
+
+	function sortPay() {
+		const sortedArray = amountToPay.sort(function (a, b) {
+			return a - b;
+		});
+		const lowestPay = sortedArray[0];
+		const highestPay = sortedArray[amountToPay.length - 1];
+
+		return sortedArray;
+	}
 
 	useEffect(() => {
 		//console.log(amountToPay, evenPay);
 		//console.log(amountToPay.reduce((a, b) => a + b, 0));
 		//THis one is making the result appear
-		//console.log('shuffled array: ' + shuffleArray(amountToPay));
+		sortPay();
+
 		//console.log(Math.floor(Math.random() * (100 - 0)) / 100);
 	}, [amountToPay, evenPay]);
 
@@ -276,8 +304,9 @@ export default function Results({ navigation }) {
 					})}
 				</View>
 			)}
-
-			<Button onPress={() => navigation.navigate('Home')}>Home</Button>
+			{countdownNumber === null && (
+				<Button onPress={() => navigation.navigate('Home')}>Home</Button>
+			)}
 		</View>
 	);
 }
