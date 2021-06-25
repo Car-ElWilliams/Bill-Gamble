@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import { render } from 'react-dom';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import Context from '../Context';
+import Ads from '../components/Ads';
 
 export default function BillAmount({ route, navigation }) {
 	//UseContext
@@ -11,15 +12,22 @@ export default function BillAmount({ route, navigation }) {
 	const { riskyLevel } = useContext(Context);
 
 	//? Variables
+	const playerInputRef = useRef();
 
 	const [getPlayersFromInput, setGetplayersFromInput] = useState('');
 	const [playerArray, setPlayerArray] = useState([]);
-	const [playerNumberCount, setPlayerNumberCount] = useState(1);
+	const [playerNumberCount, setPlayerNumberCount] = useState('');
 
 	const [billValidation, setBillValidation] = useState(false);
 	const [currentBillValue, setCurrentBillValue] = useState('');
 
 	const { bill } = route.params;
+
+	const [disableButton, setDisableButton] = useState(true);
+	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
+	const [disableNextButton, setDisableNextButton] = useState(true);
+
+	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
 
 	//? Not getting this to work?
 	//const addButton = useRef();
@@ -30,9 +38,26 @@ export default function BillAmount({ route, navigation }) {
 	//! Functions
 
 	useEffect(() => {
-		console.log(playerArray);
-		setPlayerNumberCount(playerArray.length + 1);
+		enableAddButton();
+
+		if (playerArray.length === 7) {
+			setLabelForPlayers('Max Players Reached');
+		} else {
+			setLabelForPlayers(`Enter player ${playerNumberCount + 1} name`);
+		}
+
+		if (playerArray.length === 7) {
+			setDisablePlayerTextInput(true);
+		} else {
+			setDisablePlayerTextInput(false);
+		}
+
+		console.log(playerArray.length, playerNumberCount);
 	}, [playerArray]);
+
+	useEffect(() => {
+		enableNextButton();
+	}, [currentBillValue]);
 
 	function renderPlayers() {
 		return [
@@ -41,7 +66,12 @@ export default function BillAmount({ route, navigation }) {
 				return (
 					<View key={players + i}>
 						<Text>{players}</Text>
-						<Button mode='contained' onPress={() => removePlayer(players, i)}>
+						<Button
+							mode='contained'
+							onPress={() => {
+								return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
+							}}
+						>
 							Remove
 						</Button>
 					</View>
@@ -51,15 +81,42 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function removePlayer(playerToRemove, indexToRemove) {
-		return setPlayerArray(
-			playerArray.filter(player => {
-				return player !== playerToRemove;
-			})
-		);
+		return [
+			setPlayerArray(
+				playerArray.filter((player, index) => {
+					//Works...
+					return index !== indexToRemove;
+				})
+			),
+		];
 	}
 
 	function submitAllPlayers() {
 		setAllPlayerNames(playerArray);
+	}
+
+	const clearText = useCallback(() => {
+		playerInputRef.current.setNativeProps({ text: '' });
+	});
+
+	function enableAddButton() {
+		console.log(playerArray.length);
+		console.log(disableButton);
+		if (playerArray.length > 1) {
+			console.log('setttt');
+			return setDisableButton(false);
+		}
+		return setDisableButton(true);
+	}
+
+	function enableNextButton() {
+		const regex = new RegExp(/^[0-9\b]+$/);
+
+		if (currentBillValue === '') {
+			return setDisableNextButton(true);
+		}
+
+		return setDisableNextButton(false);
 	}
 
 	return (
@@ -85,11 +142,8 @@ export default function BillAmount({ route, navigation }) {
 						onChangeText={e => {
 							const regex = new RegExp(/^[0-9\b]+$/);
 
-							if (regex.test(e)) {
+							if (regex.test(e) || e === '') {
 								setCurrentBillValue(e);
-								setBillValidation(false);
-							} else {
-								setBillValidation(true);
 							}
 						}}
 						error={billValidation}
@@ -104,36 +158,52 @@ export default function BillAmount({ route, navigation }) {
 								console.log(route.params),
 							];
 						}}
-						disabled={billValidation}
+						disabled={disableNextButton}
 					>
 						Next
 					</Button>
-					<Text>{billValue}</Text>
+					<Button
+						onPress={() => {
+							return navigation.navigate('Home');
+						}}
+					>
+						Back
+					</Button>
 				</View>
 			)}
 			{route.params.players && (
 				<View id=''>
+					<Button onPress={() => navigation.setParams({ bill: true, players: false })}>Back</Button>
 					<TextInput
-						label={`Enter player ${playerNumberCount} name`}
+						ref={playerInputRef}
+						label={labelForPlayers}
 						placeholder='Erik'
+						autoFocus={true}
 						onChangeText={e => {
 							setGetplayersFromInput(e);
 						}}
+						onSubmitEditing={() => {
+							return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+						}}
 						value={getPlayersFromInput}
+						disabled={disablePlayerTextInput}
 					></TextInput>
 					<Button
 						onPress={() => {
 							return [
-								//setPlayerNumberCount(playerNumberCount + 1),
 								console.log(playerNumberCount),
 								setPlayerArray([...playerArray, getPlayersFromInput]),
+								clearText(),
+								setPlayerNumberCount(playerArray.length + 1),
 							];
 						}}
 						returnKeyType='next'
+						disabled={disablePlayerTextInput}
 					>
 						Add
 					</Button>
 					<Button
+						disabled={disableButton}
 						onPress={() => {
 							return [submitAllPlayers(), navigation.navigate('Chicken')];
 						}}
@@ -141,6 +211,7 @@ export default function BillAmount({ route, navigation }) {
 						Done
 					</Button>
 					<View>{playerArray.length !== 0 && renderPlayers()}</View>
+					<Ads />
 				</View>
 			)}
 		</View>

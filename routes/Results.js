@@ -10,23 +10,61 @@ export default function Results({ navigation }) {
 	//? Variables
 	const [countdownNumber, setCountdownNumber] = useState(3);
 
-	const { allPlayerNames, setAllPlayerNames } = useContext(Context);
-	const { billValue, setBillValue } = useContext(Context);
+	const { allPlayerNames } = useContext(Context);
+	const { billValue } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
 	const [amountToPay, setAmountToPay] = useState([]);
-	const [isShuffleDone, updateIsShuffleDone] = useState(false);
+
+	const [launchRiskyFunctions, setLaunchRiskyFunctions] = useState(false);
+	const [launchNormalFunctions, setLaunchNormalFunctions] = useState(false);
+
+	const [winner, setWinner] = useState(null);
+	const [loser, setLoser] = useState(null);
 
 	//!Functions
+	matchPlayerWithPay();
+	function matchPlayerWithPay() {
+		let thePlayers = {};
+
+		for (const [i, playerValue] of allPlayerNames.entries()) {
+			//thePlayers = { ...playerValue[i], ...playerValue };
+
+			let playerIndex = 'player' + i;
+
+			Object.assign(thePlayers, { playerIndex: playerValue });
+			console.log(thePlayers);
+			console.log(i, playerValue, playerIndex);
+		}
+	}
+
+	function sortPay() {
+		const sortedArray = amountToPay.sort(function (a, b) {
+			return a - b;
+		});
+		const lowestPay = sortedArray[0];
+		const highestPay = sortedArray[amountToPay.length - 1];
+
+		return sortedArray;
+	}
 
 	useEffect(() => {
-		console.log(amountToPay, evenPay);
-		console.log(amountToPay.reduce((a, b) => a + b, 0));
+		//console.log(amountToPay, evenPay);
+		//console.log(amountToPay.reduce((a, b) => a + b, 0));
 		//THis one is making the result appear
-		console.log('shuffled array: ' + shuffleArray(amountToPay));
-		console.log(Math.floor(Math.random() * (100 - 0)) / 100);
+		sortPay();
+
+		//console.log(Math.floor(Math.random() * (100 - 0)) / 100);
 	}, [amountToPay, evenPay]);
+
+	useEffect(() => {
+		randomizeRiskyResults();
+	}, [launchRiskyFunctions]);
+
+	useEffect(() => {
+		randomizeNormalResults();
+	}, [launchNormalFunctions]);
 
 	//Normal Mode
 
@@ -63,7 +101,7 @@ export default function Results({ navigation }) {
 		let player5;
 		let player6;
 
-		console.log('howManyPlayers', howManyPlayers);
+		console.log('howManyPlayers:', howManyPlayers);
 		console.log(Math.floor((0.8 / howManyPlayers) * billValue));
 
 		switch (howManyPlayers) {
@@ -151,7 +189,7 @@ export default function Results({ navigation }) {
 			case 2:
 				player1 = randomBetween(0, billValue);
 				player2 = max - player1;
-				setAmountToPay([player1, player2]);
+				setAmountToPay(shuffleArray([player1, player2]));
 
 				break;
 
@@ -159,7 +197,7 @@ export default function Results({ navigation }) {
 				player1 = randomBetween(0, billValue);
 				player2 = randomBetween(0, billValue - player1);
 				player3 = max - player1 - player2;
-				setAmountToPay([player1, player2, player3]);
+				setAmountToPay(shuffleArray([player1, player2, player3]));
 
 				break;
 			//Fix minus resuts below and above
@@ -168,7 +206,7 @@ export default function Results({ navigation }) {
 				player2 = randomBetween(0, billValue - player1);
 				player3 = randomBetween(0, billValue - player1 - player2);
 				player4 = max - player1 - player2 - player3;
-				setAmountToPay([player1, player2, player3, player4]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4]));
 
 				break;
 
@@ -179,7 +217,7 @@ export default function Results({ navigation }) {
 				player4 = randomBetween(0, billValue - player1 - player2 - player3);
 
 				player5 = max - player1 - player2 - player3 - player4;
-				setAmountToPay([player1, player2, player3, player4, player5]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5]));
 
 				break;
 
@@ -190,7 +228,7 @@ export default function Results({ navigation }) {
 				player4 = randomBetween(0, billValue - player1 - player2 - player3);
 				player5 = randomBetween(0, billValue - player1 - player2 - player3 - player4);
 				player6 = max - player1 - player2 - player3 - player4 - player5;
-				setAmountToPay([player1, player2, player3, player4, player5, player6]);
+				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5, player6]));
 
 				break;
 
@@ -198,58 +236,60 @@ export default function Results({ navigation }) {
 				break;
 		}
 
+		function shuffleArray(array) {
+			//Fisher Yates Baby!
+
+			console.log('array coming in', array);
+			var currentIndex = array.length,
+				randomIndex;
+			while (0 !== currentIndex) {
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex--;
+				[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+			}
+			console.log('array coming out', array);
+			return array;
+		}
+
 		function randomBetween(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		}
-		return shuffleArray(amountToPay);
-	}
-
-	function shuffleArray(array) {
-		//Fisher Yates Baby!
-		var currentIndex = array.length,
-			randomIndex;
-
-		while (0 !== currentIndex) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex--;
-
-			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-		}
-
-		console.log(array);
-		setAmountToPay(array);
-
-		updateIsShuffleDone(true);
-
-		console.log('amountToPay after shuffle', amountToPay);
-
-		return true;
 	}
 
 	useEffect(() => {
-		setTimeout(() => {
-			setCountdownNumber(2);
+		let mounted = true;
+		if (mounted) {
 			setTimeout(() => {
-				setCountdownNumber(1);
+				setCountdownNumber(2);
 				setTimeout(() => {
-					setCountdownNumber('GO');
+					setCountdownNumber(1);
 					setTimeout(() => {
-						setCountdownNumber(null);
-						if (riskyLevel) {
-							console.log('riskylevel');
-							return randomizeRiskyResults();
-						}
-						console.log('normalLevel');
-						return randomizeNormalResults();
-					}, 500);
+						setCountdownNumber('GO');
+						setTimeout(() => {
+							setCountdownNumber(null);
+							if (riskyLevel) {
+								console.log('riskylevel');
+								launchRiskyFunctions;
+								setLaunchRiskyFunctions(true);
+							} else {
+								setLaunchNormalFunctions(true);
+								console.log('normalLevel');
+							}
+						}, 500);
+					}, 1000);
 				}, 1000);
 			}, 1000);
-		}, 1000);
+		}
+
+		return () => {
+			mounted = false;
+		};
 	}, []);
+
 	return (
 		<View style={styles.HomeContainer}>
 			{countdownNumber !== null && <Text>{countdownNumber}</Text>}
-			{countdownNumber === null && isShuffleDone && (
+			{countdownNumber === null && (
 				<View>
 					{allPlayerNames.map((player, i) => {
 						return (
@@ -262,8 +302,9 @@ export default function Results({ navigation }) {
 					})}
 				</View>
 			)}
-
-			<Button onPress={() => navigation.navigate('Home')}>Home</Button>
+			{countdownNumber === null && (
+				<Button onPress={() => navigation.navigate('Home')}>Home</Button>
+			)}
 		</View>
 	);
 }

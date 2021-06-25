@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
+import Ads from '../components/Ads';
+import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 
 export default function Home({ navigation }) {
 	useEffect(() => {
@@ -23,10 +25,13 @@ export default function Home({ navigation }) {
 
 	return (
 		<View style={styles.HomeContainer}>
+			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
+
 			<Text style={styles.Header}>Choose Risk Level</Text>
 			<Button
+				style={styles.Buttons}
 				mode='contained'
-				color='green'
+				color='#189615'
 				onPress={() => {
 					return [
 						navigation.navigate('InputSelections', {
@@ -37,13 +42,14 @@ export default function Home({ navigation }) {
 					];
 				}}
 			>
-				Normal
+				<Text style={styles.ButtonInnerText}>Normal</Text>
 			</Button>
-			<Text>Chances of splitting the bill equally is much higher</Text>
+			<Text style={styles.ButtonText}>Win less, lose less</Text>
 
 			<Button
+				style={styles.Buttons}
 				mode='contained'
-				color='red'
+				color='#D00404'
 				onPress={() => {
 					return [
 						navigation.navigate('InputSelections', {
@@ -54,14 +60,10 @@ export default function Home({ navigation }) {
 					];
 				}}
 			>
-				Risky
+				<Text style={styles.ButtonInnerText}>Risky</Text>
 			</Button>
-			<Text>For the greedy and the brave</Text>
-
-			{/*Remove this after assignment:*/}
-			<View style={styles.deleteMe}>
-				<Text>{joke}</Text>
-			</View>
+			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
+			<Ads />
 		</View>
 	);
 }
@@ -71,9 +73,43 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgb(255, 87, 87)',
+	},
+
+	TransparentLogo: {
+		width: 110,
+		height: 110,
+
+		alignSelf: 'center',
+		marginTop: -50,
 	},
 	Header: {
-		fontSize: 50,
+		marginTop: 30,
+		marginBottom: 69,
+		fontSize: 36,
+		color: '#fff',
+		fontFamily: 'Montserrat_700Bold',
+		textAlign: 'center',
+	},
+
+	Buttons: {
+		width: '60%',
+		padding: '2.5%',
+		borderColor: '#fff',
+		borderWidth: 2,
+		borderRadius: 60,
+	},
+	ButtonInnerText: {
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 16,
+	},
+	ButtonText: {
+		color: '#fff',
+		fontFamily: 'Montserrat_700Bold',
+		marginTop: 10,
+		marginBottom: 25,
+		fontSize: 10,
 	},
 	deleteMe: {
 		marginTop: 100,

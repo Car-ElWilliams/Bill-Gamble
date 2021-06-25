@@ -10,8 +10,13 @@ import Home from './routes/Home.js';
 import InputSelections from './routes/InputSelections';
 import Chicken from './routes/Chicken';
 import Results from './routes/Results';
+import {
+	useFonts,
+	Montserrat_800ExtraBold,
+	Montserrat_700Bold,
+	Montserrat_900Black_Italic,
+} from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
-import * as SplashScreen from 'expo-splash-screen';
 
 const Stack = createStackNavigator();
 
@@ -21,45 +26,36 @@ export default function App() {
 	const [allPlayerNames, setAllPlayerNames] = useState('');
 	const [riskyLevel, setriskyLevel] = useState('');
 
-	const [isReady, setIsReady] = useState(false);
+	let [fontsLoaded] = useFonts({
+		Montserrat_800ExtraBold,
+		Montserrat_700Bold,
+		Montserrat_900Black_Italic,
+	});
 
-	//!Functions
-
-	function cacheResourcesAsync() {
-		SplashScreen.hideAsync();
-	}
-
-	return (
-		<Context.Provider
-			value={{
-				progressDone,
-				setProgressDone,
-				billValue,
-				setBillValue,
-				allPlayerNames,
-				setAllPlayerNames,
-				riskyLevel,
-				setriskyLevel,
-			}}
-		>
-			<PaperProvider>
-				<AppLoading
-					startAsync={() => cacheResourcesAsync()}
-					onFinish={() => setIsReady(true)}
-					onError={console.warn}
-				/>
-				{isReady && (
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	} else {
+		return (
+			<Context.Provider
+				value={{
+					progressDone,
+					setProgressDone,
+					billValue,
+					setBillValue,
+					allPlayerNames,
+					setAllPlayerNames,
+					riskyLevel,
+					setriskyLevel,
+				}}
+			>
+				<PaperProvider>
 					<NavigationContainer>
-						<Stack.Navigator screenOptions={{ headerShown: true }}>
-							{/*<View style={styles.container}>*/}
+						<Stack.Navigator screenOptions={{ headerShown: false }}>
 							{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
-							{
-								//<Stack.Screen name='LoadingScreen-v2' component={AppLoading} />
-								//</Stack.Screen>
-							}
 							<Stack.Screen
 								name='Home'
 								component={Home}
+
 								//options={{
 								//	title: 'My home',
 								//	headerStyle: { backgroundColor: 'red', display: 'none' },
@@ -76,20 +72,10 @@ export default function App() {
 							{/*{progressDone && <LoadingScreen />}*/}
 							{/*{!progressDone && <Home />}*/}
 							{/*<StatusBar style='auto' />*/}
-							{/*</View>*/}
 						</Stack.Navigator>
 					</NavigationContainer>
-				)}
-			</PaperProvider>
-		</Context.Provider>
-	);
+				</PaperProvider>
+			</Context.Provider>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-});
