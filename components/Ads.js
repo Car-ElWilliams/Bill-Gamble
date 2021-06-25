@@ -13,9 +13,9 @@ const ads = StyleSheet.create({
 	Ads: {
 		position: 'absolute',
 		bottom: 0,
-		backgroundColor: 'lightblue',
+		backgroundColor: 'turquoise',
 		width: '100%',
-		height: '5%',
+		height: '7%',
 		textAlign: 'center',
 	},
 });

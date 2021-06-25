@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 		marginTop: -50,
 	},
 	Header: {
-		marginTop: 30,
+		marginTop: 10,
 		marginBottom: 69,
 		fontSize: 36,
 		color: '#fff',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
 		marginTop: 10,
-		marginBottom: 25,
+		marginBottom: 30,
 		fontSize: 10,
 	},
 	deleteMe: {
