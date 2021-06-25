@@ -10,7 +10,12 @@ import Home from './routes/Home.js';
 import InputSelections from './routes/InputSelections';
 import Chicken from './routes/Chicken';
 import Results from './routes/Results';
-import { useFonts, Montserrat_800ExtraBold } from '@expo-google-fonts/montserrat';
+import {
+	useFonts,
+	Montserrat_800ExtraBold,
+	Montserrat_700Bold,
+	Montserrat_900Black_Italic,
+} from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 
 const Stack = createStackNavigator();
@@ -23,6 +28,8 @@ export default function App() {
 
 	let [fontsLoaded] = useFonts({
 		Montserrat_800ExtraBold,
+		Montserrat_700Bold,
+		Montserrat_900Black_Italic,
 	});
 
 	if (!fontsLoaded) {

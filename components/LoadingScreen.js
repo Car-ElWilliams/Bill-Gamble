@@ -27,7 +27,7 @@ export default function LoadingScreen(props) {
 		}, 2500);
 		setTimeout(() => {
 			setProgressLoadTime(1);
-			setProgressDone(true);
+			setProgressDone(false);
 		}, 2700);
 	}, []);
 
@@ -35,11 +35,12 @@ export default function LoadingScreen(props) {
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
-				<Text>BILL GAMBLE </Text>
+				<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
 			</ImageBackground>
-
-			<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
+			<View style={styles.LoadingBarContainer}>
+				<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
+			</View>
 		</View>
 	);
 }
@@ -62,19 +63,26 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
 		marginTop: '25%',
+	},
+	LoadingSlogan: {
+		color: '#fff',
+		fontSize: 10,
+		fontFamily: 'Montserrat_900Black_Italic',
+		textAlign: 'center',
 		marginBottom: '75%',
+		marginTop: '2.2%',
 	},
 
 	LoadingBar: {
-		backgroundColor: 'white',
-		borderRadius: 10,
-		height: 5,
+		backgroundColor: 'transparent',
+		borderRadius: 1,
+		height: 13,
 	},
 
 	LoadingBarText: {
 		color: '#fff',
 		fontSize: 35,
-		//fontFamily: 'Roboto',
+		fontFamily: 'Montserrat_700Bold',
 		textAlign: 'center',
 		//marginTop: '75%',
 	},
