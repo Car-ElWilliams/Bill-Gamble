@@ -10,6 +10,8 @@ import Home from './routes/Home.js';
 import InputSelections from './routes/InputSelections';
 import Chicken from './routes/Chicken';
 import Results from './routes/Results';
+import { useFonts, Montserrat_800ExtraBold } from '@expo-google-fonts/montserrat';
+import AppLoading from 'expo-app-loading';
 
 const Stack = createStackNavigator();
 
@@ -19,46 +21,54 @@ export default function App() {
 	const [allPlayerNames, setAllPlayerNames] = useState('');
 	const [riskyLevel, setriskyLevel] = useState('');
 
-	return (
-		<Context.Provider
-			value={{
-				progressDone,
-				setProgressDone,
-				billValue,
-				setBillValue,
-				allPlayerNames,
-				setAllPlayerNames,
-				riskyLevel,
-				setriskyLevel,
-			}}
-		>
-			<PaperProvider>
-				<NavigationContainer>
-					<Stack.Navigator screenOptions={{ headerShown: false }}>
-						{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
-						<Stack.Screen
-							name='Home'
-							component={Home}
+	let [fontsLoaded] = useFonts({
+		Montserrat_800ExtraBold,
+	});
 
-							//options={{
-							//	title: 'My home',
-							//	headerStyle: { backgroundColor: 'red', display: 'none' },
-							//	headerTintColor: '#fff',
-							//	headerTitleStyle: {
-							//		fontWeight: 'bold',
-							//		fontSize: 25,
-							//	},
-							//}}
-						/>
-						<Stack.Screen name='InputSelections' component={InputSelections} />
-						<Stack.Screen name='Chicken' component={Chicken} />
-						<Stack.Screen name='Results' component={Results} />
-						{/*{progressDone && <LoadingScreen />}*/}
-						{/*{!progressDone && <Home />}*/}
-						{/*<StatusBar style='auto' />*/}
-					</Stack.Navigator>
-				</NavigationContainer>
-			</PaperProvider>
-		</Context.Provider>
-	);
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	} else {
+		return (
+			<Context.Provider
+				value={{
+					progressDone,
+					setProgressDone,
+					billValue,
+					setBillValue,
+					allPlayerNames,
+					setAllPlayerNames,
+					riskyLevel,
+					setriskyLevel,
+				}}
+			>
+				<PaperProvider>
+					<NavigationContainer>
+						<Stack.Navigator screenOptions={{ headerShown: false }}>
+							{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
+							<Stack.Screen
+								name='Home'
+								component={Home}
+
+								//options={{
+								//	title: 'My home',
+								//	headerStyle: { backgroundColor: 'red', display: 'none' },
+								//	headerTintColor: '#fff',
+								//	headerTitleStyle: {
+								//		fontWeight: 'bold',
+								//		fontSize: 25,
+								//	},
+								//}}
+							/>
+							<Stack.Screen name='InputSelections' component={InputSelections} />
+							<Stack.Screen name='Chicken' component={Chicken} />
+							<Stack.Screen name='Results' component={Results} />
+							{/*{progressDone && <LoadingScreen />}*/}
+							{/*{!progressDone && <Home />}*/}
+							{/*<StatusBar style='auto' />*/}
+						</Stack.Navigator>
+					</NavigationContainer>
+				</PaperProvider>
+			</Context.Provider>
+		);
+	}
 }

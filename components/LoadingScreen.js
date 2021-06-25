@@ -8,7 +8,7 @@ export default function LoadingScreen(props) {
 	//UseContext
 	const { progressDone, setProgressDone } = useContext(Context);
 
-	//Variables
+	//?Variables
 	const [progressLoadTime, setProgressLoadTime] = useState(0);
 
 	//Functions
@@ -35,8 +35,10 @@ export default function LoadingScreen(props) {
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
+				<Text>BILL GAMBLE </Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
 			</ImageBackground>
+
 			<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
 		</View>
 	);
@@ -56,8 +58,8 @@ const styles = StyleSheet.create({
 
 	LoadingText: {
 		color: '#fff',
-		fontSize: 70,
-		fontFamily: 'Roboto',
+		fontSize: 40,
+		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
 		marginTop: '25%',
 		marginBottom: '75%',
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
 	LoadingBarText: {
 		color: '#fff',
 		fontSize: 35,
-		fontFamily: 'Roboto',
+		//fontFamily: 'Roboto',
 		textAlign: 'center',
 		//marginTop: '75%',
 	},
