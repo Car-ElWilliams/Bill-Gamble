@@ -27,7 +27,7 @@ export default function LoadingScreen(props) {
 		}, 2500);
 		setTimeout(() => {
 			setProgressLoadTime(1);
-			setProgressDone(false);
+			setProgressDone(true);
 		}, 2700);
 	}, []);
 
