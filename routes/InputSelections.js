@@ -133,7 +133,7 @@ export default function BillAmount({ route, navigation }) {
 		<View style={styles.rootContainer}>
 			<SafeAreaView style={styles.SafeAreaView}>
 				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
-					<ScrollView>
+					<ScrollView bounces={false}>
 						{riskyLevel ? (
 							<View id='Banner-Risky' style={styles.riskyBanner}>
 								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
