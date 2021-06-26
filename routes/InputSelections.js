@@ -129,8 +129,6 @@ export default function BillAmount({ route, navigation }) {
 		return setDisableNextButton(false);
 	}
 
-	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 40;
-
 	return (
 		<View style={styles.rootContainer}>
 			<SafeAreaView style={styles.SafeAreaView}>
@@ -268,6 +266,9 @@ export default function BillAmount({ route, navigation }) {
 	);
 }
 
+const heightRiskLevelBanner = Platform.OS === 'ios' ? 55 : 70;
+const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 10;
+
 const styles = StyleSheet.create({
 	removeButton: {
 		backgroundColor: 'red',
@@ -303,7 +304,7 @@ const styles = StyleSheet.create({
 	riskyBanner: {
 		flex: 1,
 		backgroundColor: '#D00404',
-		height: 70,
+		height: heightRiskLevelBanner,
 		justifyContent: 'center',
 	},
 	riskyBannerText: {
@@ -312,7 +313,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 19,
-		marginTop: 10,
+		marginTop: marginTopRiskLevelBanner,
 	},
 	BillAmountText: {
 		color: '#FF5757',
