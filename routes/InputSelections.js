@@ -129,7 +129,7 @@ export default function BillAmount({ route, navigation }) {
 		return setDisableNextButton(false);
 	}
 
-	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
+	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 40;
 
 	return (
 		<View style={styles.rootContainer}>
@@ -297,13 +297,13 @@ const styles = StyleSheet.create({
 		maxHeight: '35%',
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
-		marginTop: 20,
+		marginTop: 7.5,
 	},
 
 	riskyBanner: {
 		flex: 1,
 		backgroundColor: '#D00404',
-		height: 55,
+		height: 70,
 		justifyContent: 'center',
 	},
 	riskyBannerText: {
@@ -312,13 +312,13 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 19,
-		marginTop: 0,
+		marginTop: 10,
 	},
 	BillAmountText: {
 		color: '#FF5757',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
-		marginTop: 10,
+		marginTop: 0,
 		marginBottom: 40,
 	},
 

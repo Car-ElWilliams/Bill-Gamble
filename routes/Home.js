@@ -25,7 +25,6 @@ export default function Home({ navigation }) {
 
 	return (
 		<View style={styles.HomeContainer}>
-			{/*<ScrollView>*/}
 			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 
 			<Text style={styles.Header}>Choose Risk Level</Text>
@@ -64,7 +63,6 @@ export default function Home({ navigation }) {
 				<Text style={styles.ButtonInnerText}>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
-			{/*</ScrollView>*/}
 			<Ads />
 		</View>
 	);
@@ -112,8 +110,5 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		marginBottom: 30,
 		fontSize: 10,
-	},
-	deleteMe: {
-		marginTop: 100,
 	},
 });
