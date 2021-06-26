@@ -8,6 +8,7 @@ import {
 	KeyboardAvoidingView,
 	Platform,
 	TextInput,
+	SafeAreaView,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
@@ -132,133 +133,137 @@ export default function BillAmount({ route, navigation }) {
 
 	return (
 		<View style={styles.rootContainer}>
-			<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
-				<ScrollView>
-					{riskyLevel ? (
-						<View id='Banner-Risky' style={styles.riskyBanner}>
-							<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
-						</View>
-					) : (
-						<View id='Banner-Normal' style={{ backgroundColor: 'green', height: '25%' }}>
-							<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: Normal</Text>
-						</View>
-					)}
-
-					{/*Bill amount*/}
-					{bill && (
-						<View style={styles.SecondRootContainer}>
-							<View style={styles.RecieptSVGContainer}>
-								<RecieptSVG />
+			<SafeAreaView style={styles.SafeAreaView}>
+				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
+					<ScrollView>
+						{riskyLevel ? (
+							<View id='Banner-Risky' style={styles.riskyBanner}>
+								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
 							</View>
+						) : (
+							<View id='Banner-Normal' style={{ backgroundColor: 'green', height: '25%' }}>
+								<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: Normal</Text>
+							</View>
+						)}
 
-							<Text style={styles.BillAmountText}>Enter bill total </Text>
+						{/*Bill amount*/}
+						{bill && (
+							<View style={styles.SecondRootContainer}>
+								<View style={styles.RecieptSVGContainer}>
+									<RecieptSVG />
+								</View>
 
-							<TextInput
-								label='Enter Bill Amount'
-								placeholder='500'
-								keyboardType='number-pad'
-								onChangeText={e => {
-									const regex = new RegExp(/^[0-9\b]+$/);
+								<Text style={styles.BillAmountText}>Enter bill total </Text>
 
-									if (regex.test(e) || e === '') {
-										setCurrentBillValue(e);
-									}
-								}}
-								error={billValidation}
-								value={currentBillValue}
-								style={styles.BillInput}
-								textAlign='center'
-								maxLength={9}
-							></TextInput>
-							<Text
-								style={{
-									color: 'orange',
-									fontFamily: 'Montserrat_600SemiBold_Italic',
-									fontSize: 13,
-									marginTop: 9,
-								}}
-							>
-								Show me the money...
-							</Text>
-							<Button
-								style={styles.nextButton}
-								onPress={() => {
-									return [
-										setBillValue(currentBillValue),
+								<TextInput
+									label='Enter Bill Amount'
+									placeholder='500'
+									keyboardType='number-pad'
+									onChangeText={e => {
+										const regex = new RegExp(/^[0-9\b]+$/);
 
-										navigation.setParams({ bill: false, players: true }),
-										console.log(route.params),
-									];
-								}}
-								disabled={disableNextButton}
-							>
-								<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
-									Next
-								</Text>
-							</Button>
-							<Button
-								style={styles.BackButton}
-								onPress={() => {
-									return navigation.navigate('Home');
-								}}
-							>
+										if (regex.test(e) || e === '') {
+											setCurrentBillValue(e);
+										}
+									}}
+									error={billValidation}
+									value={currentBillValue}
+									style={styles.BillInput}
+									textAlign='center'
+									maxLength={9}
+								></TextInput>
 								<Text
 									style={{
-										color: '#000',
-										fontFamily: 'Montserrat_700Bold',
-										fontSize: 12,
+										color: 'orange',
+										fontFamily: 'Montserrat_600SemiBold_Italic',
+										fontSize: 13,
+										marginTop: 9,
 									}}
 								>
-									Back
+									Show me the money...
 								</Text>
-							</Button>
-						</View>
-					)}
-				</ScrollView>
-			</KeyboardAvoidingView>
-			{route.params.players && (
-				<View style={styles.rootContainer}>
-					<Button onPress={() => navigation.setParams({ bill: true, players: false })}>Back</Button>
-					<TextInput
-						ref={playerInputRef}
-						label={labelForPlayers}
-						placeholder='Erik'
-						//autoFocus={true}
-						onChangeText={e => {
-							setGetplayersFromInput(e);
-						}}
-						onSubmitEditing={() => {
-							return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
-						}}
-						value={getPlayersFromInput}
-						disabled={disablePlayerTextInput}
-					></TextInput>
-					<Button
-						onPress={() => {
-							return [
-								console.log(playerNumberCount),
-								setPlayerArray([...playerArray, getPlayersFromInput]),
-								clearText(),
-								setPlayerNumberCount(playerArray.length + 1),
-							];
-						}}
-						returnKeyType='next'
-						disabled={disablePlayerTextInput}
-					>
-						Add
-					</Button>
-					<Button
-						disabled={disableButton}
-						onPress={() => {
-							return [submitAllPlayers(), navigation.navigate('Chicken')];
-						}}
-					>
-						Done
-					</Button>
-					<View>{playerArray.length !== 0 && renderPlayers()}</View>
-					<Ads />
-				</View>
-			)}
+								<Button
+									style={styles.nextButton}
+									onPress={() => {
+										return [
+											setBillValue(currentBillValue),
+
+											navigation.setParams({ bill: false, players: true }),
+											console.log(route.params),
+										];
+									}}
+									disabled={disableNextButton}
+								>
+									<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
+										Next
+									</Text>
+								</Button>
+								<Button
+									style={styles.BackButton}
+									onPress={() => {
+										return navigation.navigate('Home');
+									}}
+								>
+									<Text
+										style={{
+											color: '#000',
+											fontFamily: 'Montserrat_700Bold',
+											fontSize: 12,
+										}}
+									>
+										Back
+									</Text>
+								</Button>
+							</View>
+						)}
+					</ScrollView>
+				</KeyboardAvoidingView>
+				{route.params.players && (
+					<View style={styles.rootContainer}>
+						<Button onPress={() => navigation.setParams({ bill: true, players: false })}>
+							Back
+						</Button>
+						<TextInput
+							ref={playerInputRef}
+							label={labelForPlayers}
+							placeholder='Erik'
+							//autoFocus={true}
+							onChangeText={e => {
+								setGetplayersFromInput(e);
+							}}
+							onSubmitEditing={() => {
+								return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+							}}
+							value={getPlayersFromInput}
+							disabled={disablePlayerTextInput}
+						></TextInput>
+						<Button
+							onPress={() => {
+								return [
+									console.log(playerNumberCount),
+									setPlayerArray([...playerArray, getPlayersFromInput]),
+									clearText(),
+									setPlayerNumberCount(playerArray.length + 1),
+								];
+							}}
+							returnKeyType='next'
+							disabled={disablePlayerTextInput}
+						>
+							Add
+						</Button>
+						<Button
+							disabled={disableButton}
+							onPress={() => {
+								return [submitAllPlayers(), navigation.navigate('Chicken')];
+							}}
+						>
+							Done
+						</Button>
+						<View>{playerArray.length !== 0 && renderPlayers()}</View>
+						<Ads />
+					</View>
+				)}
+			</SafeAreaView>
 		</View>
 	);
 }
@@ -268,11 +273,10 @@ const styles = StyleSheet.create({
 		backgroundColor: 'red',
 	},
 	rootContainer: {
-		flex: 1,
-		flexDirection: 'column',
-		justifyContent: 'center',
-		//height: 'auto',
-		backgroundColor: '#fff',
+		//flex: 1,
+		//flexDirection: 'column',
+		//justifyContent: 'center',
+		backgroundColor: '#D00404',
 	},
 	SecondRootContainer: {
 		flex: 1,
@@ -281,6 +285,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		minHeight: 600,
 		maxHeight: 900,
+	},
+
+	SafeAreaView: {
+		marginHorizontal: 0,
 	},
 
 	RecieptSVGContainer: {
@@ -295,7 +303,7 @@ const styles = StyleSheet.create({
 	riskyBanner: {
 		flex: 1,
 		backgroundColor: '#D00404',
-		height: 70,
+		height: 55,
 		justifyContent: 'center',
 	},
 	riskyBannerText: {
@@ -304,7 +312,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 19,
-		marginTop: 10,
+		marginTop: 0,
 	},
 	BillAmountText: {
 		color: '#FF5757',

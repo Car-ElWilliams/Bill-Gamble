@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import Ads from '../components/Ads';
@@ -25,6 +25,7 @@ export default function Home({ navigation }) {
 
 	return (
 		<View style={styles.HomeContainer}>
+			{/*<ScrollView>*/}
 			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 
 			<Text style={styles.Header}>Choose Risk Level</Text>
@@ -63,6 +64,7 @@ export default function Home({ navigation }) {
 				<Text style={styles.ButtonInnerText}>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
+			{/*</ScrollView>*/}
 			<Ads />
 		</View>
 	);
