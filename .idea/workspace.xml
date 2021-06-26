@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="331b55d9-2c51-4d57-bb4a-30e358e4f9c5" name="Default Changelist" comment="" />
+    <list default="true" id="331b55d9-2c51-4d57-bb4a-30e358e4f9c5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/routes/InputSelections.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/InputSelections.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,9 +39,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="100" width="1080" height="520" key="AVDManager" timestamp="1623658812270">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state x="-1770" y="51" width="1620" height="780" key="AVDManager" timestamp="1624645213996">
+      <screen x="-1920" y="-99" width="1920" height="1080" />
     </state>
+    <state x="-1770" y="51" width="1620" height="780" key="AVDManager/0.0.1280.720/-1920.-99.1920.1080@-1920.-99.1920.1080" timestamp="1624645213996" />
     <state x="100" y="100" width="1080" height="520" key="AVDManager/0.0.1280.720/-1920.-99.1920.1080@0.0.1280.720" timestamp="1623658812270" />
     <state x="421" y="115" key="FileChooserDialogImpl" timestamp="1623658446615">
       <screen x="0" y="0" width="1280" height="720" />

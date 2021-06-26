@@ -120,13 +120,13 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.riskAndNormalContainer}>
 			{riskyLevel ? (
-				<View id='Banner-Risky' style={{ backgroundColor: 'red', height: '15%' }}>
-					<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: High</Text>
+				<View id='Banner-Risky' style={styles.riskyBanner}>
+					<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
 				</View>
 			) : (
-				<View id='Banner-Risky' style={{ backgroundColor: 'green', height: '15%' }}>
+				<View id='Banner-Normal' style={{ backgroundColor: 'green', height: '25%' }}>
 					<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: Normal</Text>
 				</View>
 			)}
@@ -172,13 +172,13 @@ export default function BillAmount({ route, navigation }) {
 				</View>
 			)}
 			{route.params.players && (
-				<View id=''>
+				<View style={styles.rootContainer}>
 					<Button onPress={() => navigation.setParams({ bill: true, players: false })}>Back</Button>
 					<TextInput
 						ref={playerInputRef}
 						label={labelForPlayers}
 						placeholder='Erik'
-						autoFocus={true}
+						//autoFocus={true}
 						onChangeText={e => {
 							setGetplayersFromInput(e);
 						}}
@@ -221,5 +221,28 @@ export default function BillAmount({ route, navigation }) {
 const styles = StyleSheet.create({
 	removeButton: {
 		backgroundColor: 'red',
+	},
+	rootContainer: {
+		backgroundColor: '#D00404',
+	},
+
+	riskAndNormalContainer: {
+		flex: 1,
+		flexDirection: 'column',
+	},
+
+	riskyBanner: {
+		flex: 1,
+		backgroundColor: '#D00404',
+		maxHeight: '12.5%',
+		justifyContent: 'center',
+	},
+	riskyBannerText: {
+		alignItems: 'center',
+		color: '#fff',
+		textAlign: 'center',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 19,
+		marginTop: 10,
 	},
 });
