@@ -20,8 +20,9 @@ export default function Results({ navigation }) {
 	const [launchRiskyFunctions, setLaunchRiskyFunctions] = useState(false);
 	const [launchNormalFunctions, setLaunchNormalFunctions] = useState(false);
 
-	const [winner, setWinner] = useState(null);
-	const [loser, setLoser] = useState(null);
+	const [winner, setWinner] = useState('');
+	const [loser, setLoser] = useState('');
+	const [playerColor, setPlayerColor] = useState('white');
 
 	//!Functions
 	matchPlayerWithPay();
@@ -50,12 +51,9 @@ export default function Results({ navigation }) {
 	}
 
 	useEffect(() => {
-		//console.log(amountToPay, evenPay);
 		//console.log(amountToPay.reduce((a, b) => a + b, 0));
-		//THis one is making the result appear
-		sortPay();
 
-		//console.log(Math.floor(Math.random() * (100 - 0)) / 100);
+		sortPay();
 	}, [amountToPay, evenPay]);
 
 	useEffect(() => {
@@ -288,14 +286,22 @@ export default function Results({ navigation }) {
 
 	return (
 		<View style={styles.HomeContainer}>
-			{countdownNumber !== null && <Text>{countdownNumber}</Text>}
+			{countdownNumber !== null && <Text style={styles.CountdownText}>{countdownNumber}</Text>}
 			{countdownNumber === null && (
-				<View>
+				<View style={styles.PlayerContainer}>
+					<Text style={styles.Header}>Results</Text>
 					{allPlayerNames.map((player, i) => {
+						//if (player === winner) {
+						//	setPlayerColor('green');
+						//} else if (player === loser) {
+						//	setPlayerColor('red');
+						//} else {
+						//	setPlayerColor('white');
+						//}
 						return (
 							<View key={player + i}>
-								<Text>
-									{player} will pay {amountToPay[i]}
+								<Text style={styles.PlayerText}>
+									{player} will pay <Text style={{ color: playerColor }}>{amountToPay[i]}</Text>
 								</Text>
 							</View>
 						);
@@ -303,10 +309,62 @@ export default function Results({ navigation }) {
 				</View>
 			)}
 			{countdownNumber === null && (
-				<Button onPress={() => navigation.navigate('Home')}>Home</Button>
+				<Button style={styles.EndButton} onPress={() => navigation.navigate('Home')}>
+					<Text style={styles.EndButtonText}>End</Text>
+				</Button>
 			)}
 		</View>
 	);
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	HomeContainer: {
+		flex: 4,
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'column',
+		backgroundColor: 'black',
+		height: '100%',
+	},
+	CountdownText: {
+		color: '#fff',
+		alignSelf: 'center',
+		fontSize: 50,
+		fontFamily: 'Montserrat_700Bold',
+	},
+
+	Header: {
+		color: '#fff',
+		fontSize: 60,
+		fontFamily: 'Montserrat_700Bold',
+		justifyContent: 'flex-start',
+		alignSelf: 'flex-start',
+	},
+
+	PlayerContainer: {
+		flex: 2,
+		//flexWrap: 'wrap',
+		flexGrow: 2,
+		justifyContent: 'center',
+		alignSelf: 'center',
+	},
+
+	PlayerText: {
+		color: '#fff',
+		fontSize: 20,
+		fontFamily: 'Montserrat_700Bold',
+		textAlign: 'center',
+		marginBottom: 20,
+	},
+	EndButton: {
+		backgroundColor: 'red',
+		borderRadius: 30,
+		width: '60%',
+		marginBottom: 20,
+	},
+	EndButtonText: {
+		color: '#fff',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 20,
+	},
+});
