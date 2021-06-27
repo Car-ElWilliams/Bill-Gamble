@@ -6,21 +6,6 @@ import Ads from '../components/Ads';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 
 export default function Home({ navigation }) {
-	useEffect(() => {
-		abba();
-	}, []);
-
-	const [joke, setJoke] = useState('');
-
-	const abba = async () => {
-		try {
-			let data = await fetch('https://api.chucknorris.io/jokes/random');
-			let json = await data.json();
-			setJoke(json.value);
-		} catch {
-			console.log(error.message);
-		}
-	};
 	const { setriskyLevel } = useContext(Context);
 
 	return (

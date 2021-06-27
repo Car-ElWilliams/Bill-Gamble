@@ -139,8 +139,10 @@ export default function BillAmount({ route, navigation }) {
 								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
 							</View>
 						) : (
-							<View id='Banner-Normal' style={{ backgroundColor: 'green', height: '25%' }}>
-								<Text style={{ color: 'white', textAlign: 'center' }}>Risk Level: Normal</Text>
+							<View id='Banner-Normal' style={{ ...styles.riskyBanner, backgroundColor: 'green' }}>
+								<Text style={{ ...styles.riskyBannerText, backgroundColor: 'green' }}>
+									Risk Level: NORMAL
+								</Text>
 							</View>
 						)}
 
@@ -214,53 +216,80 @@ export default function BillAmount({ route, navigation }) {
 								</Button>
 							</View>
 						)}
+
+						{route.params.players && (
+							<View style={{ ...styles.SecondRootContainer }}>
+								<Text
+									style={{
+										...styles.BillAmountText,
+										fontSize: 40,
+										marginBottom: -5,
+									}}
+								>
+									Enter
+								</Text>
+								<Text
+									style={{
+										...styles.BillAmountText,
+										fontSize: 40,
+										textAlign: 'center',
+									}}
+								>
+									player names
+								</Text>
+								<TextInput
+									ref={playerInputRef}
+									label={labelForPlayers}
+									placeholder='Erik'
+									//autoFocus={true}
+									onChangeText={e => {
+										setGetplayersFromInput(e);
+									}}
+									onSubmitEditing={() => {
+										return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+									}}
+									value={getPlayersFromInput}
+									disabled={disablePlayerTextInput}
+									style={{ ...styles.BillInput, textAlign: 'center' }}
+								></TextInput>
+								<Button
+									onPress={() => {
+										return [
+											console.log(playerNumberCount),
+											setPlayerArray([...playerArray, getPlayersFromInput]),
+											clearText(),
+											setPlayerNumberCount(playerArray.length + 1),
+										];
+									}}
+									returnKeyType='next'
+									disabled={disablePlayerTextInput}
+								>
+									Add
+								</Button>
+								<Button
+									disabled={disableButton}
+									onPress={() => {
+										return [submitAllPlayers(), navigation.navigate('Chicken')];
+									}}
+								>
+									<Button
+										onPress={() => navigation.setParams({ bill: true, players: false })}
+										style={{
+											color: '#000',
+											fontFamily: 'Montserrat_700Bold',
+											fontSize: 12,
+										}}
+									>
+										Back
+									</Button>
+									Done
+								</Button>
+								<View>{playerArray.length !== 0 && renderPlayers()}</View>
+								<Ads />
+							</View>
+						)}
 					</ScrollView>
 				</KeyboardAvoidingView>
-				{route.params.players && (
-					<View style={styles.rootContainer}>
-						<Button onPress={() => navigation.setParams({ bill: true, players: false })}>
-							Back
-						</Button>
-						<TextInput
-							ref={playerInputRef}
-							label={labelForPlayers}
-							placeholder='Erik'
-							//autoFocus={true}
-							onChangeText={e => {
-								setGetplayersFromInput(e);
-							}}
-							onSubmitEditing={() => {
-								return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
-							}}
-							value={getPlayersFromInput}
-							disabled={disablePlayerTextInput}
-						></TextInput>
-						<Button
-							onPress={() => {
-								return [
-									console.log(playerNumberCount),
-									setPlayerArray([...playerArray, getPlayersFromInput]),
-									clearText(),
-									setPlayerNumberCount(playerArray.length + 1),
-								];
-							}}
-							returnKeyType='next'
-							disabled={disablePlayerTextInput}
-						>
-							Add
-						</Button>
-						<Button
-							disabled={disableButton}
-							onPress={() => {
-								return [submitAllPlayers(), navigation.navigate('Chicken')];
-							}}
-						>
-							Done
-						</Button>
-						<View>{playerArray.length !== 0 && renderPlayers()}</View>
-						<Ads />
-					</View>
-				)}
 			</SafeAreaView>
 		</View>
 	);
