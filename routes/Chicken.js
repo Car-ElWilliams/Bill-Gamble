@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Audio } from 'expo-av';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
+import Context from '../Context';
 
 export default function Chicken({ navigation }) {
 	const [chickenSound, setChickenSound] = useState(false);
+
+	const { billValue } = useContext(Context);
 
 	useEffect(() => {
 		return chickenSound
@@ -31,10 +34,11 @@ export default function Chicken({ navigation }) {
 	return (
 		<View style={styles.HomeContainer}>
 			<SafeAreaView>
-				<Text style={{ ...styles.TextStandard, marginTop: -25, marginBottom: 25 }}>
-					Gamble Time
-				</Text>
-				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
+				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25 }}>Gamble Time</Text>
+				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}>
+					{' '}
+					<Text style={{ ...styles.TextStandard, color: 'gold' }}> {billValue}</Text>
+				</ImageBackground>
 				<Text style={styles.TextStandard}>START OR CHICKEN OUT?</Text>
 				<Button
 					onPress={() => navigation.navigate('Results')}

@@ -9,6 +9,8 @@ import {
 	Platform,
 	TextInput,
 	SafeAreaView,
+	Dimensions,
+	r,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
@@ -22,6 +24,7 @@ export default function BillAmount({ route, navigation }) {
 	const { riskyLevel } = useContext(Context);
 
 	//? Variables
+
 	const playerInputRef = useRef();
 
 	const [getPlayersFromInput, setGetplayersFromInput] = useState('');
@@ -130,173 +133,171 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	return (
-		<View style={styles.rootContainer}>
-			<SafeAreaView style={styles.SafeAreaView}>
-				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
-					<ScrollView bounces={false}>
-						{riskyLevel ? (
-							<View id='Banner-Risky' style={styles.riskyBanner}>
-								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
+		<SafeAreaView style={styles.SafeAreaView}>
+			<ScrollView bounces={false}>
+				{riskyLevel ? (
+					<View id='Banner-Risky' style={styles.riskyBanner}>
+						<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
+					</View>
+				) : (
+					<View id='Banner-Normal' style={{ ...styles.riskyBanner, backgroundColor: 'green' }}>
+						<Text style={{ ...styles.riskyBannerText, backgroundColor: 'green' }}>
+							Risk Level: NORMAL
+						</Text>
+					</View>
+				)}
+				{/*Bill amount*/}
+				<KeyboardAvoidingView style={styles.KeyboardAvoidingView} behavior='padding'>
+					{bill && (
+						<View style={styles.SecondRootContainer}>
+							<View style={styles.RecieptSVGContainer}>
+								<RecieptSVG />
 							</View>
-						) : (
-							<View id='Banner-Normal' style={{ ...styles.riskyBanner, backgroundColor: 'green' }}>
-								<Text style={{ ...styles.riskyBannerText, backgroundColor: 'green' }}>
-									Risk Level: NORMAL
+
+							<Text style={styles.BillAmountText}>Enter bill total </Text>
+
+							<TextInput
+								label='Enter Bill Amount'
+								placeholder='500'
+								keyboardType='number-pad'
+								onChangeText={e => {
+									const regex = new RegExp(/^[0-9\b]+$/);
+
+									if (regex.test(e) || e === '') {
+										setCurrentBillValue(e);
+									}
+								}}
+								error={billValidation}
+								value={currentBillValue}
+								style={styles.BillInput}
+								textAlign='center'
+								maxLength={9}
+							></TextInput>
+							<Text
+								style={{
+									color: 'orange',
+									fontFamily: 'Montserrat_600SemiBold_Italic',
+									fontSize: 13,
+									marginTop: 9,
+								}}
+							>
+								Show me the money...
+							</Text>
+							<Button
+								style={styles.nextButton}
+								onPress={() => {
+									return [
+										setBillValue(currentBillValue),
+
+										navigation.setParams({ bill: false, players: true }),
+										console.log(route.params),
+									];
+								}}
+								disabled={disableNextButton}
+							>
+								<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
+									Next
 								</Text>
-							</View>
-						)}
-
-						{/*Bill amount*/}
-						{bill && (
-							<View style={styles.SecondRootContainer}>
-								<View style={styles.RecieptSVGContainer}>
-									<RecieptSVG />
-								</View>
-
-								<Text style={styles.BillAmountText}>Enter bill total </Text>
-
-								<TextInput
-									label='Enter Bill Amount'
-									placeholder='500'
-									keyboardType='number-pad'
-									onChangeText={e => {
-										const regex = new RegExp(/^[0-9\b]+$/);
-
-										if (regex.test(e) || e === '') {
-											setCurrentBillValue(e);
-										}
-									}}
-									error={billValidation}
-									value={currentBillValue}
-									style={styles.BillInput}
-									textAlign='center'
-									maxLength={9}
-								></TextInput>
+							</Button>
+							<Button
+								style={styles.BackButton}
+								onPress={() => {
+									return navigation.navigate('Home');
+								}}
+							>
 								<Text
 									style={{
-										color: 'orange',
-										fontFamily: 'Montserrat_600SemiBold_Italic',
-										fontSize: 13,
-										marginTop: 9,
+										color: '#000',
+										fontFamily: 'Montserrat_700Bold',
+										fontSize: 12,
 									}}
 								>
-									Show me the money...
+									Back
 								</Text>
-								<Button
-									style={styles.nextButton}
-									onPress={() => {
-										return [
-											setBillValue(currentBillValue),
-
-											navigation.setParams({ bill: false, players: true }),
-											console.log(route.params),
-										];
-									}}
-									disabled={disableNextButton}
-								>
-									<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
-										Next
-									</Text>
-								</Button>
-								<Button
-									style={styles.BackButton}
-									onPress={() => {
-										return navigation.navigate('Home');
-									}}
-								>
-									<Text
-										style={{
-											color: '#000',
-											fontFamily: 'Montserrat_700Bold',
-											fontSize: 12,
-										}}
-									>
-										Back
-									</Text>
-								</Button>
-							</View>
-						)}
-
-						{route.params.players && (
-							<View style={{ ...styles.SecondRootContainer }}>
-								<Text
-									style={{
-										...styles.BillAmountText,
-										fontSize: 40,
-										marginBottom: -5,
-									}}
-								>
-									Enter
-								</Text>
-								<Text
-									style={{
-										...styles.BillAmountText,
-										fontSize: 40,
-										textAlign: 'center',
-									}}
-								>
-									player names
-								</Text>
-								<TextInput
-									ref={playerInputRef}
-									label={labelForPlayers}
-									placeholder='Erik'
-									//autoFocus={true}
-									onChangeText={e => {
-										setGetplayersFromInput(e);
-									}}
-									onSubmitEditing={() => {
-										return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
-									}}
-									value={getPlayersFromInput}
-									disabled={disablePlayerTextInput}
-									style={{ ...styles.BillInput, textAlign: 'center' }}
-								></TextInput>
-								<Button
-									onPress={() => {
-										return [
-											console.log(playerNumberCount),
-											setPlayerArray([...playerArray, getPlayersFromInput]),
-											clearText(),
-											setPlayerNumberCount(playerArray.length + 1),
-										];
-									}}
-									returnKeyType='next'
-									disabled={disablePlayerTextInput}
-								>
-									Add
-								</Button>
-								<Button
-									disabled={disableButton}
-									onPress={() => {
-										return [submitAllPlayers(), navigation.navigate('Chicken')];
-									}}
-								>
-									<Button
-										onPress={() => navigation.setParams({ bill: true, players: false })}
-										style={{
-											color: '#000',
-											fontFamily: 'Montserrat_700Bold',
-											fontSize: 12,
-										}}
-									>
-										Back
-									</Button>
-									Done
-								</Button>
-								<View>{playerArray.length !== 0 && renderPlayers()}</View>
-								<Ads />
-							</View>
-						)}
-					</ScrollView>
+							</Button>
+						</View>
+					)}
 				</KeyboardAvoidingView>
-			</SafeAreaView>
-		</View>
+
+				{route.params.players && (
+					<View style={{ ...styles.SecondRootContainer }}>
+						<Text
+							style={{
+								...styles.BillAmountText,
+								fontSize: 40,
+								marginBottom: -5,
+							}}
+						>
+							Enter
+						</Text>
+						<Text
+							style={{
+								...styles.BillAmountText,
+								fontSize: 40,
+								textAlign: 'center',
+							}}
+						>
+							player names
+						</Text>
+						<TextInput
+							ref={playerInputRef}
+							label={labelForPlayers}
+							placeholder='Erik'
+							//autoFocus={true}
+							onChangeText={e => {
+								setGetplayersFromInput(e);
+							}}
+							onSubmitEditing={() => {
+								return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+							}}
+							value={getPlayersFromInput}
+							disabled={disablePlayerTextInput}
+							style={{ ...styles.BillInput, textAlign: 'center' }}
+						></TextInput>
+						<Button
+							onPress={() => {
+								return [
+									console.log(playerNumberCount),
+									setPlayerArray([...playerArray, getPlayersFromInput]),
+									clearText(),
+									setPlayerNumberCount(playerArray.length + 1),
+								];
+							}}
+							returnKeyType='next'
+							disabled={disablePlayerTextInput}
+						>
+							Add
+						</Button>
+						<Button
+							disabled={disableButton}
+							onPress={() => {
+								return [submitAllPlayers(), navigation.navigate('Chicken')];
+							}}
+						>
+							<Button
+								onPress={() => navigation.setParams({ bill: true, players: false })}
+								style={{
+									color: '#000',
+									fontFamily: 'Montserrat_700Bold',
+									fontSize: 12,
+								}}
+							>
+								Back
+							</Button>
+							Done
+						</Button>
+						<View>{playerArray.length !== 0 && renderPlayers()}</View>
+						<Ads />
+					</View>
+				)}
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
 
 const heightRiskLevelBanner = Platform.OS === 'ios' ? 55 : 70;
 const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 10;
+//const windowHeight = Dimensions.get('screen').height;
 
 const styles = StyleSheet.create({
 	removeButton: {
@@ -317,6 +318,11 @@ const styles = StyleSheet.create({
 		maxHeight: 900,
 	},
 
+	KeyboardAvoidingView: {
+		height: Dimensions.get('window').height + 30,
+		backgroundColor: '#fff',
+	},
+
 	SafeAreaView: {
 		marginHorizontal: 0,
 	},
@@ -324,10 +330,12 @@ const styles = StyleSheet.create({
 	RecieptSVGContainer: {
 		width: '100%',
 		maxWidth: '52.5%',
+		minHeight: '30%',
 		maxHeight: '35%',
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
-		marginTop: 7.5,
+		marginTop: 15.5,
+		marginBottom: 15.5,
 	},
 
 	riskyBanner: {
