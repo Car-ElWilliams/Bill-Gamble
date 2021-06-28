@@ -210,6 +210,8 @@ export default function BillAmount({ route, navigation }) {
 										color: '#000',
 										fontFamily: 'Montserrat_700Bold',
 										fontSize: 12,
+
+										marginTop: 20,
 									}}
 								>
 									Back
@@ -319,7 +321,7 @@ const styles = StyleSheet.create({
 	},
 
 	KeyboardAvoidingView: {
-		height: Dimensions.get('window').height + 30,
+		//height: Dimensions.get('window').height + 30,
 		backgroundColor: '#fff',
 	},
 

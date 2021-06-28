@@ -35,10 +35,7 @@ export default function Chicken({ navigation }) {
 		<View style={styles.HomeContainer}>
 			<SafeAreaView>
 				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25 }}>Gamble Time</Text>
-				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}>
-					{' '}
-					<Text style={{ ...styles.TextStandard, color: 'gold' }}> {billValue}</Text>
-				</ImageBackground>
+				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 				<Text style={styles.TextStandard}>START OR CHICKEN OUT?</Text>
 				<Button
 					onPress={() => navigation.navigate('Results')}
@@ -54,6 +51,18 @@ export default function Chicken({ navigation }) {
 				>
 					<Text style={styles.ButtonInnerText}> Chicken out🐔</Text>
 				</Button>
+				<Text
+					style={{
+						...styles.TextStandard,
+						color: 'white',
+						marginTop: -10.5,
+						fontSize: 12,
+						position: 'relative',
+						top: '7%',
+					}}
+				>
+					Amount being gambled: <Text style={{ color: 'gold' }}>{billValue}</Text>
+				</Text>
 			</SafeAreaView>
 		</View>
 	);
