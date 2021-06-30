@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
 				color='#189615'
 				onPress={() => {
 					return [
-						navigation.navigate('InputSelections', {
+						navigation.navigate('Note', {
 							risky: false,
 							bill: 'bill',
 						}),
@@ -37,7 +37,7 @@ export default function Home({ navigation }) {
 				color='#D00404'
 				onPress={() => {
 					return [
-						navigation.navigate('InputSelections', {
+						navigation.navigate('Note', {
 							risky: true,
 							bill: 'bill',
 						}),
