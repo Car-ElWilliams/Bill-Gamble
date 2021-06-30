@@ -13,11 +13,9 @@ import {
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import Ads from '../components/Ads';
-import RecieptSVG from '../components/RecieptSVG';
 
 export default function BillAmount({ route, navigation }) {
 	//UseContext
-	const { billValue, setBillValue } = useContext(Context);
 	const { setAllPlayerNames } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
 
@@ -28,22 +26,10 @@ export default function BillAmount({ route, navigation }) {
 	const [playerArray, setPlayerArray] = useState([]);
 	const [playerNumberCount, setPlayerNumberCount] = useState('');
 
-	const [billValidation, setBillValidation] = useState(false);
-	const [currentBillValue, setCurrentBillValue] = useState('');
-
-	const { bill } = route.params;
-
 	const [disableButton, setDisableButton] = useState(true);
 	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
-	const [disableNextButton, setDisableNextButton] = useState(true);
 
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
-
-	//? Not getting this to work?
-	//const addButton = useRef();
-	//useEffect(() => {
-	//	console.log(addButton);
-	//}, []);
 
 	//! Functions
 
@@ -64,10 +50,6 @@ export default function BillAmount({ route, navigation }) {
 
 		console.log(playerArray.length, playerNumberCount);
 	}, [playerArray]);
-
-	useEffect(() => {
-		enableNextButton();
-	}, [currentBillValue]);
 
 	function renderPlayers() {
 		return [
@@ -119,19 +101,9 @@ export default function BillAmount({ route, navigation }) {
 		return setDisableButton(true);
 	}
 
-	function enableNextButton() {
-		const regex = new RegExp(/^[0-9\b]+$/);
-
-		if (currentBillValue === '') {
-			return setDisableNextButton(true);
-		}
-
-		return setDisableNextButton(false);
-	}
-
 	return (
 		<View style={styles.rootContainer}>
-			<SafeAreaView style={styles.SafeAreaView}>
+			<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
 				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
 					<ScrollView bounces={false}>
 						{riskyLevel ? (
@@ -146,148 +118,74 @@ export default function BillAmount({ route, navigation }) {
 							</View>
 						)}
 
-						{/*Bill amount*/}
-						{bill && (
-							<View style={styles.SecondRootContainer}>
-								<View style={styles.RecieptSVGContainer}>
-									<RecieptSVG />
-								</View>
-
-								<Text style={styles.BillAmountText}>Enter bill total </Text>
-
-								<TextInput
-									label='Enter Bill Amount'
-									placeholder='500'
-									keyboardType='number-pad'
-									onChangeText={e => {
-										const regex = new RegExp(/^[0-9\b]+$/);
-
-										if (regex.test(e) || e === '') {
-											setCurrentBillValue(e);
-										}
-									}}
-									error={billValidation}
-									value={currentBillValue}
-									style={styles.BillInput}
-									textAlign='center'
-									maxLength={9}
-								></TextInput>
-								<Text
+						<View style={{ ...styles.SecondRootContainer }}>
+							<Text
+								style={{
+									...styles.EnterPlayerText,
+									fontSize: 40,
+									marginBottom: -5,
+								}}
+							>
+								Enter
+							</Text>
+							<Text
+								style={{
+									...styles.EnterPlayerText,
+									fontSize: 40,
+									textAlign: 'center',
+								}}
+							>
+								player names
+							</Text>
+							<TextInput
+								ref={playerInputRef}
+								label={labelForPlayers}
+								placeholder='Erik'
+								//autoFocus={true}
+								onChangeText={e => {
+									setGetplayersFromInput(e);
+								}}
+								onSubmitEditing={() => {
+									return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+								}}
+								value={getPlayersFromInput}
+								disabled={disablePlayerTextInput}
+								style={{ ...styles.PlayerInput, textAlign: 'center' }}
+							></TextInput>
+							<Button
+								onPress={() => {
+									return [
+										console.log(playerNumberCount),
+										setPlayerArray([...playerArray, getPlayersFromInput]),
+										clearText(),
+										setPlayerNumberCount(playerArray.length + 1),
+									];
+								}}
+								returnKeyType='next'
+								disabled={disablePlayerTextInput}
+							>
+								Add
+							</Button>
+							<Button
+								disabled={disableButton}
+								onPress={() => {
+									return [submitAllPlayers(), navigation.navigate('Chicken')];
+								}}
+							>
+								<Button
 									style={{
-										color: 'orange',
-										fontFamily: 'Montserrat_600SemiBold_Italic',
-										fontSize: 13,
-										marginTop: 9,
+										color: '#000',
+										fontFamily: 'Montserrat_700Bold',
+										fontSize: 12,
 									}}
 								>
-									Show me the money...
-								</Text>
-								<Button
-									style={styles.nextButton}
-									onPress={() => {
-										return [
-											setBillValue(currentBillValue),
-
-											navigation.setParams({ bill: false, players: true }),
-											console.log(route.params),
-										];
-									}}
-									disabled={disableNextButton}
-								>
-									<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
-										Next
-									</Text>
+									Back
 								</Button>
-								<Button
-									style={styles.BackButton}
-									onPress={() => {
-										return navigation.navigate('Home');
-									}}
-								>
-									<Text
-										style={{
-											color: '#000',
-											fontFamily: 'Montserrat_700Bold',
-											fontSize: 12,
-										}}
-									>
-										Back
-									</Text>
-								</Button>
-							</View>
-						)}
-
-						{route.params.players && (
-							<View style={{ ...styles.SecondRootContainer }}>
-								<Text
-									style={{
-										...styles.BillAmountText,
-										fontSize: 40,
-										marginBottom: -5,
-									}}
-								>
-									Enter
-								</Text>
-								<Text
-									style={{
-										...styles.BillAmountText,
-										fontSize: 40,
-										textAlign: 'center',
-									}}
-								>
-									player names
-								</Text>
-								<TextInput
-									ref={playerInputRef}
-									label={labelForPlayers}
-									placeholder='Erik'
-									//autoFocus={true}
-									onChangeText={e => {
-										setGetplayersFromInput(e);
-									}}
-									onSubmitEditing={() => {
-										return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
-									}}
-									value={getPlayersFromInput}
-									disabled={disablePlayerTextInput}
-									style={{ ...styles.BillInput, textAlign: 'center' }}
-								></TextInput>
-								<Button
-									onPress={() => {
-										return [
-											console.log(playerNumberCount),
-											setPlayerArray([...playerArray, getPlayersFromInput]),
-											clearText(),
-											setPlayerNumberCount(playerArray.length + 1),
-										];
-									}}
-									returnKeyType='next'
-									disabled={disablePlayerTextInput}
-								>
-									Add
-								</Button>
-								<Button
-									disabled={disableButton}
-									onPress={() => {
-										return [submitAllPlayers(), navigation.navigate('Chicken')];
-									}}
-								>
-									<Button
-										onPress={() => navigation.setParams({ bill: true, players: false })}
-										style={{
-											color: '#000',
-											fontFamily: 'Montserrat_700Bold',
-											fontSize: 12,
-										}}
-									>
-										Back
-									</Button>
-									Done
-								</Button>
-								<View>{playerArray.length !== 0 && renderPlayers()}</View>
-								<Ads />
-							</View>
-						)}
+								Done
+							</Button>
+							<View>{playerArray.length !== 0 && renderPlayers()}</View>
+						</View>
+						<Ads />
 					</ScrollView>
 				</KeyboardAvoidingView>
 			</SafeAreaView>
@@ -344,7 +242,7 @@ const styles = StyleSheet.create({
 		fontSize: 19,
 		marginTop: marginTopRiskLevelBanner,
 	},
-	BillAmountText: {
+	EnterPlayerText: {
 		color: '#FF5757',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
@@ -352,7 +250,7 @@ const styles = StyleSheet.create({
 		marginBottom: 40,
 	},
 
-	BillInput: {
+	PlayerInput: {
 		width: '70%',
 		borderWidth: 6,
 		borderColor: '#FF5757',

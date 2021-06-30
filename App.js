@@ -7,9 +7,11 @@ import { Asset } from 'expo-asset';
 import LoadingScreen from './components/LoadingScreen';
 import Context from './Context';
 import Home from './routes/Home.js';
-import InputSelections from './routes/InputSelections';
+import Note from './routes/Note';
+import Players from './routes/Players';
 import Chicken from './routes/Chicken';
 import Results from './routes/Results';
+
 import {
 	useFonts,
 	Montserrat_800ExtraBold,
@@ -68,7 +70,8 @@ export default function App() {
 								//	},
 								//}}
 							/>
-							<Stack.Screen name='InputSelections' component={InputSelections} />
+							<Stack.Screen name='Note' component={Note} />
+							<Stack.Screen name='Players' component={Players} />
 							<Stack.Screen name='Chicken' component={Chicken} />
 							<Stack.Screen name='Results' component={Results} />
 							{/*{progressDone && <LoadingScreen />}*/}

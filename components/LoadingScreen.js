@@ -37,6 +37,9 @@ export default function LoadingScreen(props) {
 				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
 				<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>
 				<Text style={styles.LoadingBarText}>Loading...</Text>
+				<Text style={{ ...styles.LoadingText, fontSize: 12, marginBottom: 12 }}>
+					CREATED BY CAREL WILLIAMS
+				</Text>
 			</ImageBackground>
 			<View style={styles.LoadingBarContainer}>
 				<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
