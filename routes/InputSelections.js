@@ -332,8 +332,8 @@ const styles = StyleSheet.create({
 	RecieptSVGContainer: {
 		width: '100%',
 		maxWidth: '52.5%',
-		minHeight: '30%',
-		maxHeight: '35%',
+		minHeight: '25%',
+		maxHeight: '30%',
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
 		marginTop: 15.5,
