@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Animated, Dimensions } from 'react-native';
 import LoadingImage from '../assets/bill-gamble-logo.png';
 import { ProgressBar, Colors } from 'react-native-paper';
 import Context from '../Context';
@@ -33,14 +33,13 @@ export default function LoadingScreen(props) {
 
 	return (
 		<View style={styles.container}>
-			<ImageBackground source={LoadingImage} style={styles.LoadingImage}>
-				<Text style={styles.LoadingText}>BILL GAMBLE </Text>
-				<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>
-				<Text style={styles.LoadingBarText}>Loading...</Text>
-				<Text style={{ ...styles.LoadingText, fontSize: 12, marginBottom: 12 }}>
-					CREATED BY CAREL WILLIAMS
-				</Text>
-			</ImageBackground>
+			<ImageBackground source={LoadingImage} style={styles.LoadingImage}></ImageBackground>
+			<Text style={styles.LoadingText}>BILL GAMBLE </Text>
+			{/*<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>*/}
+			{/*<Text style={styles.LoadingBarText}>Loading...</Text>*/}
+			<Text style={{ ...styles.LoadingText, fontSize: 14, flexGrow: 1 }}>
+				CREATED BY CAREL WILLIAMS
+			</Text>
 			<View style={styles.LoadingBarContainer}>
 				<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
 			</View>
@@ -52,12 +51,15 @@ const styles = StyleSheet.create({
 	container: {
 		color: '#fff',
 		width: '100%',
-		height: '100%',
+		height: Dimensions.get('window').height,
+		flex: 1,
 	},
 	LoadingImage: {
-		flex: 1,
+		position: 'absolute',
 		flexDirection: 'column',
 		alignItems: 'center',
+		height: Dimensions.get('window').height,
+		width: Dimensions.get('window').width,
 	},
 
 	LoadingText: {
@@ -65,7 +67,8 @@ const styles = StyleSheet.create({
 		fontSize: 40,
 		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
-		marginTop: '25%',
+		marginTop: '35%',
+		flexGrow: 10,
 	},
 	LoadingSlogan: {
 		color: '#fff',

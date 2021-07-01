@@ -41,6 +41,7 @@ export default function App() {
 	} else {
 		return (
 			<Context.Provider
+				style={{ backgroundColor: 'rgba(255, 51, 51, .95)' }}
 				value={{
 					progressDone,
 					setProgressDone,

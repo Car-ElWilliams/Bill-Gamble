@@ -36,7 +36,7 @@ export default function Chicken({ navigation }) {
 			<SafeAreaView>
 				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25 }}>Gamble Time</Text>
 				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
-				<Text style={styles.TextStandard}>START OR CHICKEN OUT?</Text>
+				<Text style={styles.TextStandard}>START OR {'\n'} CHICKEN OUT?</Text>
 				<Button
 					onPress={() => navigation.navigate('Results')}
 					style={{ ...styles.Buttons, backgroundColor: 'green' }}
@@ -69,11 +69,14 @@ export default function Chicken({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+	RiskColor: {
+		backgroundColor: 'rgba(255, 60, 60, .95)',
+	},
 	HomeContainer: {
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: '#FF5757',
+		backgroundColor: 'rgba(255, 56, 56, .95)',
 		alignItems: 'center',
 	},
 	SafeAreaView: {
@@ -106,5 +109,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		marginBottom: 45,
 		marginTop: 15,
+		letterSpacing: 0.9,
 	},
 });
