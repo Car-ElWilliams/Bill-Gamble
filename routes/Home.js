@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'rgb(255, 87, 87)',
+		backgroundColor: 'rgb(255, 55, 55)',
 	},
 
 	TransparentLogo: {

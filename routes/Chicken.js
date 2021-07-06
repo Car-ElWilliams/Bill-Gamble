@@ -34,7 +34,9 @@ export default function Chicken({ navigation }) {
 	return (
 		<View style={styles.HomeContainer}>
 			<SafeAreaView>
-				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25 }}>Gamble Time</Text>
+				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25, fontSize: 40 }}>
+					Gamble Time
+				</Text>
 				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 				<Text style={styles.TextStandard}>START OR {'\n'} CHICKEN OUT?</Text>
 				<Button

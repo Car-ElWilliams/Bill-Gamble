@@ -163,8 +163,9 @@ export default function BillAmount({ route, navigation }) {
 								}}
 								returnKeyType='next'
 								disabled={disablePlayerTextInput}
+								style={{ ...styles.nextButton }}
 							>
-								Add
+								<Text style={{ color: '#fff', fontSize: 28 }}>Add</Text>
 							</Button>
 							<Button
 								disabled={disableButton}
@@ -265,8 +266,7 @@ const styles = StyleSheet.create({
 	nextButton: {
 		marginTop: 70,
 		padding: 5,
-		backgroundColor: '#FF5757',
-
+		backgroundColor: 'rgb(255, 55, 55)',
 		borderRadius: 40,
 		width: '60%',
 	},
