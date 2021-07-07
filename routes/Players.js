@@ -89,7 +89,17 @@ export default function BillAmount({ route, navigation }) {
 
 	const clearText = useCallback(() => {
 		playerInputRef.current.setNativeProps({ text: '' });
+
+		//console.log(playerInputRef.current.text);
 	});
+
+	useEffect(() => {
+		let unmounted = false;
+		setGetplayersFromInput('');
+		return () => {
+			return (unmounted = true);
+		};
+	}, []);
 
 	function enableAddButton() {
 		console.log(playerArray.length);
@@ -146,7 +156,11 @@ export default function BillAmount({ route, navigation }) {
 									setGetplayersFromInput(e);
 								}}
 								onSubmitEditing={() => {
-									return [setPlayerArray([...playerArray, getPlayersFromInput]), clearText()];
+									return [
+										setPlayerArray([...playerArray, getPlayersFromInput]),
+										clearText(),
+										setGetplayersFromInput(''),
+									];
 								}}
 								value={getPlayersFromInput}
 								disabled={disablePlayerTextInput}
@@ -157,8 +171,9 @@ export default function BillAmount({ route, navigation }) {
 									return [
 										console.log(playerNumberCount),
 										setPlayerArray([...playerArray, getPlayersFromInput]),
-										clearText(),
 										setPlayerNumberCount(playerArray.length + 1),
+										clearText(),
+										setGetplayersFromInput(''),
 									];
 								}}
 								returnKeyType='next'
