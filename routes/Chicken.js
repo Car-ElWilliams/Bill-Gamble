@@ -42,16 +42,18 @@ export default function Chicken({ navigation }) {
 				<Button
 					onPress={() => navigation.navigate('Results')}
 					style={{ ...styles.Buttons, backgroundColor: 'green' }}
+					labelStyle={styles.ButtonInnerText}
 				>
-					<Text style={styles.ButtonInnerText}>Let's go</Text>
+					<Text>Let's go</Text>
 				</Button>
 				<Button
 					onPress={() => {
 						return [navigation.navigate('Home'), playSound()];
 					}}
 					style={{ ...styles.Buttons, backgroundColor: 'red' }}
+					labelStyle={styles.ButtonInnerText}
 				>
-					<Text style={styles.ButtonInnerText}> Chicken out🐔</Text>
+					<Text> Chicken out🐔</Text>
 				</Button>
 				<Text
 					style={{
@@ -91,7 +93,6 @@ const styles = StyleSheet.create({
 	},
 	Buttons: {
 		width: 280,
-		padding: '2.5%',
 		borderColor: '#fff',
 		borderWidth: 2,
 		borderRadius: 60,
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 16,
 		color: '#fff',
+		padding: '3.5%',
 	},
 	TextStandard: {
 		color: '#fff',

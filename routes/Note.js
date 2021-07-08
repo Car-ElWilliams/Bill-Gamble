@@ -51,7 +51,14 @@ export default function BillAmount({ route, navigation }) {
 	return (
 		<View style={styles.rootContainer}>
 			<SafeAreaView style={styles.SafeAreaView}>
-				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
+				<KeyboardAvoidingView
+					behavior='padding'
+					keyboardVerticalOffset={Platform.select({
+						ios: () => 0,
+						android: () => -225,
+					})()}
+					style={styles.KeyboardAvoidingView}
+				>
 					<ScrollView bounces={false}>
 						{riskyLevel ? (
 							<View id='Banner-Risky' style={styles.riskyBanner}>
@@ -105,26 +112,19 @@ export default function BillAmount({ route, navigation }) {
 									return [setBillValue(currentBillValue), navigation.navigate('Players')];
 								}}
 								disabled={disableNextButton}
+								labelStyle={styles.NextButtonInnerText}
 							>
-								<Text style={{ color: '#fff', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
-									Next
-								</Text>
+								<Text>Next</Text>
 							</Button>
+
 							<Button
-								style={styles.BackButton}
 								onPress={() => {
 									return navigation.navigate('Home');
 								}}
+								labelStyle={styles.BackButtonText}
+								style={styles.BackButton}
 							>
-								<Text
-									style={{
-										color: '#000',
-										fontFamily: 'Montserrat_700Bold',
-										fontSize: 12,
-									}}
-								>
-									Back
-								</Text>
+								<Text>Back</Text>
 							</Button>
 						</View>
 
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
 	},
 
 	KeyboardAvoidingView: {
-		//height: Dimensions.get('window').height + 30,
 		backgroundColor: '#fff',
+		flex: -1,
 	},
 
 	SafeAreaView: {
@@ -215,14 +215,25 @@ const styles = StyleSheet.create({
 
 	nextButton: {
 		marginTop: 70,
-		padding: 5,
 		backgroundColor: '#FF5757',
-
 		borderRadius: 40,
 		width: '60%',
 	},
 
+	NextButtonInnerText: {
+		color: '#fff',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 20,
+		padding: 5,
+	},
+
 	BackButton: {
 		marginTop: 25,
+	},
+
+	BackButtonText: {
+		color: '#000',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 12,
 	},
 });

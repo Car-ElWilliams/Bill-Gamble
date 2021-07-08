@@ -114,7 +114,14 @@ export default function BillAmount({ route, navigation }) {
 	return (
 		<View style={styles.rootContainer}>
 			<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
-				<KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0}>
+				<KeyboardAvoidingView
+					behavior='padding'
+					keyboardVerticalOffset={Platform.select({
+						ios: () => 0,
+						android: () => -225,
+					})()}
+					style={styles.KeyboardAvoidingView}
+				>
 					<ScrollView bounces={false}>
 						{riskyLevel ? (
 							<View id='Banner-Risky' style={styles.riskyBanner}>
@@ -233,6 +240,11 @@ const styles = StyleSheet.create({
 
 	SafeAreaView: {
 		marginHorizontal: 0,
+	},
+
+	KeyboardAvoidingView: {
+		backgroundColor: '#fff',
+		flex: -1,
 	},
 
 	RecieptSVGContainer: {
