@@ -15,6 +15,7 @@ export default function Home({ navigation }) {
 			<Text style={styles.Header}>Choose Risk Level</Text>
 			<Button
 				style={styles.Buttons}
+				labelStyle={styles.ButtonInnerText}
 				mode='contained'
 				color='#189615'
 				onPress={() => {
@@ -27,12 +28,13 @@ export default function Home({ navigation }) {
 					];
 				}}
 			>
-				<Text style={styles.ButtonInnerText}>Normal</Text>
+				<Text>Normal</Text>
 			</Button>
 			<Text style={styles.ButtonText}>Win less, lose less</Text>
 
 			<Button
 				style={styles.Buttons}
+				labelStyle={styles.ButtonInnerText}
 				mode='contained'
 				color='#D00404'
 				onPress={() => {
@@ -45,7 +47,7 @@ export default function Home({ navigation }) {
 					];
 				}}
 			>
-				<Text style={styles.ButtonInnerText}>Risky</Text>
+				<Text>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
 			<Ads />
@@ -80,7 +82,6 @@ const styles = StyleSheet.create({
 
 	Buttons: {
 		width: '60%',
-		padding: '2.5%',
 		borderColor: '#fff',
 		borderWidth: 2,
 		borderRadius: 60,
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
 	ButtonInnerText: {
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 16,
+		padding: '4.5%',
 	},
 	ButtonText: {
 		color: '#fff',
