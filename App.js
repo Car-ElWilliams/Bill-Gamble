@@ -15,9 +15,11 @@ import Results from './routes/Results';
 import {
 	useFonts,
 	Montserrat_800ExtraBold,
+	Montserrat_800ExtraBold_Italic,
 	Montserrat_700Bold,
-	Montserrat_900Black_Italic,
 	Montserrat_600SemiBold_Italic,
+	Montserrat_900Black_Italic,
+	Montserrat_900Black,
 } from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 
@@ -31,8 +33,10 @@ export default function App() {
 
 	let [fontsLoaded] = useFonts({
 		Montserrat_800ExtraBold,
+		Montserrat_800ExtraBold_Italic,
 		Montserrat_700Bold,
 		Montserrat_900Black_Italic,
+		Montserrat_900Black,
 		Montserrat_600SemiBold_Italic,
 	});
 

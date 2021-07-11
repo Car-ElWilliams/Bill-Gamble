@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import Ads from '../components/Ads';
@@ -9,10 +9,10 @@ export default function Home({ navigation }) {
 	const { setriskyLevel } = useContext(Context);
 
 	return (
-		<View style={styles.HomeContainer}>
+		<SafeAreaView style={{ ...styles.HomeContainer }}>
 			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 
-			<Text style={styles.Header}>Choose Risk Level</Text>
+			<Text style={styles.Header}>CHOOSE RISK LEVEL</Text>
 			<Button
 				style={styles.Buttons}
 				labelStyle={styles.ButtonInnerText}
@@ -51,7 +51,7 @@ export default function Home({ navigation }) {
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
 			<Ads />
-		</View>
+		</SafeAreaView>
 	);
 }
 
@@ -67,16 +67,15 @@ const styles = StyleSheet.create({
 	TransparentLogo: {
 		width: 110,
 		height: 110,
-
 		alignSelf: 'center',
-		marginTop: -50,
+		marginTop: -40,
 	},
 	Header: {
-		marginTop: 10,
-		marginBottom: 69,
-		fontSize: 36,
+		marginTop: 30,
+		marginBottom: 80,
+		fontSize: 34,
 		color: '#fff',
-		fontFamily: 'Montserrat_700Bold',
+		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
 	},
 

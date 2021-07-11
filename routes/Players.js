@@ -9,9 +9,12 @@ import {
 	Platform,
 	TextInput,
 	SafeAreaView,
+	TouchableOpacity,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
+import PlayerTrashCan from '../components/PlayerTrashCan';
+
 import Ads from '../components/Ads';
 
 export default function BillAmount({ route, navigation }) {
@@ -56,16 +59,42 @@ export default function BillAmount({ route, navigation }) {
 			playerArray.map((players, i) => {
 				console.log('Players and number count:', players, playerNumberCount);
 				return (
-					<View key={players + i}>
-						<Text>{players}</Text>
-						<Button
-							mode='contained'
+					<View
+						key={players + i}
+						style={{ flex: 1, flexDirection: 'row', borderTopWidth: 1, padding: 10 }}
+					>
+						<Text
+							style={{
+								fontSize: 22,
+								fontFamily: 'Montserrat_800ExtraBold_Italic',
+								justifyContent: 'flex-start',
+							}}
+						>
+							{i + 1}#{'  '}
+							<Text
+								style={{
+									color: '#fff',
+									fontSize: 27,
+									fontFamily: 'Montserrat_800ExtraBold_Italic',
+								}}
+							>
+								{players}
+							</Text>
+						</Text>
+						<TouchableOpacity
 							onPress={() => {
 								return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
 							}}
+							style={{
+								width: 20,
+								height: 34,
+								alignSelf: 'center',
+								justifyContent: 'flex-end',
+								marginLeft: 30,
+							}}
 						>
-							Remove
-						</Button>
+							<PlayerTrashCan />
+						</TouchableOpacity>
 					</View>
 				);
 			}),
@@ -110,10 +139,13 @@ export default function BillAmount({ route, navigation }) {
 		}
 		return setDisableButton(true);
 	}
-
+	//
 	return (
-		<View style={styles.rootContainer}>
-			<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
+		<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
+			<ScrollView
+				//bounces={false}
+				contentContainerStyle={{ ...styles.rootContainer, width: '100%' }}
+			>
 				<KeyboardAvoidingView
 					behavior='padding'
 					keyboardVerticalOffset={Platform.select({
@@ -122,38 +154,39 @@ export default function BillAmount({ route, navigation }) {
 					})()}
 					style={styles.KeyboardAvoidingView}
 				>
-					<ScrollView bounces={false}>
-						{riskyLevel ? (
-							<View id='Banner-Risky' style={styles.riskyBanner}>
-								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
-							</View>
-						) : (
-							<View id='Banner-Normal' style={{ ...styles.riskyBanner, backgroundColor: 'green' }}>
-								<Text style={{ ...styles.riskyBannerText, backgroundColor: 'green' }}>
-									Risk Level: NORMAL
-								</Text>
-							</View>
-						)}
+					{riskyLevel ? (
+						<View id='Banner-Risky' style={styles.riskyBanner}>
+							<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
+						</View>
+					) : (
+						<View id='Banner-Normal' style={{ ...styles.riskyBanner, backgroundColor: 'green' }}>
+							<Text style={{ ...styles.riskyBannerText, backgroundColor: 'green' }}>
+								Risk Level: NORMAL
+							</Text>
+						</View>
+					)}
 
-						<View style={{ ...styles.SecondRootContainer }}>
-							<Text
-								style={{
-									...styles.EnterPlayerText,
-									fontSize: 40,
-									marginBottom: -5,
-								}}
-							>
-								Enter
-							</Text>
-							<Text
-								style={{
-									...styles.EnterPlayerText,
-									fontSize: 40,
-									textAlign: 'center',
-								}}
-							>
-								player names
-							</Text>
+					<View>
+						<Text
+							style={{
+								...styles.EnterPlayerText,
+								fontSize: 40,
+								//marginBottom: -5,
+								textAlign: 'center',
+								marginTop: 70,
+								marginBottom: 55,
+							}}
+						>
+							Enter player names
+						</Text>
+						{/*<Text
+							style={{
+								...styles.EnterPlayerText,
+								fontSize: 40,
+								textAlign: 'center',
+							}}
+						></Text>*/}
+						<View style={{ alignItems: 'center' }}>
 							<TextInput
 								ref={playerInputRef}
 								label={labelForPlayers}
@@ -171,48 +204,55 @@ export default function BillAmount({ route, navigation }) {
 								}}
 								value={getPlayersFromInput}
 								disabled={disablePlayerTextInput}
-								style={{ ...styles.PlayerInput, textAlign: 'center' }}
+								style={{ ...styles.PlayerInput }}
 							></TextInput>
-							<Button
-								onPress={() => {
-									return [
-										console.log(playerNumberCount),
-										setPlayerArray([...playerArray, getPlayersFromInput]),
-										setPlayerNumberCount(playerArray.length + 1),
-										clearText(),
-										setGetplayersFromInput(''),
-									];
-								}}
-								returnKeyType='next'
-								disabled={disablePlayerTextInput}
-								style={{ ...styles.nextButton }}
-							>
-								<Text style={{ color: '#fff', fontSize: 28 }}>Add</Text>
-							</Button>
-							<Button
-								disabled={disableButton}
-								onPress={() => {
-									return [submitAllPlayers(), navigation.navigate('Chicken')];
-								}}
-							>
-								<Button
-									style={{
-										color: '#000',
-										fontFamily: 'Montserrat_700Bold',
-										fontSize: 12,
-									}}
-								>
-									Back
-								</Button>
-								Done
-							</Button>
-							<View>{playerArray.length !== 0 && renderPlayers()}</View>
 						</View>
-						<Ads />
-					</ScrollView>
+						<Button
+							onPress={() => {
+								return [
+									console.log(playerNumberCount),
+									setPlayerArray([...playerArray, getPlayersFromInput]),
+									setPlayerNumberCount(playerArray.length + 1),
+									clearText(),
+									setGetplayersFromInput(''),
+								];
+							}}
+							returnKeyType='next'
+							disabled={disablePlayerTextInput}
+							style={{ ...styles.addButton }}
+						>
+							<Text style={{ color: '#000', fontSize: 20, fontFamily: 'Montserrat_900Black' }}>
+								Add
+							</Text>
+						</Button>
+
+						{/*<Button
+								style={{
+									color: '#000',
+									fontFamily: 'Montserrat_700Bold',
+									fontSize: 12,
+								}}
+							>
+							</Button>*/}
+						<View style={styles.playerBoardContainer}>
+							<View style={styles.playerBoard}>
+								<Text style={styles.playerBoardHeader}>Players</Text>
+								<View>{playerArray.length !== 0 && renderPlayers()}</View>
+							</View>
+						</View>
+						<Button
+							disabled={disableButton}
+							onPress={() => {
+								return [submitAllPlayers(), navigation.navigate('Chicken')];
+							}}
+						>
+							<Text>Done</Text>
+						</Button>
+					</View>
+					{/*<Ads />*/}
 				</KeyboardAvoidingView>
-			</SafeAreaView>
-		</View>
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
 
@@ -227,15 +267,14 @@ const styles = StyleSheet.create({
 		//flex: 1,
 		//flexDirection: 'column',
 		//justifyContent: 'center',
-		backgroundColor: '#D00404',
-	},
-	SecondRootContainer: {
-		flex: 1,
+		//backgroundColor: '#D00404',
+		//},
+		flex: -0,
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'center',
 		backgroundColor: '#fff',
-		minHeight: 600,
-		maxHeight: 900,
+		//minHeight: 600,
 	},
 
 	SafeAreaView: {
@@ -288,14 +327,40 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		fontFamily: 'Montserrat_700Bold',
 		color: 'orange',
+		textAlign: 'center',
 	},
 
-	nextButton: {
-		marginTop: 70,
-		padding: 5,
-		backgroundColor: 'rgb(255, 55, 55)',
-		borderRadius: 40,
-		width: '60%',
+	playerBoardContainer: {
+		alignItems: 'center',
+	},
+
+	playerBoard: {
+		borderColor: '#000',
+		borderWidth: 2,
+		backgroundColor: 'red',
+		minHeight: 200,
+		padding: 15,
+		width: '80%',
+		borderRadius: 15,
+	},
+
+	playerBoardHeader: {
+		textAlign: 'center',
+		color: '#fff',
+		fontSize: 35,
+		fontFamily: 'Montserrat_800ExtraBold_Italic',
+		borderColor: '#000',
+		borderBottomWidth: 1,
+		padding: 10,
+	},
+
+	addButton: {
+		marginTop: 20,
+
+		//padding: 5,
+		//backgroundColor: 'rgb(255, 55, 55)',
+		//borderRadius: 40,
+		//width: '60%',
 	},
 
 	BackButton: {
