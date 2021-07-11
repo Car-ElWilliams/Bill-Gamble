@@ -61,7 +61,12 @@ export default function BillAmount({ route, navigation }) {
 				return (
 					<View
 						key={players + i}
-						style={{ flex: 1, flexDirection: 'row', borderTopWidth: 1, padding: 10 }}
+						style={{
+							flex: 1,
+							flexDirection: 'row',
+							borderTopWidth: 1,
+							padding: 10,
+						}}
 					>
 						<Text
 							style={{
@@ -226,14 +231,6 @@ export default function BillAmount({ route, navigation }) {
 							</Text>
 						</Button>
 
-						{/*<Button
-								style={{
-									color: '#000',
-									fontFamily: 'Montserrat_700Bold',
-									fontSize: 12,
-								}}
-							>
-							</Button>*/}
 						<View style={styles.playerBoardContainer}>
 							<View style={styles.playerBoard}>
 								<Text style={styles.playerBoardHeader}>Players</Text>
@@ -245,8 +242,18 @@ export default function BillAmount({ route, navigation }) {
 							onPress={() => {
 								return [submitAllPlayers(), navigation.navigate('Chicken')];
 							}}
+							style={{
+								marginTop: 70,
+								backgroundColor: 'red',
+								borderRadius: 40,
+								width: '80%',
+								padding: 5,
+								alignSelf: 'center',
+							}}
 						>
-							<Text>Done</Text>
+							<Text style={{ color: 'white', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
+								Done
+							</Text>
 						</Button>
 					</View>
 					{/*<Ads />*/}
@@ -332,6 +339,7 @@ const styles = StyleSheet.create({
 
 	playerBoardContainer: {
 		alignItems: 'center',
+		marginTop: 60,
 	},
 
 	playerBoard: {
