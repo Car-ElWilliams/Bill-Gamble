@@ -4,8 +4,7 @@ import { Button } from 'react-native-paper';
 import Context from '../Context';
 
 export default function Results({ navigation }) {
-	//Todo shuffle array not rendering
-	//Todo useEffect console.log makes values be seen without it nothing renders
+	//Todo negative values happens now and then
 
 	//? Variables
 	const [countdownNumber, setCountdownNumber] = useState(3);
@@ -285,27 +284,33 @@ export default function Results({ navigation }) {
 	}, []);
 
 	return (
-		<View style={styles.HomeContainer}>
+		<View
+			style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}
+		>
 			{countdownNumber !== null && <Text style={styles.CountdownText}>{countdownNumber}</Text>}
 			{countdownNumber === null && (
-				<View style={styles.PlayerContainer}>
-					<Text style={styles.Header}>Results</Text>
-					{allPlayerNames.map((player, i) => {
-						//if (player === winner) {
-						//	setPlayerColor('green');
-						//} else if (player === loser) {
-						//	setPlayerColor('red');
-						//} else {
-						//	setPlayerColor('white');
-						//}
-						return (
-							<View key={player + i}>
-								<Text style={styles.PlayerText}>
-									{player} will pay <Text style={{ color: playerColor }}>{amountToPay[i]}</Text>
-								</Text>
-							</View>
-						);
-					})}
+				<View style={styles.HomeContainer}>
+					<View style={styles.HeaderContainer}>
+						<Text style={styles.Header}>Results</Text>
+					</View>
+					<View style={styles.PlayerContainer}>
+						{allPlayerNames.map((player, i) => {
+							//if (player === winner) {
+							//	setPlayerColor('green');
+							//} else if (player === loser) {
+							//	setPlayerColor('red');
+							//} else {
+							//	setPlayerColor('white');
+							//}
+							return (
+								<View key={player + i}>
+									<Text style={styles.PlayerText}>
+										{player} will pay <Text style={{ color: playerColor }}>{amountToPay[i]}</Text>
+									</Text>
+								</View>
+							);
+						})}
+					</View>
 				</View>
 			)}
 			{countdownNumber === null && (
@@ -313,18 +318,27 @@ export default function Results({ navigation }) {
 					<Text style={styles.EndButtonText}>End</Text>
 				</Button>
 			)}
+			{countdownNumber === null && (
+				<Text
+					style={{
+						...styles.Header,
+						fontSize: 12,
+						fontFamily: 'Montserrat_700Bold_Italic',
+						marginBottom: 20,
+						textDecorationLine: 'none',
+					}}
+				>
+					Scores are saved in the home menu
+				</Text>
+			)}
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	HomeContainer: {
-		flex: 4,
-		alignItems: 'center',
-		justifyContent: 'center',
+		flex: 1,
 		flexDirection: 'column',
-		backgroundColor: 'black',
-		height: '100%',
 	},
 	CountdownText: {
 		color: '#fff',
@@ -333,20 +347,27 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_700Bold',
 	},
 
+	HeaderContainer: {
+		height: 23,
+		marginTop: 45,
+		marginBottom: 45,
+	},
 	Header: {
 		color: '#fff',
-		fontSize: 60,
+		fontSize: 55,
 		fontFamily: 'Montserrat_700Bold',
-		justifyContent: 'flex-start',
-		alignSelf: 'flex-start',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		textDecorationLine: 'underline',
 	},
 
 	PlayerContainer: {
 		flex: 2,
 		//flexWrap: 'wrap',
-		flexGrow: 2,
+		flexGrow: 1,
 		justifyContent: 'center',
 		alignSelf: 'center',
+		width: '100%',
 	},
 
 	PlayerText: {
@@ -360,7 +381,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'red',
 		borderRadius: 30,
 		width: '60%',
-		marginBottom: 20,
+		marginBottom: 12,
 	},
 	EndButtonText: {
 		color: '#fff',

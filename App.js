@@ -17,6 +17,7 @@ import {
 	Montserrat_800ExtraBold,
 	Montserrat_800ExtraBold_Italic,
 	Montserrat_700Bold,
+	Montserrat_700Bold_Italic,
 	Montserrat_600SemiBold_Italic,
 	Montserrat_900Black_Italic,
 	Montserrat_900Black,
@@ -35,6 +36,7 @@ export default function App() {
 		Montserrat_800ExtraBold,
 		Montserrat_800ExtraBold_Italic,
 		Montserrat_700Bold,
+		Montserrat_700Bold_Italic,
 		Montserrat_900Black_Italic,
 		Montserrat_900Black,
 		Montserrat_600SemiBold_Italic,
@@ -45,7 +47,6 @@ export default function App() {
 	} else {
 		return (
 			<Context.Provider
-				style={{ backgroundColor: 'rgba(255, 51, 51, .95)' }}
 				value={{
 					progressDone,
 					setProgressDone,

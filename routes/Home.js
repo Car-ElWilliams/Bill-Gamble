@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
+		//opacity: 0,
 		backgroundColor: 'rgb(255, 55, 55)',
 	},
 

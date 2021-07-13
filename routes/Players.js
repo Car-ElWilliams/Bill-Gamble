@@ -242,18 +242,10 @@ export default function BillAmount({ route, navigation }) {
 							onPress={() => {
 								return [submitAllPlayers(), navigation.navigate('Chicken')];
 							}}
-							style={{
-								marginTop: 70,
-								backgroundColor: 'red',
-								borderRadius: 40,
-								width: '80%',
-								padding: 5,
-								alignSelf: 'center',
-							}}
+							style={styles.DoneButton}
+							labelStyle={styles.DoneButtonText}
 						>
-							<Text style={{ color: 'white', fontFamily: 'Montserrat_700Bold', fontSize: 20 }}>
-								Done
-							</Text>
+							<Text>Done</Text>
 						</Button>
 					</View>
 					{/*<Ads />*/}
@@ -346,7 +338,7 @@ const styles = StyleSheet.create({
 		borderColor: '#000',
 		borderWidth: 2,
 		backgroundColor: 'red',
-		minHeight: 200,
+		minHeight: 400,
 		padding: 15,
 		width: '80%',
 		borderRadius: 15,
@@ -359,19 +351,29 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
 		borderColor: '#000',
 		borderBottomWidth: 1,
-		padding: 10,
+		paddingBottom: 15,
 	},
 
 	addButton: {
 		marginTop: 20,
-
-		//padding: 5,
-		//backgroundColor: 'rgb(255, 55, 55)',
-		//borderRadius: 40,
-		//width: '60%',
 	},
 
 	BackButton: {
 		marginTop: 25,
+	},
+
+	DoneButton: {
+		marginTop: 70,
+		backgroundColor: 'red',
+		borderRadius: 40,
+		width: '80%',
+		alignSelf: 'center',
+		color: '#fff',
+	},
+	DoneButtonText: {
+		color: '#fff',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 20,
+		padding: 5,
 	},
 });
