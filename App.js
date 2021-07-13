@@ -31,6 +31,7 @@ export default function App() {
 	const [billValue, setBillValue] = useState(true);
 	const [allPlayerNames, setAllPlayerNames] = useState('');
 	const [riskyLevel, setriskyLevel] = useState('');
+	const [scoreResults, setScoreResults] = useState([]);
 
 	let [fontsLoaded] = useFonts({
 		Montserrat_800ExtraBold,
@@ -56,6 +57,8 @@ export default function App() {
 					setAllPlayerNames,
 					riskyLevel,
 					setriskyLevel,
+					scoreResults,
+					setScoreResults,
 				}}
 			>
 				<PaperProvider>

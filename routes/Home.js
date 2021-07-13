@@ -7,6 +7,7 @@ import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 
 export default function Home({ navigation }) {
 	const { setriskyLevel } = useContext(Context);
+	const { scoreResults } = useContext(Context);
 
 	return (
 		<SafeAreaView style={{ ...styles.HomeContainer }}>
@@ -50,7 +51,8 @@ export default function Home({ navigation }) {
 				<Text>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
-			<Ads />
+			<Button onPress={() => console.log(scoreResults)}>test</Button>
+			{/*<Ads />*/}
 		</SafeAreaView>
 	);
 }

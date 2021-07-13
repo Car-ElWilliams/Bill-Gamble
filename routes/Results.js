@@ -12,6 +12,7 @@ export default function Results({ navigation }) {
 	const { allPlayerNames } = useContext(Context);
 	const { billValue } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
+	const { setScoreResults } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
 	const [amountToPay, setAmountToPay] = useState([]);
@@ -187,6 +188,7 @@ export default function Results({ navigation }) {
 				player1 = randomBetween(0, billValue);
 				player2 = max - player1;
 				setAmountToPay(shuffleArray([player1, player2]));
+				setScoreResults(amountToPay);
 
 				break;
 
@@ -215,7 +217,6 @@ export default function Results({ navigation }) {
 
 				player5 = max - player1 - player2 - player3 - player4;
 				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5]));
-
 				break;
 
 			case 6:
