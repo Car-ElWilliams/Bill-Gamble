@@ -33,6 +33,7 @@ export default function BillAmount({ route, navigation }) {
 	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
 
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
+	const [placeholderName, setPlaceholderName] = useState('Eric');
 
 	//! Functions
 
@@ -127,6 +128,29 @@ export default function BillAmount({ route, navigation }) {
 		//console.log(playerInputRef.current.text);
 	});
 
+	function checkEmptyField() {
+		console.log('name of added player', getPlayersFromInput);
+		if (getPlayersFromInput === '') {
+			return setPlaceholderName('Name?');
+		}
+		return [checkMaxPlayerCountAndAddPlayers(), setPlaceholderName('')];
+	}
+
+	function checkMaxPlayerCountAndAddPlayers() {
+		if (playerNumberCount <= 5) {
+			return [
+				setPlayerArray([...playerArray, getPlayersFromInput]),
+				setPlayerNumberCount(playerArray.length + 1),
+				clearText(),
+				setGetplayersFromInput(''),
+				React.memo(() => {
+					return setDisablePlayerTextInput(false);
+				}),
+			];
+		}
+		return [setDisablePlayerTextInput(true), console.log('set')];
+	}
+
 	useEffect(() => {
 		let unmounted = false;
 		setGetplayersFromInput('');
@@ -195,32 +219,29 @@ export default function BillAmount({ route, navigation }) {
 							<TextInput
 								ref={playerInputRef}
 								label={labelForPlayers}
-								placeholder='Erik'
+								placeholder={placeholderName}
 								//autoFocus={true}
 								onChangeText={e => {
 									setGetplayersFromInput(e);
 								}}
 								onSubmitEditing={() => {
 									return [
-										setPlayerArray([...playerArray, getPlayersFromInput]),
-										clearText(),
-										setGetplayersFromInput(''),
+										//setPlayerArray([...playerArray, getPlayersFromInput]),
+										//clearText(),
+										//setGetplayersFromInput(''),
+										checkEmptyField(),
 									];
 								}}
 								value={getPlayersFromInput}
 								disabled={disablePlayerTextInput}
 								style={{ ...styles.PlayerInput }}
+								clearButtonMode='always'
 							></TextInput>
 						</View>
+						{playerNumberCount === 6 && <Text>Max players reached</Text>}
 						<Button
 							onPress={() => {
-								return [
-									console.log(playerNumberCount),
-									setPlayerArray([...playerArray, getPlayersFromInput]),
-									setPlayerNumberCount(playerArray.length + 1),
-									clearText(),
-									setGetplayersFromInput(''),
-								];
+								return [console.log(playerNumberCount), checkEmptyField()];
 							}}
 							returnKeyType='next'
 							disabled={disablePlayerTextInput}
