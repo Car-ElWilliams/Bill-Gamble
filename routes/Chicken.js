@@ -34,11 +34,13 @@ export default function Chicken({ navigation }) {
 	return (
 		<View style={styles.HomeContainer}>
 			<SafeAreaView>
-				<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25, fontSize: 40 }}>
+				{/*<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25, fontSize: 40 }}>
 					Gamble Time
-				</Text>
+				</Text>*/}
 				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
-				<Text style={styles.TextStandard}>START OR {'\n'} CHICKEN OUT?</Text>
+				<Text style={{ ...styles.TextStandard, marginBottom: 70 }}>
+					START OR {'\n'} CHICKEN OUT?
+				</Text>
 				<Button
 					onPress={() => navigation.navigate('Results')}
 					style={{ ...styles.Buttons, backgroundColor: 'green' }}
@@ -59,13 +61,24 @@ export default function Chicken({ navigation }) {
 					style={{
 						...styles.TextStandard,
 						color: 'white',
-						marginTop: -10.5,
+						marginTop: -20.5,
 						fontSize: 12,
 						position: 'relative',
 						top: '7%',
+						marginBottom: 30,
 					}}
 				>
-					Amount being gambled: <Text style={{ color: 'gold' }}>{billValue}</Text>
+					Cash being gambled: {'\n'}
+				</Text>
+				<Text
+					style={{
+						color: 'yellow',
+						fontSize: 30,
+						alignSelf: 'center',
+						fontFamily: 'Montserrat_800ExtraBold',
+					}}
+				>
+					{billValue}
 				</Text>
 			</SafeAreaView>
 		</View>
@@ -90,6 +103,7 @@ const styles = StyleSheet.create({
 		width: 350,
 		height: 110,
 		alignSelf: 'center',
+		marginBottom: 50,
 	},
 	Buttons: {
 		width: 280,
@@ -97,7 +111,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 60,
 		alignSelf: 'center',
-		marginBottom: 15,
+		marginBottom: 25,
 		marginTop: 10,
 	},
 	ButtonInnerText: {

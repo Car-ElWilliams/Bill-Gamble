@@ -142,13 +142,14 @@ const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 10;
 
 const styles = StyleSheet.create({
 	removeButton: {
-		backgroundColor: 'red',
+		backgroundColor: 'rgb(255, 55, 55)',
 	},
 	rootContainer: {
 		//flex: 1,
 		//flexDirection: 'column',
 		//justifyContent: 'center',
 		backgroundColor: '#D00404',
+		backgroundColor: 'rgb(255, 55, 55)',
 	},
 	SecondRootContainer: {
 		flex: 1,
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	BillAmountText: {
-		color: '#FF5757',
+		color: 'rgb(255, 55, 55)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
 		marginTop: 0,
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
 	BillInput: {
 		width: '70%',
 		borderWidth: 6,
-		borderColor: '#FF5757',
+		borderColor: 'rgb(255, 55, 55)',
 		borderRadius: 20,
 		backgroundColor: '#fff',
 		padding: 10,
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
 
 	nextButton: {
 		marginTop: 70,
-		backgroundColor: '#FF5757',
+		backgroundColor: 'rgb(255, 55, 55)',
 		borderRadius: 40,
 		width: '60%',
 	},

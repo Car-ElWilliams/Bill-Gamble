@@ -12,7 +12,7 @@ export default function Results({ navigation }) {
 	const { allPlayerNames } = useContext(Context);
 	const { billValue } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
-	const { setScoreResults } = useContext(Context);
+	const { scoreResults, setScoreResults } = useContext(Context);
 
 	const [evenPay, setEvenPay] = useState(null);
 	const [amountToPay, setAmountToPay] = useState([]);
@@ -189,7 +189,9 @@ export default function Results({ navigation }) {
 				player2 = max - player1;
 				setAmountToPay(shuffleArray([player1, player2]));
 				setScoreResults(amountToPay);
-
+				setTimeout(function () {
+					console.log('setScore', scoreResults, amountToPay);
+				}, 1000);
 				break;
 
 			case 3:

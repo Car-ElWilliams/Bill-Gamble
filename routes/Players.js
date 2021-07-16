@@ -67,6 +67,7 @@ export default function BillAmount({ route, navigation }) {
 							flexDirection: 'row',
 							borderTopWidth: 1,
 							padding: 10,
+							borderColor: 'rgb(255, 55, 55)',
 						}}
 					>
 						<Text
@@ -79,7 +80,7 @@ export default function BillAmount({ route, navigation }) {
 							{i + 1}#{'  '}
 							<Text
 								style={{
-									color: '#fff',
+									color: 'orange',
 									fontSize: 27,
 									fontFamily: 'Montserrat_800ExtraBold_Italic',
 								}}
@@ -217,6 +218,7 @@ export default function BillAmount({ route, navigation }) {
 						></Text>*/}
 						<View style={{ alignItems: 'center' }}>
 							<TextInput
+								maxLength={12}
 								ref={playerInputRef}
 								label={labelForPlayers}
 								placeholder={placeholderName}
@@ -356,23 +358,24 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		borderColor: '#000',
-		borderWidth: 2,
-		backgroundColor: 'red',
+		borderColor: 'rgb(255, 55, 55)',
+		borderWidth: 3.5,
+		backgroundColor: '#fff',
 		minHeight: 400,
 		padding: 15,
-		width: '80%',
+		width: '85%',
 		borderRadius: 15,
 	},
 
 	playerBoardHeader: {
 		textAlign: 'center',
-		color: '#fff',
+		color: 'rgb(255, 55, 55)',
+		color: 'orange',
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
-		borderColor: '#000',
-		borderBottomWidth: 1,
-		paddingBottom: 15,
+		borderColor: 'rgb(255, 55, 55)',
+		borderBottomWidth: 3,
+		paddingBottom: 13,
 	},
 
 	addButton: {
