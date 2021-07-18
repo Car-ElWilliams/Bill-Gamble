@@ -8,6 +8,23 @@ import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 export default function Home({ navigation }) {
 	const { setriskyLevel } = useContext(Context);
 	const { scoreResults } = useContext(Context);
+	const { allPlayerNames } = useContext(Context);
+
+	function renderAllPlayers() {
+		if (allPlayerNames) {
+			console.log(scoreResults);
+			return allPlayerNames.map((players, i) => {
+				console.log(players, 'test');
+				return (
+					<View key={players + i}>
+						<Text style={{ color: 'white', fontSize: 50 }}>
+							{players} pays <Text style={{ color: 'white' }}>{scoreResults[i]}</Text>
+						</Text>
+					</View>
+				);
+			});
+		}
+	}
 
 	return (
 		<SafeAreaView style={{ ...styles.HomeContainer }}>
@@ -51,7 +68,25 @@ export default function Home({ navigation }) {
 				<Text>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
-			<Button onPress={() => console.log(scoreResults)}>test</Button>
+			<Button onPress={() => console.log(allPlayerNames[0], scoreResults)}>test</Button>
+			<View
+				style={{
+					flex: 1,
+					position: 'absolute',
+					height: '75%',
+					width: '40%',
+					backgroundColor: 'black',
+					top: 10,
+					left: 0,
+					alignItems: 'center',
+					alignSelf: 'center',
+					borderRadius: 20,
+				}}
+			>
+				<Text style={{ color: 'white' }}>Score Results</Text>
+				{renderAllPlayers()}
+			</View>
+
 			{/*<Ads />*/}
 		</SafeAreaView>
 	);

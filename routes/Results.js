@@ -25,6 +25,7 @@ export default function Results({ navigation }) {
 	const [playerColor, setPlayerColor] = useState('white');
 
 	//!Functions
+
 	matchPlayerWithPay();
 	function matchPlayerWithPay() {
 		let thePlayers = {};
@@ -35,34 +36,42 @@ export default function Results({ navigation }) {
 			let playerIndex = 'player' + i;
 
 			Object.assign(thePlayers, { playerIndex: playerValue });
-			console.log(thePlayers);
-			console.log(i, playerValue, playerIndex);
+			//console.log(thePlayers);
+			//console.log(i, playerValue, playerIndex);
 		}
 	}
 
-	function sortPay() {
-		const sortedArray = amountToPay.sort(function (a, b) {
-			return a - b;
-		});
-		const lowestPay = sortedArray[0];
-		const highestPay = sortedArray[amountToPay.length - 1];
+	//function sortPay() {
+	//	const sortedArray = amountToPay.sort(function (a, b) {
+	//		return a - b;
+	//	});
+	//	const lowestPay = sortedArray[0];
+	//	const highestPay = sortedArray[amountToPay.length - 1];
 
-		return sortedArray;
-	}
+	//	return sortedArray;
+	//}
 
-	useEffect(() => {
-		//console.log(amountToPay.reduce((a, b) => a + b, 0));
+	//useEffect(() => {
+	//	//console.log(amountToPay.reduce((a, b) => a + b, 0));
 
-		sortPay();
-	}, [amountToPay, evenPay]);
-
-	useEffect(() => {
-		randomizeRiskyResults();
-	}, [launchRiskyFunctions]);
+	//	sortPay();
+	//}, [amountToPay, evenPay]);
 
 	useEffect(() => {
-		randomizeNormalResults();
-	}, [launchNormalFunctions]);
+		if (riskyLevel) {
+			randomizeRiskyResults();
+		}
+	}, []);
+
+	useEffect(() => {
+		if (!riskyLevel) {
+			randomizeNormalResults();
+		}
+	}, []);
+
+	useEffect(() => {
+		setScoreResults(amountToPay);
+	}, [setAmountToPay, amountToPay]);
 
 	//Normal Mode
 
@@ -71,23 +80,26 @@ export default function Results({ navigation }) {
 
 		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
 
-		if (RandomPayOrEvenPay === 1 || RandomPayOrEvenPay === 2) {
+		if (RandomPayOrEvenPay === 1) {
 			return normalModeRandomPay();
 		}
-		//33% chance of splitting evenly
+		//66% chance of splitting evenly
 		return RiskyAndNormalEvenPay();
 	}
 
 	function RiskyAndNormalEvenPay() {
+		let amountArray = [];
 		const playerAmount = allPlayerNames.length;
 		const split = billValue / playerAmount;
 
-		setEvenPay(split);
-
-		return evenPay;
+		for (let i = 0; i < playerAmount; i++) {
+			amountArray.push(split);
+		}
+		setAmountToPay(amountArray);
 	}
 
 	function normalModeRandomPay() {
+		console.log('rendered one...');
 		const howManyPlayers = allPlayerNames.length;
 
 		let max = billValue;
@@ -99,7 +111,6 @@ export default function Results({ navigation }) {
 		let player5;
 		let player6;
 
-		console.log('howManyPlayers:', howManyPlayers);
 		console.log(Math.floor((0.8 / howManyPlayers) * billValue));
 
 		switch (howManyPlayers) {
@@ -188,10 +199,10 @@ export default function Results({ navigation }) {
 				player1 = randomBetween(0, billValue);
 				player2 = max - player1;
 				setAmountToPay(shuffleArray([player1, player2]));
-				setScoreResults(amountToPay);
-				setTimeout(function () {
-					console.log('setScore', scoreResults, amountToPay);
-				}, 1000);
+
+				//setTimeout(function () {
+				//	console.log('setScore', scoreResults, amountToPay);
+				//}, 1000);
 				break;
 
 			case 3:
@@ -219,6 +230,7 @@ export default function Results({ navigation }) {
 
 				player5 = max - player1 - player2 - player3 - player4;
 				setAmountToPay(shuffleArray([player1, player2, player3, player4, player5]));
+
 				break;
 
 			case 6:
@@ -239,7 +251,7 @@ export default function Results({ navigation }) {
 		function shuffleArray(array) {
 			//Fisher Yates Baby!
 
-			console.log('array coming in', array);
+			//console.log('array coming in', array);
 			var currentIndex = array.length,
 				randomIndex;
 			while (0 !== currentIndex) {
@@ -247,7 +259,7 @@ export default function Results({ navigation }) {
 				currentIndex--;
 				[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 			}
-			console.log('array coming out', array);
+			//console.log('array coming out', array);
 			return array;
 		}
 
@@ -267,14 +279,6 @@ export default function Results({ navigation }) {
 						setCountdownNumber('GO');
 						setTimeout(() => {
 							setCountdownNumber(null);
-							if (riskyLevel) {
-								console.log('riskylevel');
-								launchRiskyFunctions;
-								setLaunchRiskyFunctions(true);
-							} else {
-								setLaunchNormalFunctions(true);
-								console.log('normalLevel');
-							}
 						}, 500);
 					}, 1000);
 				}, 1000);

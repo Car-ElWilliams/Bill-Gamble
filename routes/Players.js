@@ -52,13 +52,13 @@ export default function BillAmount({ route, navigation }) {
 			setDisablePlayerTextInput(false);
 		}
 
-		console.log(playerArray.length, playerNumberCount);
+		//console.log(playerArray.length, playerNumberCount);
 	}, [playerArray]);
 
 	function renderPlayers() {
 		return [
 			playerArray.map((players, i) => {
-				console.log('Players and number count:', players, playerNumberCount);
+				//console.log('Players and number count:', players, playerNumberCount);
 				return (
 					<View
 						key={players + i}
@@ -149,7 +149,7 @@ export default function BillAmount({ route, navigation }) {
 				}),
 			];
 		}
-		return [setDisablePlayerTextInput(true), console.log('set')];
+		return [setDisablePlayerTextInput(true)];
 	}
 
 	useEffect(() => {
@@ -161,10 +161,10 @@ export default function BillAmount({ route, navigation }) {
 	}, []);
 
 	function enableAddButton() {
-		console.log(playerArray.length);
-		console.log(disableButton);
+		//console.log(playerArray.length);
+		//console.log(disableButton);
 		if (playerArray.length > 1) {
-			console.log('setttt');
+			//console.log('setttt');
 			return setDisableButton(false);
 		}
 		return setDisableButton(true);
@@ -243,7 +243,7 @@ export default function BillAmount({ route, navigation }) {
 						{playerNumberCount === 6 && <Text>Max players reached</Text>}
 						<Button
 							onPress={() => {
-								return [console.log(playerNumberCount), checkEmptyField()];
+								return [checkEmptyField()];
 							}}
 							returnKeyType='next'
 							disabled={disablePlayerTextInput}
