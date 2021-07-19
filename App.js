@@ -18,6 +18,7 @@ import {
 	Montserrat_800ExtraBold_Italic,
 	Montserrat_700Bold,
 	Montserrat_700Bold_Italic,
+	Montserrat_600SemiBold,
 	Montserrat_600SemiBold_Italic,
 	Montserrat_900Black_Italic,
 	Montserrat_900Black,
@@ -40,6 +41,7 @@ export default function App() {
 		Montserrat_700Bold_Italic,
 		Montserrat_900Black_Italic,
 		Montserrat_900Black,
+		Montserrat_600SemiBold,
 		Montserrat_600SemiBold_Italic,
 	});
 

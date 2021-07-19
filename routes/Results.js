@@ -26,20 +26,20 @@ export default function Results({ navigation }) {
 
 	//!Functions
 
-	matchPlayerWithPay();
-	function matchPlayerWithPay() {
-		let thePlayers = {};
+	//matchPlayerWithPay();
+	//function matchPlayerWithPay() {
+	//	let thePlayers = {};
 
-		for (const [i, playerValue] of allPlayerNames.entries()) {
-			//thePlayers = { ...playerValue[i], ...playerValue };
+	//	for (const [i, playerValue] of allPlayerNames.entries()) {
+	//		//thePlayers = { ...playerValue[i], ...playerValue };
 
-			let playerIndex = 'player' + i;
+	//		let playerIndex = 'player' + i;
 
-			Object.assign(thePlayers, { playerIndex: playerValue });
-			//console.log(thePlayers);
-			//console.log(i, playerValue, playerIndex);
-		}
-	}
+	//		Object.assign(thePlayers, { playerIndex: playerValue });
+	//		//console.log(thePlayers);
+	//		//console.log(i, playerValue, playerIndex);
+	//	}
+	//}
 
 	//function sortPay() {
 	//	const sortedArray = amountToPay.sort(function (a, b) {
@@ -335,7 +335,7 @@ export default function Results({ navigation }) {
 						textDecorationLine: 'none',
 					}}
 				>
-					Scores are saved in the home menu
+					Scores are found in the home menu
 				</Text>
 			)}
 		</View>
