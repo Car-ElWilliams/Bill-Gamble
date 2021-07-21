@@ -10,7 +10,6 @@ import {
 	TextInput,
 	SafeAreaView,
 	Dimensions,
-	r,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';

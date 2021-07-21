@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: 'rgba(255, 56, 56, .95)',
+		backgroundColor: 'rgb(255, 55, 55)',
 		alignItems: 'center',
 	},
 	SafeAreaView: {

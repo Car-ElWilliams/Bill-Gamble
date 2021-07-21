@@ -7,11 +7,14 @@ import {
 	SafeAreaView,
 	Switch,
 	Platform,
+	TouchableOpacity,
+	Dimensions,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import Ads from '../components/Ads';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
+import TrophySVG from '../components/TrophySVG.js';
 import { Montserrat_200ExtraLight } from '@expo-google-fonts/montserrat';
 
 export default function Home({ navigation }) {
@@ -97,19 +100,27 @@ export default function Home({ navigation }) {
 				<Text>Risky</Text>
 			</Button>
 			<Text style={styles.ButtonText}>For the greedy and the brave</Text>
+
 			{scoreResults.length > 0 && (
-				<Button
+				<TouchableOpacity
 					onPress={() => {
 						return [showOrHideScore(), console.log(showSavedScore)];
 					}}
 					style={{
 						height: 'auto',
 						backgroundColor: 'orange',
-						borderRadius: 20,
+						borderColor: 'white',
+						borderWidth: 1.25,
+						borderRadius: 50,
+						width: 65,
+						height: 65,
+						position: 'absolute',
+						left: 15,
+						top: Dimensions.get('window').height - 80,
 					}}
 				>
-					<Text style={{ color: 'white' }}>Past scores</Text>
-				</Button>
+					<TrophySVG style={{ width: 35, height: 35 }} />
+				</TouchableOpacity>
 			)}
 
 			{showSavedScore && (
@@ -165,8 +176,8 @@ const styles = StyleSheet.create({
 		marginTop: -40,
 	},
 	Header: {
-		marginTop: 30,
-		marginBottom: 80,
+		marginTop: 15,
+		marginBottom: 75,
 		fontSize: 34,
 		color: '#fff',
 		fontFamily: 'Montserrat_800ExtraBold',

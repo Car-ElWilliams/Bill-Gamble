@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	EnterPlayerText: {
-		color: '#FF5757',
+		color: 'rgb(255, 55, 55)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
 		marginTop: 0,
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
 	PlayerInput: {
 		width: '70%',
 		borderWidth: 6,
-		borderColor: '#FF5757',
+		borderColor: 'rgb(255, 55, 55)',
 		borderRadius: 20,
 		backgroundColor: '#fff',
 		padding: 10,
