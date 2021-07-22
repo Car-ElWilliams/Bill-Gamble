@@ -38,7 +38,7 @@ export default function Chicken({ navigation }) {
 					Gamble Time
 				</Text>*/}
 				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
-				<Text style={{ ...styles.TextStandard, marginBottom: 70 }}>
+				<Text style={{ ...styles.TextStandard, marginBottom: 55 }}>
 					START OR {'\n'} CHICKEN OUT?
 				</Text>
 				<Button
@@ -52,7 +52,7 @@ export default function Chicken({ navigation }) {
 					onPress={() => {
 						return [navigation.navigate('Home'), playSound()];
 					}}
-					style={{ ...styles.Buttons, backgroundColor: 'red' }}
+					style={{ ...styles.Buttons, backgroundColor: 'red', marginBottom: 50 }}
 					labelStyle={styles.ButtonInnerText}
 				>
 					<Text> Chicken out🐔</Text>
@@ -62,7 +62,7 @@ export default function Chicken({ navigation }) {
 						...styles.TextStandard,
 						color: 'white',
 						marginTop: -20.5,
-						fontSize: 12,
+						fontSize: 16,
 						position: 'relative',
 						top: '7%',
 						marginBottom: 30,
@@ -72,7 +72,7 @@ export default function Chicken({ navigation }) {
 				</Text>
 				<Text
 					style={{
-						color: 'yellow',
+						color: 'orange',
 						fontSize: 30,
 						alignSelf: 'center',
 						fontFamily: 'Montserrat_800ExtraBold',
@@ -100,10 +100,11 @@ const styles = StyleSheet.create({
 		marginHorizontal: 0,
 	},
 	TransparentLogo: {
-		width: 350,
+		width: 110,
 		height: 110,
 		alignSelf: 'center',
-		marginBottom: 50,
+		marginBottom: -10,
+		marginTop: 20,
 	},
 	Buttons: {
 		width: 280,

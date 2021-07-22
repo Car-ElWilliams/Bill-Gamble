@@ -172,18 +172,18 @@ export default function BillAmount({ route, navigation }) {
 	//
 	return (
 		<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
-			<ScrollView
-				//bounces={false}
-				contentContainerStyle={{ ...styles.rootContainer, width: '100%' }}
-			>
 				<KeyboardAvoidingView
 					behavior='padding'
 					keyboardVerticalOffset={Platform.select({
 						ios: () => 0,
-						android: () => -225,
+						android: () => -250,
 					})()}
 					style={styles.KeyboardAvoidingView}
 				>
+			<ScrollView
+				//bounces={false}
+				contentContainerStyle={{ ...styles.rootContainer, width: '100%' }}
+			>
 					{riskyLevel ? (
 						<View id='Banner-Risky' style={styles.riskyBanner}>
 							<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
@@ -271,9 +271,19 @@ export default function BillAmount({ route, navigation }) {
 							<Text>Done</Text>
 						</Button>
 					</View>
+					
+							<Button
+								onPress={() => {
+									return navigation.navigate('Note');
+								}}
+								labelStyle={styles.BackButtonText}
+								style={styles.BackButton}
+							>
+								<Text>Back</Text>
+							</Button>
 					{/*<Ads />*/}
-				</KeyboardAvoidingView>
 			</ScrollView>
+				</KeyboardAvoidingView>
 		</SafeAreaView>
 	);
 }
@@ -318,6 +328,7 @@ const styles = StyleSheet.create({
 	},
 
 	riskyBanner: {
+		width: '100%',
 		flex: 1,
 		backgroundColor: '#D00404',
 		height: heightRiskLevelBanner,
@@ -382,15 +393,12 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 
-	BackButton: {
-		marginTop: 25,
-	},
 
 	DoneButton: {
-		marginTop: 70,
+		marginTop: 55,
 		backgroundColor: 'red',
 		borderRadius: 40,
-		width: '80%',
+		width: 280,
 		alignSelf: 'center',
 		color: '#fff',
 	},
@@ -399,5 +407,16 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 20,
 		padding: 5,
+	},
+
+	BackButton: {
+		marginTop: 25,
+	},
+
+	BackButtonText: {
+		color: '#000',
+		fontFamily: 'Montserrat_700Bold',
+		fontSize: 12,
+		paddingBottom: 30
 	},
 });

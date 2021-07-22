@@ -170,9 +170,9 @@ const styles = StyleSheet.create({
 
 	RecieptSVGContainer: {
 		width: '100%',
-		maxWidth: '52.5%',
+		maxWidth: '50.5%',
 		minHeight: '25%',
-		maxHeight: '30%',
+		maxHeight: '26.75%',
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
 		marginTop: 15.5,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
 		color: 'rgb(255, 55, 55)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
-		marginTop: 0,
+		marginTop: 15,
 		marginBottom: 40,
 	},
 
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 	},
 
 	nextButton: {
-		marginTop: 70,
+		marginTop: 30,
 		backgroundColor: 'rgb(255, 55, 55)',
 		borderRadius: 40,
 		width: '60%',

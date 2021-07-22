@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated, Dimensions } from 'react-native';
-import LoadingImage from '../assets/bill-gamble-logo.png';
+//import LoadingImage from '../assets/bill-gamble-logo.png';
+import LoadingImage from '../assets/NewLogoScreen3.png';
 import { ProgressBar, Colors } from 'react-native-paper';
 import Context from '../Context';
 
@@ -34,7 +35,7 @@ export default function LoadingScreen(props) {
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}></ImageBackground>
-			<Text style={styles.LoadingText}>BILL GAMBLE </Text>
+			<Text style={styles.LoadingText}>BILL GAMBLE</Text>
 			{/*<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>*/}
 			{/*<Text style={styles.LoadingBarText}>Loading...</Text>*/}
 			<Text style={{ ...styles.LoadingText, fontSize: 14, flexGrow: 1 }}>
