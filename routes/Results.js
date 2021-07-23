@@ -14,11 +14,7 @@ export default function Results({ navigation }) {
 	const { riskyLevel } = useContext(Context);
 	const { scoreResults, setScoreResults } = useContext(Context);
 
-	const [evenPay, setEvenPay] = useState(null);
 	const [amountToPay, setAmountToPay] = useState([]);
-
-	const [launchRiskyFunctions, setLaunchRiskyFunctions] = useState(false);
-	const [launchNormalFunctions, setLaunchNormalFunctions] = useState(false);
 
 	const [winner, setWinner] = useState('');
 	const [loser, setLoser] = useState('');
@@ -96,6 +92,10 @@ export default function Results({ navigation }) {
 			amountArray.push(split);
 		}
 		setAmountToPay(amountArray);
+
+		//Reset no winner loser
+		setWinner('split');
+		setLoser('split');
 	}
 
 	function normalModeRandomPay() {
@@ -268,6 +268,16 @@ export default function Results({ navigation }) {
 		}
 	}
 
+	function findWinner() {
+		for (let i = 0; i < amountToPay.length; i++) {
+			if (winner[i] > winner[0]) {
+				setWinner(allPlayerNames[i]);
+				//winnerArr.push(allPlayerNames[i]);
+				console.log(allPlayerNames[i]);
+			}
+		}
+	}
+
 	useEffect(() => {
 		let mounted = true;
 		if (mounted) {
@@ -311,9 +321,39 @@ export default function Results({ navigation }) {
 							//}
 							return (
 								<View key={player + i}>
-									<Text style={styles.PlayerText}>
-										{player} will pay <Text style={{ color: playerColor }}>{amountToPay[i]}</Text>
-									</Text>
+									{winner === player && (
+										<View>
+											{' '}
+											<Text style={{ ...styles.PlayerText, color: 'green' }}>
+												{player} will pay{' '}
+											</Text>
+											<Text style={{ color: 'green' }}>{amountToPay[i]}</Text>
+										</View>
+									)}
+									{loser === player && (
+										<View>
+											{' '}
+											<Text style={{ ...styles.PlayerText, color: 'red' }}>{player} will pay </Text>
+											<Text style={{ color: 'red' }}>{amountToPay[i]}</Text>
+										</View>
+									)}
+
+									{loser === 'split' && winner === 'split' && (
+										<Text style={{ ...styles.PlayerText, color: 'yellow' }}>
+											{player} <Text style={{ color: 'white' }}>will pay</Text>{' '}
+											<Text style={{ color: 'yellow' }}> {amountToPay[i]}</Text>
+										</Text>
+									)}
+
+									{loser !== player &&
+										winner !== player &&
+										loser !== 'split' &&
+										winner !== 'split' && (
+											<Text style={styles.PlayerText}>
+												{player} will pay{' '}
+												<Text style={{ color: playerColor }}>{amountToPay[i]}</Text>
+											</Text>
+										)}
 								</View>
 							);
 						})}

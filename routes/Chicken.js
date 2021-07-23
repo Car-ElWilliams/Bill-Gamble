@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	Buttons: {
-		width: 280,
+		width: 275,
 		borderColor: '#fff',
 		borderWidth: 2,
 		borderRadius: 60,
