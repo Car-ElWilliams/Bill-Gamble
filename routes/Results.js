@@ -67,6 +67,8 @@ export default function Results({ navigation }) {
 
 	useEffect(() => {
 		setScoreResults(amountToPay);
+		findWinner();
+		findLoser();
 	}, [setAmountToPay, amountToPay]);
 
 	//Normal Mode
@@ -76,11 +78,11 @@ export default function Results({ navigation }) {
 
 		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
 
-		if (RandomPayOrEvenPay === 1) {
-			return normalModeRandomPay();
-		}
+		//if (RandomPayOrEvenPay === 1) {
+		return normalModeRandomPay();
+		//}
 		//66% chance of splitting evenly
-		return RiskyAndNormalEvenPay();
+		//return RiskyAndNormalEvenPay();
 	}
 
 	function RiskyAndNormalEvenPay() {
@@ -269,13 +271,32 @@ export default function Results({ navigation }) {
 	}
 
 	function findWinner() {
+		let foundWinnerIndex = null;
+		let currentValue = amountToPay[0];
 		for (let i = 0; i < amountToPay.length; i++) {
-			if (winner[i] > winner[0]) {
-				setWinner(allPlayerNames[i]);
-				//winnerArr.push(allPlayerNames[i]);
-				console.log(allPlayerNames[i]);
+			if (amountToPay[i] >= currentValue) {
+				currentValue = amountToPay[i];
+				foundWinnerIndex = i;
+				//console.log(allPlayerNames[i], 'current value', currentValue);
 			}
 		}
+		return [
+			setWinner(allPlayerNames[foundWinnerIndex]),
+			console.log('winner:', winner, 'index:', foundWinnerIndex),
+		];
+	}
+
+	function findLoser() {
+		let foundLoserIndex = null;
+		let currentValue = amountToPay[0];
+		for (let i = 0; i <= amountToPay.length; i++) {
+			if (amountToPay[i] < currentValue) {
+				currentValue = amountToPay[i];
+				foundLoserIndex = i;
+				console.log('loser:', allPlayerNames[i], currentValue);
+			}
+		}
+		return setLoser(allPlayerNames[foundLoserIndex]);
 	}
 
 	useEffect(() => {
@@ -312,6 +333,7 @@ export default function Results({ navigation }) {
 					</View>
 					<View style={styles.PlayerContainer}>
 						{allPlayerNames.map((player, i) => {
+							let playerID = player + i;
 							//if (player === winner) {
 							//	setPlayerColor('green');
 							//} else if (player === loser) {
@@ -320,21 +342,20 @@ export default function Results({ navigation }) {
 							//	setPlayerColor('white');
 							//}
 							return (
-								<View key={player + i}>
+								<View key={playerID}>
 									{winner === player && (
 										<View>
-											{' '}
 											<Text style={{ ...styles.PlayerText, color: 'green' }}>
-												{player} will pay{' '}
+												{player} will pay <Text style={{ color: 'green' }}>{amountToPay[i]}</Text>
 											</Text>
-											<Text style={{ color: 'green' }}>{amountToPay[i]}</Text>
 										</View>
 									)}
 									{loser === player && (
 										<View>
-											{' '}
-											<Text style={{ ...styles.PlayerText, color: 'red' }}>{player} will pay </Text>
-											<Text style={{ color: 'red' }}>{amountToPay[i]}</Text>
+											<Text style={{ ...styles.PlayerText, color: 'red' }}>
+												{player} will pay{' '}
+												<Text style={{ ...styles.PlayerText, color: 'red' }}>{amountToPay[i]}</Text>
+											</Text>
 										</View>
 									)}
 
