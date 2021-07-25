@@ -330,10 +330,7 @@ export default function Results({ navigation }) {
 									{winner === player && winner !== 'split ' && (
 										<View>
 											<Text style={{ ...styles.PlayerText, color: 'green' }}>
-												{player} will pay{' '}
-												<Text style={{ ...styles.PlayerText, color: 'green' }}>
-													{amountToPay[i]}
-												</Text>
+												{player} will pay <Text style={{ color: 'green' }}>{amountToPay[i]}</Text>
 											</Text>
 										</View>
 									)}

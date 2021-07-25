@@ -41,12 +41,13 @@ export default function Home({ navigation }) {
 						<Text
 							style={{
 								color: 'white',
-								fontSize: 22,
+								fontSize: 20.2,
 								fontFamily: 'Montserrat_600SemiBold',
 								marginTop: 20,
+								textAlign: 'center',
 							}}
 						>
-							{players} payed <Text style={{ color: 'orange' }}>{scoreResults[i]}</Text>
+							{players} pays <Text style={{ color: 'orange' }}>{scoreResults[i]}</Text>
 						</Text>
 					</View>
 				);
@@ -57,10 +58,6 @@ export default function Home({ navigation }) {
 	return (
 		<SafeAreaView style={{ ...styles.HomeContainer }}>
 			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
-			{/*<ImageBackground
-				source={require('../assets/scores.png')}
-				style={styles.TrophyLogo}
-			></ImageBackground>*/}
 
 			<Text style={styles.Header}>CHOOSE RISK LEVEL</Text>
 			<Button
@@ -122,20 +119,21 @@ export default function Home({ navigation }) {
 					<TrophySVG style={{ width: 35, height: 35 }} />
 				</TouchableOpacity>
 			)}
-
 			{showSavedScore && (
-				<View
+				<TouchableOpacity
+					onPress={() => {
+						return [showOrHideScore(), console.log(showSavedScore)];
+					}}
 					style={{
 						flex: 1,
 						position: 'absolute',
 						height: '75%',
 						width: '80%',
 						backgroundColor: 'black',
-						top: '2%',
+						top: '8%',
 						left: '10%',
 						alignItems: 'center',
 						alignSelf: 'center',
-
 						borderRadius: 20,
 						elevation: Platform.OS === 'android' ? 101 : 0,
 					}}
@@ -151,7 +149,7 @@ export default function Home({ navigation }) {
 						Score Results
 					</Text>
 					{renderAllPlayers()}
-				</View>
+				</TouchableOpacity>
 			)}
 
 			{/*<Ads />*/}

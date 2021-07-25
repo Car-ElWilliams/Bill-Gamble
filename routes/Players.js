@@ -35,6 +35,8 @@ export default function BillAmount({ route, navigation }) {
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
 	const [placeholderName, setPlaceholderName] = useState('Eric');
 
+	const [showMinimumPlayer, setShowMinimumPlayer] = useState(false);
+
 	//! Functions
 
 	useEffect(() => {
@@ -165,25 +167,26 @@ export default function BillAmount({ route, navigation }) {
 		//console.log(disableButton);
 		if (playerArray.length > 1) {
 			//console.log('setttt');
-			return setDisableButton(false);
+			return [setDisableButton(false), setShowMinimumPlayer(false)];
 		}
-		return setDisableButton(true);
+		return [setDisableButton(true), setShowMinimumPlayer(true)];
 	}
+
 	//
 	return (
 		<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
-				<KeyboardAvoidingView
-					behavior='padding'
-					keyboardVerticalOffset={Platform.select({
-						ios: () => 0,
-						android: () => -250,
-					})()}
-					style={styles.KeyboardAvoidingView}
-				>
-			<ScrollView
-				//bounces={false}
-				contentContainerStyle={{ ...styles.rootContainer, width: '100%' }}
+			<KeyboardAvoidingView
+				behavior='padding'
+				keyboardVerticalOffset={Platform.select({
+					ios: () => 0,
+					android: () => -200,
+				})()}
+				style={styles.KeyboardAvoidingView}
 			>
+				<ScrollView
+					//bounces={false}
+					contentContainerStyle={{ ...styles.rootContainer, width: '100%' }}
+				>
 					{riskyLevel ? (
 						<View id='Banner-Risky' style={styles.riskyBanner}>
 							<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
@@ -240,7 +243,20 @@ export default function BillAmount({ route, navigation }) {
 								clearButtonMode='always'
 							></TextInput>
 						</View>
-						{playerNumberCount === 6 && <Text>Max players reached</Text>}
+						{playerNumberCount === 6 && (
+							<Text
+								style={{
+									textAlign: 'center',
+									color: 'black',
+									fontSize: 11,
+									fontFamily: 'Montserrat_600SemiBold',
+									marginTop: 5,
+									marginBottom: -5,
+								}}
+							>
+								Max players reached
+							</Text>
+						)}
 						<Button
 							onPress={() => {
 								return [checkEmptyField()];
@@ -270,20 +286,34 @@ export default function BillAmount({ route, navigation }) {
 						>
 							<Text>Done</Text>
 						</Button>
-					</View>
-					
-							<Button
-								onPress={() => {
-									return navigation.navigate('Note');
+						{showMinimumPlayer && (
+							<Text
+								style={{
+									textAlign: 'center',
+									fontFamily: 'Montserrat_600SemiBold',
+									fontSize: 10,
+									marginTop: 11,
+									marginBottom: -10,
+									color: 'black',
 								}}
-								labelStyle={styles.BackButtonText}
-								style={styles.BackButton}
 							>
-								<Text>Back</Text>
-							</Button>
+								Minimum 2 players
+							</Text>
+						)}
+					</View>
+
+					<Button
+						onPress={() => {
+							return navigation.navigate('Note');
+						}}
+						labelStyle={styles.BackButtonText}
+						style={styles.BackButton}
+					>
+						<Text>Back</Text>
+					</Button>
 					{/*<Ads />*/}
-			</ScrollView>
-				</KeyboardAvoidingView>
+				</ScrollView>
+			</KeyboardAvoidingView>
 		</SafeAreaView>
 	);
 }
@@ -372,8 +402,8 @@ const styles = StyleSheet.create({
 		borderColor: 'rgb(255, 55, 55)',
 		borderWidth: 3.5,
 		backgroundColor: '#fff',
-		minHeight: 400,
-		padding: 15,
+		//minHeight: 400,
+		padding: 27,
 		width: '85%',
 		borderRadius: 15,
 	},
@@ -392,7 +422,6 @@ const styles = StyleSheet.create({
 	addButton: {
 		marginTop: 20,
 	},
-
 
 	DoneButton: {
 		marginTop: 55,
@@ -417,6 +446,6 @@ const styles = StyleSheet.create({
 		color: '#000',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 12,
-		paddingBottom: 30
+		paddingBottom: 30,
 	},
 });

@@ -26,15 +26,41 @@ export default function BillAmount({ route, navigation }) {
 
 	const [billValidation, setBillValidation] = useState(false);
 	const [currentBillValue, setCurrentBillValue] = useState('');
+	const [moneyText, setMoneyText] = useState('Show me the money...');
 
 	const { bill } = route.params;
-
 	const [disableNextButton, setDisableNextButton] = useState(true);
 
 	//! Functions
 
 	useEffect(() => {
 		enableNextButton();
+
+		if (currentBillValue < 499) {
+			setMoneyText('Show me the money...');
+		}
+		if (currentBillValue > 99) {
+			setMoneyText('Good luck! You will need it ;)');
+		}
+
+		if (currentBillValue > 499) {
+			setMoneyText("Now we're talking!");
+		}
+		if (currentBillValue > 999) {
+			setMoneyText('I like what I see...');
+		}
+		if (currentBillValue > 1499) {
+			setMoneyText("RISK? Ain't nobody got time for that!");
+		}
+		if (currentBillValue > 9999) {
+			setMoneyText('Do not sue us if you lose🙏 ');
+		}
+		if (currentBillValue > 99999) {
+			setMoneyText('Can we have some too?');
+		}
+		if (currentBillValue > 999999) {
+			setMoneyText('That is just ridiculous, but I like it😎 ');
+		}
 	}, [currentBillValue]);
 
 	function enableNextButton() {
@@ -103,7 +129,7 @@ export default function BillAmount({ route, navigation }) {
 									marginTop: 9,
 								}}
 							>
-								Show me the money...
+								{moneyText}
 							</Text>
 							<Button
 								style={styles.nextButton}
@@ -127,7 +153,7 @@ export default function BillAmount({ route, navigation }) {
 							</Button>
 						</View>
 
-						<Ads />
+						{/*<Ads />*/}
 					</ScrollView>
 				</KeyboardAvoidingView>
 			</SafeAreaView>
