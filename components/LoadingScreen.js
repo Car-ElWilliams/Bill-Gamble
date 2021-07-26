@@ -36,9 +36,9 @@ export default function LoadingScreen(props) {
 		<View style={styles.container}>
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}></ImageBackground>
 			<Text style={styles.LoadingText}>BILL GAMBLE</Text>
-			{/*<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE EXCITING WAY</Text>*/}
+			<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE {'\n'} EXCITING WAY</Text>
 			{/*<Text style={styles.LoadingBarText}>Loading...</Text>*/}
-			<Text style={{ ...styles.LoadingText, fontSize: 14, flexGrow: 1 }}>
+			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 5 }}>
 				CREATED BY CAREL WILLIAMS
 			</Text>
 			<View style={styles.LoadingBarContainer}>
@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
 	},
 	LoadingSlogan: {
 		color: '#fff',
-		fontSize: 10,
+		fontSize: 16,
 		fontFamily: 'Montserrat_900Black_Italic',
 		textAlign: 'center',
-		marginBottom: '75%',
-		marginTop: '2.2%',
+		marginBottom: '4%',
+		marginTop: '55.2%',
 	},
 
 	LoadingBar: {

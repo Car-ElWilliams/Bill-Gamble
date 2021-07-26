@@ -19,7 +19,7 @@ import Ads from '../components/Ads';
 
 export default function BillAmount({ route, navigation }) {
 	//UseContext
-	const { setAllPlayerNames } = useContext(Context);
+	const { allPlayerNames, setAllPlayerNames } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
 
 	//? Variables
@@ -34,6 +34,7 @@ export default function BillAmount({ route, navigation }) {
 
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
 	const [placeholderName, setPlaceholderName] = useState('Eric');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const [showMinimumPlayer, setShowMinimumPlayer] = useState(false);
 
@@ -131,11 +132,26 @@ export default function BillAmount({ route, navigation }) {
 		//console.log(playerInputRef.current.text);
 	});
 
-	function checkEmptyField() {
+	function checkEmptyField(playerName) {
 		console.log('name of added player', getPlayersFromInput);
 		if (getPlayersFromInput === '') {
 			return setPlaceholderName('Name?');
 		}
+		if (checkIdenticalPlayer(playerName) === true) {
+			return false;
+		}
+
+		if (playerArray === 6) {
+			checkMaxPlayerCountAndAddPlayers();
+		}
+
+		console.log(playerNumberCount);
+		if (playerNumberCount === 5) {
+			setErrorMessage('Max players reached');
+			console.log(errorMessage);
+			console.log(playerNumberCount);
+		}
+
 		return [checkMaxPlayerCountAndAddPlayers(), setPlaceholderName('')];
 	}
 
@@ -150,6 +166,11 @@ export default function BillAmount({ route, navigation }) {
 					return setDisablePlayerTextInput(false);
 				}),
 			];
+		}
+		if (playerNumberCount === 6) {
+			setErrorMessage('Max players reached');
+		} else {
+			setErrorMessage();
 		}
 		return [setDisablePlayerTextInput(true)];
 	}
@@ -170,6 +191,16 @@ export default function BillAmount({ route, navigation }) {
 			return [setDisableButton(false), setShowMinimumPlayer(false)];
 		}
 		return [setDisableButton(true), setShowMinimumPlayer(true)];
+	}
+
+	function checkIdenticalPlayer(name) {
+		if (playerArray.includes(name)) {
+			setErrorMessage('Identical player exists');
+			return true;
+		} else {
+			setErrorMessage('');
+			return false;
+		}
 	}
 
 	//
@@ -234,7 +265,7 @@ export default function BillAmount({ route, navigation }) {
 										//setPlayerArray([...playerArray, getPlayersFromInput]),
 										//clearText(),
 										//setGetplayersFromInput(''),
-										checkEmptyField(),
+										checkEmptyField(getPlayersFromInput),
 									];
 								}}
 								value={getPlayersFromInput}
@@ -254,12 +285,26 @@ export default function BillAmount({ route, navigation }) {
 									marginBottom: -5,
 								}}
 							>
-								Max players reached
+								{errorMessage}
+							</Text>
+						)}
+						{errorMessage === 'Identical player exists' && (
+							<Text
+								style={{
+									textAlign: 'center',
+									color: 'black',
+									fontSize: 11,
+									fontFamily: 'Montserrat_600SemiBold',
+									marginTop: 5,
+									marginBottom: -5,
+								}}
+							>
+								{errorMessage}
 							</Text>
 						)}
 						<Button
 							onPress={() => {
-								return [checkEmptyField()];
+								return [checkEmptyField(getPlayersFromInput)];
 							}}
 							returnKeyType='next'
 							disabled={disablePlayerTextInput}
@@ -269,7 +314,6 @@ export default function BillAmount({ route, navigation }) {
 								Add
 							</Text>
 						</Button>
-
 						<View style={styles.playerBoardContainer}>
 							<View style={styles.playerBoard}>
 								<Text style={styles.playerBoardHeader}>Players</Text>

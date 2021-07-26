@@ -62,13 +62,15 @@ export default function Chicken({ navigation }) {
 						...styles.TextStandard,
 						color: 'white',
 						marginTop: -20.5,
-						fontSize: 16.5,
+						fontSize: 16,
+						textDecorationLine: 'underline',
+
 						position: 'relative',
 						top: '7%',
 						marginBottom: 27,
 					}}
 				>
-					Cash being gambled: {'\n'}
+					CASH ON THE LINE {'\n'}
 				</Text>
 				<Text
 					style={{
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	ButtonInnerText: {
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 16,
+		fontSize: 16.7,
 		color: '#fff',
 		padding: '3.7%',
 	},
