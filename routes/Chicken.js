@@ -64,7 +64,7 @@ export default function Chicken({ navigation }) {
 						marginTop: -20.5,
 						fontSize: 16,
 						textDecorationLine: 'underline',
-
+						fontFamily: 'Montserrat_800ExtraBold',
 						position: 'relative',
 						top: '7%',
 						marginBottom: 27,
@@ -74,7 +74,7 @@ export default function Chicken({ navigation }) {
 				</Text>
 				<Text
 					style={{
-						color: 'gold',
+						color: '	rgb(255,215,0)',
 						fontSize: 30,
 						alignSelf: 'center',
 						fontFamily: 'Montserrat_800ExtraBold',

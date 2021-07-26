@@ -37,7 +37,19 @@ export default function Results({ navigation }) {
 	}, []);
 
 	useEffect(() => {
-		setScoreResults(amountToPay);
+		const belowZero = currentValue => currentValue >= 0;
+		console.log(amountToPay.every(belowZero));
+		if (amountToPay.every(belowZero) === false) {
+			if (riskyLevel) {
+				console.log('negative value was removed');
+				randomizeRiskyResults();
+			} else if (!riskyLevel) {
+				console.log('negative value was removed');
+				randomizeNormalResults();
+			}
+		} else {
+			setScoreResults(amountToPay);
+		}
 	}, [setAmountToPay, amountToPay]);
 
 	useEffect(() => {
