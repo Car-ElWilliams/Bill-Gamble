@@ -52,6 +52,9 @@ export default function BillAmount({ route, navigation }) {
 		if (currentBillValue > 1499) {
 			setMoneyText("RISK? Ain't nobody got time for that!");
 		}
+		if (currentBillValue > 2499) {
+			setMoneyText('Woh! Someone will win/lose BIG!');
+		}
 		if (currentBillValue > 9999) {
 			setMoneyText('Do not sue us if you lose🙏 ');
 		}
@@ -198,11 +201,11 @@ const styles = StyleSheet.create({
 		width: '100%',
 		maxWidth: '50.5%',
 		minHeight: '25%',
-		maxHeight: '26.75%',
+		maxHeight: '22.75%',
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
-		marginTop: 15.5,
-		marginBottom: 15.5,
+		marginTop: 25.5,
+		marginBottom: 10.5,
 	},
 
 	riskyBanner: {
@@ -224,7 +227,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
 		marginTop: 15,
-		marginBottom: 40,
+		marginBottom: 25,
 	},
 
 	BillInput: {
@@ -240,7 +243,7 @@ const styles = StyleSheet.create({
 	},
 
 	nextButton: {
-		marginTop: 30,
+		marginTop: 55,
 		backgroundColor: 'rgb(255, 55, 55)',
 		borderRadius: 40,
 		width: '60%',
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
 	},
 
 	BackButton: {
-		marginTop: 25,
+		marginTop: 20,
 	},
 
 	BackButtonText: {

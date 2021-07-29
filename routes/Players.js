@@ -10,6 +10,7 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
+	Touchable,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
@@ -68,9 +69,10 @@ export default function BillAmount({ route, navigation }) {
 						style={{
 							flex: 1,
 							flexDirection: 'row',
-							borderTopWidth: 1,
-							padding: 10,
+							borderBottomWidth: 1,
+							padding: 12,
 							borderColor: 'rgb(255, 55, 55)',
+							alignItems: 'center',
 						}}
 					>
 						<Text
@@ -78,6 +80,7 @@ export default function BillAmount({ route, navigation }) {
 								fontSize: 22,
 								fontFamily: 'Montserrat_800ExtraBold_Italic',
 								justifyContent: 'flex-start',
+								width: '90%',
 							}}
 						>
 							{i + 1}#{'  '}
@@ -86,6 +89,7 @@ export default function BillAmount({ route, navigation }) {
 									color: 'orange',
 									fontSize: 27,
 									fontFamily: 'Montserrat_800ExtraBold_Italic',
+									width: '110%',
 								}}
 							>
 								{players}
@@ -95,15 +99,22 @@ export default function BillAmount({ route, navigation }) {
 							onPress={() => {
 								return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
 							}}
-							style={{
-								width: 20,
-								height: 34,
-								alignSelf: 'center',
-								justifyContent: 'flex-end',
-								marginLeft: 30,
-							}}
+							style={{ padding: 12 }}
 						>
-							<PlayerTrashCan />
+							<TouchableOpacity
+								style={{
+									width: 20,
+									height: 34,
+									alignSelf: 'center',
+									justifyContent: 'flex-end',
+									//marginLeft: 12,
+								}}
+								onPress={() => {
+									return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
+								}}
+							>
+								<PlayerTrashCan />
+							</TouchableOpacity>
 						</TouchableOpacity>
 					</View>
 				);
@@ -252,7 +263,7 @@ export default function BillAmount({ route, navigation }) {
 						></Text>*/}
 						<View style={{ alignItems: 'center' }}>
 							<TextInput
-								maxLength={12}
+								maxLength={9}
 								ref={playerInputRef}
 								label={labelForPlayers}
 								placeholder={placeholderName}
@@ -279,7 +290,7 @@ export default function BillAmount({ route, navigation }) {
 								style={{
 									textAlign: 'center',
 									color: 'black',
-									fontSize: 11,
+									fontSize: 10.8,
 									fontFamily: 'Montserrat_600SemiBold',
 									marginTop: 5,
 									marginBottom: -5,
@@ -443,13 +454,13 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		borderColor: 'rgb(255, 55, 55)',
-		borderWidth: 3.5,
+		//borderColor: 'rgb(255, 55, 55)',
+		//borderWidth: 3.5,
 		backgroundColor: '#fff',
 		//minHeight: 400,
 		padding: 27,
-		width: '85%',
-		borderRadius: 15,
+		width: '100%',
+		//borderRadius: 15,
 	},
 
 	playerBoardHeader: {
@@ -459,8 +470,8 @@ const styles = StyleSheet.create({
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
 		borderColor: 'rgb(255, 55, 55)',
-		borderBottomWidth: 3,
-		paddingBottom: 13,
+		borderBottomWidth: 5,
+		paddingBottom: 20,
 	},
 
 	addButton: {

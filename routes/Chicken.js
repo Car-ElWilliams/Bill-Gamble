@@ -10,13 +10,30 @@ export default function Chicken({ navigation }) {
 
 	const { billValue } = useContext(Context);
 
+	const [mounted, setMounted] = useState('');
+
 	useEffect(() => {
-		return chickenSound
+		setMounted(true);
+
+		//clean up
+		return setMounted(false);
+	});
+
+	useEffect(() => {
+		let mounted = true;
+
+		chickenSound
 			? () => {
-					console.log('Unloading Sound');
-					chickenSound.unloadAsync();
+					if (mounted) {
+						return [console.log('Unloading Sound'), chickenSound.unloadAsync()];
+					}
 			  }
 			: undefined;
+
+		return () => {
+			mounted = false;
+			return mounted;
+		};
 	}, []);
 
 	//! Functions
@@ -50,7 +67,9 @@ export default function Chicken({ navigation }) {
 				</Button>
 				<Button
 					onPress={() => {
-						return [navigation.navigate('Home'), playSound()];
+						if (mounted) {
+							return [navigation.navigate('Home'), playSound()];
+						}
 					}}
 					style={{ ...styles.Buttons, backgroundColor: 'red', marginBottom: 50 }}
 					labelStyle={styles.ButtonInnerText}
