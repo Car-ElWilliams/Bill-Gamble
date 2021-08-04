@@ -59,7 +59,7 @@ export default function Home({ navigation }) {
 		<SafeAreaView style={{ ...styles.HomeContainer }}>
 			<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
 
-			<Text style={styles.Header}>CHOOSE RISK LEVEL</Text>
+			<Text style={styles.Header}>CHOOSE{'\n'} RISK LEVEL</Text>
 			<Button
 				style={styles.Buttons}
 				labelStyle={styles.ButtonInnerText}
@@ -109,11 +109,11 @@ export default function Home({ navigation }) {
 						borderColor: 'white',
 						borderWidth: 1.25,
 						borderRadius: 50,
-						width: 65,
-						height: 65,
+						width: TrophyLogoWidth,
+						height: TrophyLogoHeight,
 						position: 'absolute',
 						left: 15,
-						top: Dimensions.get('window').height - 80,
+						bottom: '2%',
 					}}
 				>
 					<TrophySVG style={{ width: 35, height: 35 }} />
@@ -157,6 +157,24 @@ export default function Home({ navigation }) {
 	);
 }
 
+let TextSizeHeader;
+let TransparentLogoMarginTop;
+let TrophyLogoHeight;
+let TrophyLogoWidth;
+
+if (Dimensions.get('window').height > 640) {
+	TextSizeHeader = 40;
+	TransparentLogoMarginTop = -10;
+	TrophyLogoHeight = 80;
+	TrophyLogoWidth = 80;
+}
+if (Dimensions.get('window').height <= 640) {
+	TextSizeHeader = 34;
+	TransparentLogoMarginTop = -40;
+	TrophyLogoHeight = 65;
+	TrophyLogoWidth = 65;
+}
+
 const styles = StyleSheet.create({
 	HomeContainer: {
 		flex: 1,
@@ -171,12 +189,12 @@ const styles = StyleSheet.create({
 		width: 110,
 		height: 110,
 		alignSelf: 'center',
-		marginTop: -40,
+		marginTop: TransparentLogoMarginTop,
 	},
 	Header: {
 		marginTop: 15,
 		marginBottom: 75,
-		fontSize: 34,
+		fontSize: TextSizeHeader,
 		color: '#fff',
 		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
@@ -201,9 +219,5 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		marginBottom: 30,
 		fontSize: 10,
-	},
-	TrophyLogo: {
-		width: 100,
-		height: 110,
 	},
 });

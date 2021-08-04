@@ -87,7 +87,7 @@ export default function BillAmount({ route, navigation }) {
 					})()}
 					style={styles.KeyboardAvoidingView}
 				>
-					<ScrollView bounces={false}>
+					<ScrollView styles={{ alignSelf: 'flexStart 	' }} bounces={false}>
 						{riskyLevel ? (
 							<View id='Banner-Risky' style={styles.riskyBanner}>
 								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
@@ -168,6 +168,22 @@ const heightRiskLevelBanner = Platform.OS === 'ios' ? 55 : 70;
 const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 10;
 //const windowHeight = Dimensions.get('screen').height;
 
+let svgNoteImageMaxHeight;
+let svgNoteImageMarginBottom;
+let svgNoteImageMarginTop;
+
+if (Dimensions.get('window').height > 640) {
+	svgNoteImageMaxHeight = '28%';
+	svgNoteImageMarginBottom = '6%';
+	svgNoteImageMarginTop = '11%';
+}
+
+if (Dimensions.get('window').height <= 640) {
+	svgNoteImageMaxHeight = '25%';
+	svgNoteImageMarginBottom = '1%';
+	svgNoteImageMarginTop = Dimensions.get('window').height * 0.05;
+}
+
 const styles = StyleSheet.create({
 	removeButton: {
 		backgroundColor: 'rgb(255, 55, 55)',
@@ -176,9 +192,11 @@ const styles = StyleSheet.create({
 		//flex: 1,
 		//flexDirection: 'column',
 		//justifyContent: 'center',
-		backgroundColor: '#D00404',
-		backgroundColor: 'rgb(255, 55, 55)',
+		//backgroundColor: '#D00404',
+		backgroundColor: 'white',
+		height: '100%',
 	},
+
 	SecondRootContainer: {
 		flex: 1,
 		flexDirection: 'column',
@@ -201,11 +219,11 @@ const styles = StyleSheet.create({
 		width: '100%',
 		maxWidth: '50.5%',
 		minHeight: '25%',
-		maxHeight: '22.75%',
+		maxHeight: svgNoteImageMaxHeight,
 		backgroundColor: 'green',
 		backgroundColor: '#fff',
-		marginTop: 25.5,
-		marginBottom: 10.5,
+		marginTop: svgNoteImageMarginTop,
+		marginBottom: svgNoteImageMarginBottom,
 	},
 
 	riskyBanner: {
@@ -225,7 +243,7 @@ const styles = StyleSheet.create({
 	BillAmountText: {
 		color: 'rgb(255, 55, 55)',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 37,
+		fontSize: 36,
 		marginTop: 15,
 		marginBottom: 25,
 	},
@@ -243,7 +261,7 @@ const styles = StyleSheet.create({
 	},
 
 	nextButton: {
-		marginTop: 55,
+		marginTop: 53,
 		backgroundColor: 'rgb(255, 55, 55)',
 		borderRadius: 40,
 		width: '60%',

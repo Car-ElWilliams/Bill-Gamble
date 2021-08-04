@@ -16,25 +16,18 @@ export default function Chicken({ navigation }) {
 		setMounted(true);
 
 		//clean up
-		return setMounted(false);
-	});
-
-	useEffect(() => {
-		let mounted = true;
-
-		chickenSound
-			? () => {
-					if (mounted) {
-						return [console.log('Unloading Sound'), chickenSound.unloadAsync()];
-					}
-			  }
-			: undefined;
-
 		return () => {
-			mounted = false;
-			return mounted;
+			setMounted(false);
 		};
 	}, []);
+
+	useEffect(() => {
+		chickenSound
+			? () => {
+					return [console.log('Unloading Sound'), chickenSound.unloadAsync()];
+			  }
+			: undefined;
+	});
 
 	//! Functions
 
@@ -59,7 +52,13 @@ export default function Chicken({ navigation }) {
 					START OR {'\n'} CHICKEN OUT?
 				</Text>
 				<Button
-					onPress={() => navigation.navigate('Results')}
+					onPress={() => {
+						if (mounted) {
+							return [navigation.navigate('Results'), setMounted(false)];
+						} else {
+							console.log(mounted);
+						}
+					}}
 					style={{ ...styles.Buttons, backgroundColor: 'green' }}
 					labelStyle={styles.ButtonInnerText}
 				>
@@ -68,7 +67,9 @@ export default function Chicken({ navigation }) {
 				<Button
 					onPress={() => {
 						if (mounted) {
-							return [navigation.navigate('Home'), playSound()];
+							return [navigation.navigate('Home'), playSound(), setMounted(false)];
+						} else {
+							console.log(mounted);
 						}
 					}}
 					style={{ ...styles.Buttons, backgroundColor: 'red', marginBottom: 50 }}

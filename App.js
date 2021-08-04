@@ -67,27 +67,11 @@ export default function App() {
 					<NavigationContainer>
 						<Stack.Navigator screenOptions={{ headerShown: false }}>
 							{progressDone && <Stack.Screen name='LoadingScreen' component={LoadingScreen} />}
-							<Stack.Screen
-								name='Home'
-								component={Home}
-
-								//options={{
-								//	title: 'My home',
-								//	headerStyle: { backgroundColor: 'red', display: 'none' },
-								//	headerTintColor: '#fff',
-								//	headerTitleStyle: {
-								//		fontWeight: 'bold',
-								//		fontSize: 25,
-								//	},
-								//}}
-							/>
+							<Stack.Screen name='Home' component={Home} />
 							<Stack.Screen name='Note' component={Note} />
 							<Stack.Screen name='Players' component={Players} />
 							<Stack.Screen name='Chicken' component={Chicken} />
 							<Stack.Screen name='Results' component={Results} />
-							{/*{progressDone && <LoadingScreen />}*/}
-							{/*{!progressDone && <Home />}*/}
-							{/*<StatusBar style='auto' />*/}
 						</Stack.Navigator>
 					</NavigationContainer>
 				</PaperProvider>

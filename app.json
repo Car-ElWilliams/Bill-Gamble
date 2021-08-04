@@ -6,7 +6,7 @@
 		"orientation": "portrait",
 		"icon": "./assets/bill-gamble-icon-correct.png",
 		"splash": {
-			"image": "./assets/NewLogoScreen3.png",
+			"image": "./assets/bill-gamble-logo.png",
 			"resizeMode": "cover",
 			"backgroundColor": "#ffffff"
 		},
@@ -19,10 +19,11 @@
 			"buildNumber": "1.0.0"
 		},
 		"android": {
+			"permissions": [],
 			"package": "com.c_williams.bill_gamble",
-			"versionCode": 1,
+			"versionCode": 5,
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
+				"foregroundImage": "./assets/bill-gamble-icon-correct.png",
 				"backgroundColor": "#FFFFFF"
 			}
 		},

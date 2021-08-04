@@ -38,7 +38,7 @@ export default function LoadingScreen(props) {
 			<Text style={styles.LoadingText}>BILL GAMBLE</Text>
 			<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE {'\n'} EXCITING WAY</Text>
 			{/*<Text style={styles.LoadingBarText}>Loading...</Text>*/}
-			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 5 }}>
+			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 10 }}>
 				CREATED BY CAREL WILLIAMS
 			</Text>
 			<View style={styles.LoadingBarContainer}>
@@ -48,12 +48,28 @@ export default function LoadingScreen(props) {
 	);
 }
 
+let LoadingTextMarginTop;
+let TextSizeHeader;
+let TextSizeSlogan;
+
+if (Dimensions.get('window').height <= 670) {
+	LoadingTextMarginTop = '35%';
+	TextSizeHeader = 40;
+	TextSizeSlogan = 16;
+}
+if (Dimensions.get('window').height > 640) {
+	LoadingTextMarginTop = '48%';
+	TextSizeHeader = 45;
+	TextSizeSlogan = 20;
+}
+
 const styles = StyleSheet.create({
 	container: {
 		color: '#fff',
 		width: '100%',
 		height: Dimensions.get('window').height,
 		flex: 1,
+		backgroundColor: 'rgb(255, 55, 55)',
 	},
 	LoadingImage: {
 		position: 'absolute',
@@ -65,15 +81,15 @@ const styles = StyleSheet.create({
 
 	LoadingText: {
 		color: '#fff',
-		fontSize: 40,
+		fontSize: TextSizeHeader,
 		fontFamily: 'Montserrat_800ExtraBold',
 		textAlign: 'center',
-		marginTop: '35%',
+		marginTop: LoadingTextMarginTop,
 		flexGrow: 10,
 	},
 	LoadingSlogan: {
 		color: '#fff',
-		fontSize: 16,
+		fontSize: TextSizeSlogan,
 		fontFamily: 'Montserrat_900Black_Italic',
 		textAlign: 'center',
 		marginBottom: '4%',
