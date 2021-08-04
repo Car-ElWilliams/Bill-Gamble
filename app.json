@@ -2,7 +2,7 @@
 	"expo": {
 		"name": "Bill Gamble",
 		"slug": "bill-gamble",
-		"version": "1.0.0",
+		"version": "1.0.1",
 		"orientation": "portrait",
 		"icon": "./assets/bill-gamble-icon-correct.png",
 		"splash": {
@@ -21,7 +21,7 @@
 		"android": {
 			"permissions": [],
 			"package": "com.c_williams.bill_gamble",
-			"versionCode": 5,
+			"versionCode": 7,
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/bill-gamble-icon-correct.png",
 				"backgroundColor": "#FFFFFF"
