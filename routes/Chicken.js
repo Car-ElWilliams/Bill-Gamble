@@ -48,8 +48,8 @@ export default function Chicken({ navigation }) {
 					Gamble Time
 				</Text>*/}
 				<ImageBackground source={TransparentLogo} style={styles.TransparentLogo}></ImageBackground>
-				<Text style={{ ...styles.TextStandard, marginBottom: 55, fontSize: 30 }}>
-					START OR {'\n'} CHICKEN OUT?
+				<Text style={{ ...styles.TextStandard, marginBottom: 55, fontSize: 29 }}>
+					START OR{'\n'}CHICKEN OUT?
 				</Text>
 				<Button
 					onPress={() => {
@@ -82,22 +82,23 @@ export default function Chicken({ navigation }) {
 						...styles.TextStandard,
 						color: 'white',
 						marginTop: -20.5,
-						fontSize: 16,
+						fontSize: 17,
 						textDecorationLine: 'underline',
-						fontFamily: 'Montserrat_800ExtraBold',
+						fontFamily: 'Montserrat_800ExtraBold_Italic',
 						position: 'relative',
 						top: '7%',
-						marginBottom: 27,
+						marginBottom: 25,
 					}}
 				>
-					CASH ON THE LINE {'\n'}
+					CASH ON THE LINE{'\n'}
 				</Text>
 				<Text
 					style={{
-						color: '	rgb(255,215,0)',
-						fontSize: 30,
+						color: '	rgb(255,214,0)',
+						fontSize: 33,
 						alignSelf: 'center',
-						fontFamily: 'Montserrat_800ExtraBold',
+						fontFamily: 'Montserrat_800ExtraBold_Italic',
+						marginBottom: 5,
 					}}
 				>
 					{billValue}
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: 'rgb(255, 55, 55)',
+		backgroundColor: 'rgb(255, 40, 40)',
 		alignItems: 'center',
 	},
 	SafeAreaView: {
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
 	TextStandard: {
 		color: '#fff',
 		fontSize: 28,
-		fontFamily: 'Montserrat_700Bold',
+		fontFamily: 'Montserrat_800ExtraBold_Italic',
 		textAlign: 'center',
 		marginBottom: 45,
 		marginTop: 15,

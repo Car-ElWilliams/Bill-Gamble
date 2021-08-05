@@ -71,7 +71,7 @@ export default function BillAmount({ route, navigation }) {
 							flexDirection: 'row',
 							borderBottomWidth: 1,
 							padding: 12,
-							borderColor: 'rgb(255, 55, 55)',
+							borderColor: 'rgb(255, 40, 40)',
 							alignItems: 'center',
 						}}
 					>
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	EnterPlayerText: {
-		color: 'rgb(255, 55, 55)',
+		color: 'rgb(255, 40, 40)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 37,
 		marginTop: 0,
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
 	PlayerInput: {
 		width: '70%',
 		borderWidth: 6,
-		borderColor: 'rgb(255, 55, 55)',
+		borderColor: 'rgb(255, 40, 40)',
 		borderRadius: 20,
 		backgroundColor: '#fff',
 		padding: 10,
@@ -454,7 +454,7 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		//borderColor: 'rgb(255, 55, 55)',
+		//borderColor: 'rgb(255, 40, 40)',
 		//borderWidth: 3.5,
 		backgroundColor: '#fff',
 		//minHeight: 400,
@@ -465,11 +465,11 @@ const styles = StyleSheet.create({
 
 	playerBoardHeader: {
 		textAlign: 'center',
-		color: 'rgb(255, 55, 55)',
+		color: 'rgb(255, 40, 40)',
 		color: 'orange',
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
-		borderColor: 'rgb(255, 55, 55)',
+		borderColor: 'rgb(255, 40, 40)',
 		borderBottomWidth: 5,
 		paddingBottom: 20,
 	},

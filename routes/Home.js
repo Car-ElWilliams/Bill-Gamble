@@ -15,7 +15,6 @@ import Context from '../Context';
 import Ads from '../components/Ads';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 import TrophySVG from '../components/TrophySVG.js';
-import { Montserrat_200ExtraLight } from '@expo-google-fonts/montserrat';
 
 export default function Home({ navigation }) {
 	const { setriskyLevel } = useContext(Context);
@@ -127,15 +126,18 @@ export default function Home({ navigation }) {
 					style={{
 						flex: 1,
 						position: 'absolute',
-						height: '75%',
-						width: '80%',
-						backgroundColor: 'black',
-						top: '8%',
-						left: '10%',
+						height: '80%',
+						width: '82.5%',
+						backgroundColor: '#98521F',
+						top: '5%',
 						alignItems: 'center',
 						alignSelf: 'center',
-						borderRadius: 20,
+						paddingLeft: 17.5,
+						paddingRight: 17.5,
+						borderRadius: 12,
 						elevation: Platform.OS === 'android' ? 101 : 0,
+						borderWidth: 3,
+						borderColor: '#FAA500',
 					}}
 				>
 					<Text
@@ -144,11 +146,13 @@ export default function Home({ navigation }) {
 							fontSize: 30,
 							fontFamily: 'Montserrat_700Bold',
 							marginTop: 20,
+							marginBottom: '-20%',
+							textDecorationLine: 'underline',
 						}}
 					>
 						Score Results
 					</Text>
-					{renderAllPlayers()}
+					<View style={{ flex: 1, justifyContent: 'center' }}>{renderAllPlayers()}</View>
 				</TouchableOpacity>
 			)}
 
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		//opacity: 0,
-		backgroundColor: 'rgb(255, 55, 55)',
+		backgroundColor: 'rgb(255, 40, 40)',
 	},
 
 	TransparentLogo: {

@@ -6,9 +6,8 @@
 		"orientation": "portrait",
 		"icon": "./assets/bill-gamble-icon-correct.png",
 		"splash": {
-			"image": "./assets/bill-gamble-logo.png",
-			"resizeMode": "cover",
-			"backgroundColor": "#ffffff"
+			"image": "./assets/android-splash-screen.png",
+			"resizeMode": "cover"
 		},
 		"updates": {
 			"fallbackToCacheTimeout": 0
@@ -21,10 +20,9 @@
 		"android": {
 			"permissions": [],
 			"package": "com.c_williams.bill_gamble",
-			"versionCode": 7,
+			"versionCode": 6,
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/bill-gamble-icon-correct.png",
-				"backgroundColor": "#FFFFFF"
+				"foregroundImage": "./assets/bill-gamble-icon-correct.png"
 			}
 		},
 		"web": {

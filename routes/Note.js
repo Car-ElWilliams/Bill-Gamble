@@ -186,7 +186,7 @@ if (Dimensions.get('window').height <= 640) {
 
 const styles = StyleSheet.create({
 	removeButton: {
-		backgroundColor: 'rgb(255, 55, 55)',
+		backgroundColor: 'rgb(255, 40, 40)',
 	},
 	rootContainer: {
 		//flex: 1,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	BillAmountText: {
-		color: 'rgb(255, 55, 55)',
+		color: 'rgb(255, 40, 40)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: 36,
 		marginTop: 15,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
 	BillInput: {
 		width: '70%',
 		borderWidth: 6,
-		borderColor: 'rgb(255, 55, 55)',
+		borderColor: 'rgb(255, 40, 40)',
 		borderRadius: 20,
 		backgroundColor: '#fff',
 		padding: 10,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
 
 	nextButton: {
 		marginTop: 53,
-		backgroundColor: 'rgb(255, 55, 55)',
+		backgroundColor: 'rgb(255, 40, 40)',
 		borderRadius: 40,
 		width: '60%',
 	},

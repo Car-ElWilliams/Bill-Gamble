@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Animated, Dimensions } from 'react-native';
 //import LoadingImage from '../assets/bill-gamble-logo.png';
-import LoadingImage from '../assets/NewLogoScreen3.png';
+import LoadingImage from '../assets/android-splash-screen.png';
 import { ProgressBar, Colors } from 'react-native-paper';
 import Context from '../Context';
 
@@ -37,8 +37,7 @@ export default function LoadingScreen(props) {
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}></ImageBackground>
 			<Text style={styles.LoadingText}>BILL GAMBLE</Text>
 			<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE {'\n'} EXCITING WAY</Text>
-			{/*<Text style={styles.LoadingBarText}>Loading...</Text>*/}
-			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 10 }}>
+			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 13 }}>
 				CREATED BY CAREL WILLIAMS
 			</Text>
 			<View style={styles.LoadingBarContainer}>
@@ -53,12 +52,12 @@ let TextSizeHeader;
 let TextSizeSlogan;
 
 if (Dimensions.get('window').height <= 670) {
-	LoadingTextMarginTop = '35%';
+	LoadingTextMarginTop = '30%';
 	TextSizeHeader = 40;
 	TextSizeSlogan = 16;
 }
 if (Dimensions.get('window').height > 640) {
-	LoadingTextMarginTop = '48%';
+	LoadingTextMarginTop = '40.5%';
 	TextSizeHeader = 45;
 	TextSizeSlogan = 20;
 }
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: Dimensions.get('window').height,
 		flex: 1,
-		backgroundColor: 'rgb(255, 55, 55)',
+		backgroundColor: 'rgb(255, 40, 40)',
 	},
 	LoadingImage: {
 		position: 'absolute',
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
 		fontSize: TextSizeSlogan,
 		fontFamily: 'Montserrat_900Black_Italic',
 		textAlign: 'center',
-		marginBottom: '4%',
+		marginBottom: '3%',
 		marginTop: '55.2%',
 	},
 
@@ -100,13 +99,5 @@ const styles = StyleSheet.create({
 		backgroundColor: 'transparent',
 		borderRadius: 1,
 		height: 13,
-	},
-
-	LoadingBarText: {
-		color: '#fff',
-		fontSize: 35,
-		fontFamily: 'Montserrat_700Bold',
-		textAlign: 'center',
-		//marginTop: '75%',
 	},
 });
