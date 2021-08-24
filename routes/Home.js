@@ -5,7 +5,7 @@ import {
 	View,
 	ImageBackground,
 	SafeAreaView,
-	Switch,
+	Modal,
 	Platform,
 	TouchableOpacity,
 	Dimensions,
@@ -15,6 +15,7 @@ import Context from '../Context';
 import Ads from '../components/Ads';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 import TrophySVG from '../components/TrophySVG.js';
+import constantStyle from '../constants/primeColors.js';
 
 export default function Home({ navigation }) {
 	const { setriskyLevel } = useContext(Context);
@@ -119,41 +120,43 @@ export default function Home({ navigation }) {
 				</TouchableOpacity>
 			)}
 			{showSavedScore && (
-				<TouchableOpacity
-					onPress={() => {
-						return [showOrHideScore(), console.log(showSavedScore)];
-					}}
-					style={{
-						flex: 1,
-						position: 'absolute',
-						height: '80%',
-						width: '82.5%',
-						backgroundColor: '#98521F',
-						top: '5%',
-						alignItems: 'center',
-						alignSelf: 'center',
-						paddingLeft: 17.5,
-						paddingRight: 17.5,
-						borderRadius: 12,
-						elevation: Platform.OS === 'android' ? 101 : 0,
-						borderWidth: 3,
-						borderColor: '#FAA500',
-					}}
-				>
-					<Text
+				<Modal animationType='slide' visible={showSavedScore} transparent={true}>
+					<TouchableOpacity
+						onPress={() => {
+							return [showOrHideScore(), console.log(showSavedScore)];
+						}}
 						style={{
-							color: 'white',
-							fontSize: 30,
-							fontFamily: 'Montserrat_700Bold',
-							marginTop: 20,
-							marginBottom: '-20%',
-							textDecorationLine: 'underline',
+							flex: 1,
+							position: 'absolute',
+							height: '80%',
+							width: '82.5%',
+							backgroundColor: '#98521F',
+							top: '5%',
+							alignItems: 'center',
+							alignSelf: 'center',
+							paddingLeft: 17.5,
+							paddingRight: 17.5,
+							borderRadius: 12,
+							elevation: Platform.OS === 'android' ? 101 : 0,
+							borderWidth: 3,
+							borderColor: '#FAA500',
 						}}
 					>
-						Score Results
-					</Text>
-					<View style={{ flex: 1, justifyContent: 'center' }}>{renderAllPlayers()}</View>
-				</TouchableOpacity>
+						<Text
+							style={{
+								color: 'white',
+								fontSize: 30,
+								fontFamily: 'Montserrat_700Bold',
+								marginTop: 20,
+								marginBottom: '-20%',
+								textDecorationLine: 'underline',
+							}}
+						>
+							Score Results
+						</Text>
+						<View style={{ flex: 1, justifyContent: 'center' }}>{renderAllPlayers()}</View>
+					</TouchableOpacity>
+				</Modal>
 			)}
 
 			{/*<Ads />*/}
@@ -186,7 +189,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		//opacity: 0,
-		backgroundColor: 'rgb(255, 40, 40)',
+		backgroundColor: constantStyle.primaryThemeColor,
 	},
 
 	TransparentLogo: {

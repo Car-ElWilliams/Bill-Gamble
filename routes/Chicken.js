@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-nat
 import { Button } from 'react-native-paper';
 import { Audio } from 'expo-av';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
+import constantStyle from '../constants/primeColors.js';
 import Context from '../Context';
 
 export default function Chicken({ navigation }) {
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: 'rgb(255, 40, 40)',
+		backgroundColor: constantStyle.primaryThemeColor,
 		alignItems: 'center',
 	},
 	SafeAreaView: {

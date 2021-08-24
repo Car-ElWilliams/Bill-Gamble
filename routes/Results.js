@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { set } from 'react-native-reanimated';
 import Context from '../Context';
 
 export default function Results({ navigation }) {
-	//Todo negative values happens now and then
-
 	//? Variables
 	const [countdownNumber, setCountdownNumber] = useState(3);
 
 	const { allPlayerNames } = useContext(Context);
 	const { billValue } = useContext(Context);
 	const { riskyLevel } = useContext(Context);
-	const { scoreResults, setScoreResults } = useContext(Context);
+	const { setScoreResults } = useContext(Context);
 
 	const [amountToPay, setAmountToPay] = useState([]);
 	const [split, setSplit] = useState(false);
@@ -269,12 +266,10 @@ export default function Results({ navigation }) {
 			if (amountToPay[i] >= currentValue) {
 				currentValue = amountToPay[i];
 				foundLoserIndex = i;
-				//console.log(allPlayerNames[i], 'current value', currentValue);
 			}
 		}
-		return setLoser(allPlayerNames[foundLoserIndex]);
 
-		//console.log('winner:', winner, 'index:', foundWinnerIndex),
+		return setLoser(allPlayerNames[foundLoserIndex]);
 	}
 
 	function findWinner() {
@@ -285,7 +280,6 @@ export default function Results({ navigation }) {
 			if (amountToPay[i] <= currentValue) {
 				currentValue = amountToPay[i];
 				foundWinnerIndex = i;
-				//console.log('loser:', allPlayerNames[i], currentValue);
 			}
 		}
 		return setWinner(allPlayerNames[foundWinnerIndex]);

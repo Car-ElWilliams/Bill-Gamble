@@ -10,7 +10,6 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
-	Touchable,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
@@ -62,16 +61,13 @@ export default function BillAmount({ route, navigation }) {
 	function renderPlayers() {
 		return [
 			playerArray.map((players, i) => {
-				//console.log('Players and number count:', players, playerNumberCount);
 				return (
 					<View
 						key={players + i}
 						style={{
 							flex: 1,
 							flexDirection: 'row',
-							borderBottomWidth: 1,
-							padding: 12,
-							borderColor: 'rgb(255, 40, 40)',
+
 							alignItems: 'center',
 						}}
 					>
@@ -86,7 +82,7 @@ export default function BillAmount({ route, navigation }) {
 							{i + 1}#{'  '}
 							<Text
 								style={{
-									color: 'orange',
+									color: 'white',
 									fontSize: 27,
 									fontFamily: 'Montserrat_800ExtraBold_Italic',
 									width: '110%',
@@ -195,12 +191,10 @@ export default function BillAmount({ route, navigation }) {
 	}, []);
 
 	function enableAddButton() {
-		//console.log(playerArray.length);
-		//console.log(disableButton);
 		if (playerArray.length > 1) {
-			//console.log('setttt');
 			return [setDisableButton(false), setShowMinimumPlayer(false)];
 		}
+
 		return [setDisableButton(true), setShowMinimumPlayer(true)];
 	}
 
@@ -214,7 +208,6 @@ export default function BillAmount({ route, navigation }) {
 		}
 	}
 
-	//
 	return (
 		<SafeAreaView style={styles.SafeAreaView} stickyHeaderIndices={[0]}>
 			<KeyboardAvoidingView
@@ -246,7 +239,6 @@ export default function BillAmount({ route, navigation }) {
 							style={{
 								...styles.EnterPlayerText,
 								fontSize: 40,
-								//marginBottom: -5,
 								textAlign: 'center',
 								marginTop: 70,
 								marginBottom: 55,
@@ -267,6 +259,8 @@ export default function BillAmount({ route, navigation }) {
 								ref={playerInputRef}
 								label={labelForPlayers}
 								placeholder={placeholderName}
+								//placeholderTextColor='rgba(217, 193, 108, 0.9)'
+								placeholderTextColor='rgba(255, 40, 40, 0.4)'
 								//autoFocus={true}
 								onChangeText={e => {
 									setGetplayersFromInput(e);
@@ -289,7 +283,7 @@ export default function BillAmount({ route, navigation }) {
 							<Text
 								style={{
 									textAlign: 'center',
-									color: 'black',
+									color: 'white',
 									fontSize: 10.8,
 									fontFamily: 'Montserrat_600SemiBold',
 									marginTop: 5,
@@ -321,7 +315,7 @@ export default function BillAmount({ route, navigation }) {
 							disabled={disablePlayerTextInput}
 							style={{ ...styles.addButton }}
 						>
-							<Text style={{ color: '#000', fontSize: 20, fontFamily: 'Montserrat_900Black' }}>
+							<Text style={{ color: '#fff', fontSize: 25, fontFamily: 'Montserrat_900Black' }}>
 								Add
 							</Text>
 						</Button>
@@ -390,8 +384,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#fff',
-		//minHeight: 600,
+		backgroundColor: 'rgb(255, 40, 40)',
 	},
 
 	SafeAreaView: {
@@ -428,23 +421,24 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	EnterPlayerText: {
-		color: 'rgb(255, 40, 40)',
+		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 37,
+		fontSize: 40,
 		marginTop: 0,
 		marginBottom: 40,
 	},
 
 	PlayerInput: {
-		width: '70%',
-		borderWidth: 6,
-		borderColor: 'rgb(255, 40, 40)',
-		borderRadius: 20,
-		backgroundColor: '#fff',
+		width: '80%',
+		borderWidth: 5,
+		borderColor: 'yellow',
+		borderRadius: 35,
+		backgroundColor: 'rgba(208, 4, 4, 0.78)',
+		backgroundColor: 'white',
 		padding: 10,
-		fontSize: 30,
+		fontSize: 37,
 		fontFamily: 'Montserrat_700Bold',
-		color: 'orange',
+		color: 'black',
 		textAlign: 'center',
 	},
 
@@ -454,24 +448,25 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		//borderColor: 'rgb(255, 40, 40)',
-		//borderWidth: 3.5,
-		backgroundColor: '#fff',
-		//minHeight: 400,
+		backgroundColor: 'rgba(208, 4, 4, 0.78)',
+
+		borderWidth: 3.5,
+		borderColor: 'white',
+		borderRadius: 10,
 		padding: 27,
-		width: '100%',
-		//borderRadius: 15,
+		width: '85%',
+		borderColor: 'yellow',
 	},
 
 	playerBoardHeader: {
 		textAlign: 'center',
-		color: 'rgb(255, 40, 40)',
-		color: 'orange',
+		color: 'white',
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
-		borderColor: 'rgb(255, 40, 40)',
+		borderColor: 'yellow',
 		borderBottomWidth: 5,
-		paddingBottom: 20,
+		borderRadius: 3.1,
+		paddingBottom: 12.5,
 	},
 
 	addButton: {
@@ -480,11 +475,11 @@ const styles = StyleSheet.create({
 
 	DoneButton: {
 		marginTop: 55,
-		backgroundColor: 'red',
+		backgroundColor: 'orange',
 		borderRadius: 40,
 		width: 280,
 		alignSelf: 'center',
-		color: '#fff',
+		color: 'red',
 	},
 	DoneButtonText: {
 		color: '#fff',
@@ -498,9 +493,9 @@ const styles = StyleSheet.create({
 	},
 
 	BackButtonText: {
-		color: '#000',
+		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 12,
+		fontSize: 14,
 		paddingBottom: 30,
 	},
 });
