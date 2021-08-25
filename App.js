@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Asset } from 'expo-asset';
+
 import LoadingScreen from './components/LoadingScreen';
+import Home from './screens/Home.js';
+import Note from './screens/Note';
+import Players from './screens/Players';
+import Chicken from './screens/Chicken';
+import Results from './screens/Results';
 import Context from './Context';
-import Home from './routes/Home.js';
-import Note from './routes/Note';
-import Players from './routes/Players';
-import Chicken from './routes/Chicken';
-import Results from './routes/Results';
+
+import AppLoading from 'expo-app-loading';
+import { Asset } from 'expo-asset';
 
 import {
 	useFonts,
@@ -23,7 +25,6 @@ import {
 	Montserrat_900Black_Italic,
 	Montserrat_900Black,
 } from '@expo-google-fonts/montserrat';
-import AppLoading from 'expo-app-loading';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,7 @@ export default function App() {
 	const [riskyLevel, setriskyLevel] = useState('');
 	const [scoreResults, setScoreResults] = useState([]);
 
-	let [fontsLoaded] = useFonts({
+	let [isFontsLoaded] = useFonts({
 		Montserrat_800ExtraBold,
 		Montserrat_800ExtraBold_Italic,
 		Montserrat_700Bold,
@@ -45,7 +46,7 @@ export default function App() {
 		Montserrat_600SemiBold_Italic,
 	});
 
-	if (!fontsLoaded) {
+	if (!isFontsLoaded) {
 		return <AppLoading />;
 	} else {
 		return (

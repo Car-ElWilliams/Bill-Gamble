@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Animated, Dimensions } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	ImageBackground,
+	ActivityIndicator,
+	Dimensions,
+} from 'react-native';
 //import LoadingImage from '../assets/bill-gamble-logo.png';
 import LoadingImage from '../assets/android-splash-screen.png';
 import { ProgressBar, Colors } from 'react-native-paper';
@@ -37,11 +44,16 @@ export default function LoadingScreen(props) {
 			<ImageBackground source={LoadingImage} style={styles.LoadingImage}></ImageBackground>
 			<Text style={styles.LoadingText}>BILL GAMBLE</Text>
 			<Text style={styles.LoadingSlogan}>SPLITTING THE BILL THE {'\n'} EXCITING WAY</Text>
+			{/*<ActivityIndicator size='large' color='orange' />*/}
 			<Text style={{ ...styles.LoadingText, fontSize: 13, flexGrow: 1, marginBottom: 13 }}>
 				CREATED BY CAREL WILLIAMS
 			</Text>
 			<View style={styles.LoadingBarContainer}>
-				<ProgressBar style={styles.LoadingBar} progress={progressLoadTime} color={Colors.blue400} />
+				<ProgressBar
+					style={styles.LoadingBar}
+					progress={progressLoadTime}
+					color={Colors.yellow700}
+				/>
 			</View>
 		</View>
 	);
