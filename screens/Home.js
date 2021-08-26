@@ -9,11 +9,13 @@ import {
 	Platform,
 	TouchableOpacity,
 	Dimensions,
+	Image,
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 import TrophySVG from '../components/TrophySVG.js';
+import CashSVG from '../components/CashSVG.js';
 import QuestionMark from '../components/QuestionMark.js';
 import constantStyle from '../constants/primeColors.js';
 
@@ -145,9 +147,10 @@ export default function Home({ navigation }) {
 					>
 						<View
 							style={{
-								flex: 1,
+								flex: 2,
 								flexDirection: 'column',
 								alignItems: 'center',
+								backgroundColor: 'yellow',
 							}}
 						>
 							<Text
@@ -184,12 +187,53 @@ export default function Home({ navigation }) {
 								<Text style={{ fontFamily: 'Montserrat_800ExtraBold' }}>Bill Gamble</Text> and let
 								chance decide how much each will pay!
 							</Text>
+						</View>
+						<View
+							style={{
+								flex: 0,
+								//backgroundColor: '#FFF, fontFamily: 'Montserrat_800ExtraBold'FFF',
+								alignItems: 'center',
+								flexDirection: 'row',
+								justifyContent: 'center',
+								height: '10%',
+							}}
+						>
+							<View style={{ width: '15%', height: '70%' }}>
+								<Image
+									style={{ borderRadius: 12, maxWidth: '100%', maxHeight: '100%' }}
+									//source={require('../assets/InfoAppIcon.png')}
+									source={require('../assets/bill-gamble-icon-correct.png')}
+								></Image>
+							</View>
+							<Text style={{ color: 'white', fontSize: 30, fontFamily: 'Montserrat_800ExtraBold' }}>
+								{' '}
+								+{' '}
+							</Text>
+							<View style={{ width: '15%', height: '35%' }}>
+								<CashSVG />
+							</View>
+							<Text style={{ color: 'white', fontSize: 30, fontFamily: 'Montserrat_800ExtraBold' }}>
+								{' '}
+								={' '}
+							</Text>
+							<Text
+								style={{
+									color: 'rgb(255,184,0)',
+									fontSize: 25,
+									fontFamily: 'Montserrat_800ExtraBold',
+								}}
+							>
+								EXCITING!
+							</Text>
+						</View>
+						<View style={{ flex: 1 }}>
 							<Text
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
 									fontSize: 40,
 									marginBottom: '5%',
+									textAlign: 'center',
 								}}
 							>
 								Modes?
@@ -209,51 +253,177 @@ export default function Home({ navigation }) {
 							style={{
 								flex: 1,
 								flexDirection: 'row',
-								backgroundColor: 'pink',
 								justifyContent: 'space-around',
 							}}
 						>
-							<View style={{ flex: 0, alignItems: 'center', width: '40%' }}>
+							<View
+								style={{
+									flex: 0,
+									alignItems: 'center',
+									width: '40%',
+									height: '90%',
+								}}
+							>
 								<Text
-									style={{ color: 'green', fontSize: 18, fontFamily: constantStyle.defaultFont }}
+									style={{
+										color: 'green',
+										fontSize: 18,
+										fontFamily: constantStyle.defaultFont,
+									}}
 								>
 									Normal Mode
 								</Text>
-								<View style={{ flex: 1, flexDirection: 'row' }}>
-									<Text style={{ textAlign: 'center', fontSize: 12, color: 'green' }}>
-										{'\u2022'}
-									</Text>
-									<Text
+								<View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+									<View
 										style={{
-											textAlign: 'center',
-											fontSize: 12,
-											fontFamily: constantStyle.defaultFont,
-											color: 'white',
+											flex: 1,
+											flexDirection: 'row',
+											alignItems: 'center',
+											width: '100%',
 										}}
 									>
-										50% chance of splitting the bill
-									</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 30,
+												color: 'green',
+												alignItems: 'center',
+												marginLeft: -10,
+												paddingRight: 10,
+											}}
+										>
+											{'\u2022'}
+										</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 12,
+												fontFamily: constantStyle.defaultFont,
+												color: 'white',
+												//height: '33%',
+												width: '70%',
+											}}
+										>
+											50% chance of splitting the bill
+										</Text>
+									</View>
+									<View
+										style={{
+											flex: 1,
+											flexDirection: 'row',
+											alignItems: 'center',
+											width: '100%',
+										}}
+									>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 30,
+												color: 'green',
+												alignItems: 'center',
+												marginLeft: -10,
+												paddingRight: 10,
+											}}
+										>
+											{'\u2022'}
+										</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 12,
+												fontFamily: constantStyle.defaultFont,
+												color: 'white',
+												width: '100%',
+											}}
+										>
+											No chance of anyone {'\n'}paying everything
+										</Text>
+									</View>
 								</View>
 							</View>
-
-							<View style={{ flex: 0, alignItems: 'center', width: '40%' }}>
-								<Text style={{ color: 'red', fontSize: 18, fontFamily: constantStyle.defaultFont }}>
+							<View
+								style={{
+									flex: 0,
+									alignItems: 'center',
+									width: '40%',
+									height: '90%',
+								}}
+							>
+								<Text
+									style={{
+										color: 'red',
+										fontSize: 18,
+										fontFamily: constantStyle.defaultFont,
+									}}
+								>
 									Risky Mode
 								</Text>
-								<View style={{ flex: 1, flexDirection: 'row' }}>
-									<Text style={{ textAlign: 'center', fontSize: 12, color: 'red' }}>
-										{'\u2022'}
-									</Text>
-									<Text
+								<View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+									<View
 										style={{
-											textAlign: 'center',
-											fontSize: 12,
-											fontFamily: constantStyle.defaultFont,
-											color: 'white',
+											flex: 1,
+											flexDirection: 'row',
+											alignItems: 'center',
+											width: '100%',
 										}}
 									>
-										50% chance of splitting the bill
-									</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 30,
+												color: 'red',
+												alignItems: 'center',
+												marginLeft: -10,
+												paddingRight: 10,
+											}}
+										>
+											{'\u2022'}
+										</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 12,
+												fontFamily: constantStyle.defaultFont,
+												color: 'white',
+												//height: '33%',
+												width: '70%',
+											}}
+										>
+											1% chance of splitting the bill
+										</Text>
+									</View>
+									<View
+										style={{
+											flex: 1,
+											flexDirection: 'row',
+											alignItems: 'center',
+											width: '100%',
+										}}
+									>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 30,
+												color: 'red',
+												alignItems: 'center',
+												marginLeft: -10,
+												paddingRight: 10,
+											}}
+										>
+											{'\u2022'}
+										</Text>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontSize: 12,
+												fontFamily: constantStyle.defaultFont,
+												color: 'white',
+												width: '85%',
+											}}
+										>
+											One person can pay for everything
+										</Text>
+									</View>
 								</View>
 							</View>
 						</View>
