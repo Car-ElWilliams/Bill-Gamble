@@ -29,9 +29,9 @@ export default function Home({ navigation }) {
 
 	function showOrHideScore() {
 		if (showSavedScore) {
-			return setShowSavedScore(false);
+			return setShowSavedScore(true);
 		}
-		return setShowSavedScore(true);
+		return setShowSavedScore(false);
 	}
 
 	function showOrHideInformation() {
@@ -334,6 +334,9 @@ export default function Home({ navigation }) {
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '100%',
+												textShadowColor: 'rgba(0, 0, 0, 0.25)',
+												textShadowOffset: { width: 0, height: 1.5 },
+												textShadowRadius: 2,
 											}}
 										>
 											No chance of anyone {'\n'}paying everything

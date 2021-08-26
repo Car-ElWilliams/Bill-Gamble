@@ -14,7 +14,7 @@ import {
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import PlayerTrashCan from '../components/PlayerTrashCan';
-
+import constantStyle from '../constants/primeColors.js';
 import Ads from '../components/Ads';
 
 export default function BillAmount({ route, navigation }) {
@@ -33,7 +33,7 @@ export default function BillAmount({ route, navigation }) {
 	const [disablePlayerTextInput, setDisablePlayerTextInput] = useState(false);
 
 	const [labelForPlayers, setLabelForPlayers] = useState(`Enter player ${playerNumberCount} name`);
-	const [placeholderName, setPlaceholderName] = useState('Eric');
+	const [placeholderName, setPlaceholderName] = useState('ERIC');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const [showMinimumPlayer, setShowMinimumPlayer] = useState(false);
@@ -253,14 +253,18 @@ export default function BillAmount({ route, navigation }) {
 								textAlign: 'center',
 							}}
 						></Text>*/}
-						<View style={{ alignItems: 'center' }}>
+						<View
+							style={{
+								alignItems: 'center',
+							}}
+						>
 							<TextInput
 								maxLength={9}
 								ref={playerInputRef}
 								label={labelForPlayers}
 								placeholder={placeholderName}
 								//placeholderTextColor='rgba(217, 193, 108, 0.9)'
-								placeholderTextColor='rgba(255, 40, 40, 0.4)'
+								placeholderTextColor='rgba(15, 7, 7, 0.24)'
 								//autoFocus={true}
 								onChangeText={e => {
 									setGetplayersFromInput(e);
@@ -307,7 +311,7 @@ export default function BillAmount({ route, navigation }) {
 								{errorMessage}
 							</Text>
 						)}
-						<Button
+						<TouchableOpacity
 							onPress={() => {
 								return [checkEmptyField(getPlayersFromInput)];
 							}}
@@ -315,13 +319,21 @@ export default function BillAmount({ route, navigation }) {
 							disabled={disablePlayerTextInput}
 							style={{ ...styles.addButton }}
 						>
-							<Text style={{ color: '#fff', fontSize: 25, fontFamily: 'Montserrat_900Black' }}>
-								Add
+							<Text
+								style={{
+									color: '#fff',
+									fontSize: 30,
+									fontFamily: 'Montserrat_900Black',
+									textDecorationLine: 'underline',
+									textAlign: 'center',
+								}}
+							>
+								ADD
 							</Text>
-						</Button>
+						</TouchableOpacity>
 						<View style={styles.playerBoardContainer}>
 							<View style={styles.playerBoard}>
-								<Text style={styles.playerBoardHeader}>Players</Text>
+								<Text style={styles.playerBoardHeader}>PLAYERS</Text>
 								<View>{playerArray.length !== 0 && renderPlayers()}</View>
 							</View>
 						</View>
@@ -339,11 +351,11 @@ export default function BillAmount({ route, navigation }) {
 							<Text
 								style={{
 									textAlign: 'center',
-									fontFamily: 'Montserrat_600SemiBold',
+									fontFamily: 'Montserrat_700Bold',
 									fontSize: 10,
 									marginTop: 11,
 									marginBottom: -10,
-									color: 'black',
+									color: 'white',
 								}}
 							>
 								Minimum 2 players
@@ -384,7 +396,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'rgb(255, 40, 40)',
+		backgroundColor: constantStyle.primaryThemeColor,
 	},
 
 	SafeAreaView: {
@@ -429,16 +441,15 @@ const styles = StyleSheet.create({
 	},
 
 	PlayerInput: {
-		width: '80%',
-		borderWidth: 5,
-		borderColor: 'yellow',
-		borderRadius: 35,
-		backgroundColor: 'rgba(208, 4, 4, 0.78)',
-		backgroundColor: 'white',
+		width: '70%',
+		borderWidth: 2.5,
+		borderColor: 'rgb(255,214, 0)',
+		borderRadius: 20,
+		backgroundColor: 'rgba(208, 4, 4, 0.67)',
 		padding: 10,
 		fontSize: 37,
 		fontFamily: 'Montserrat_700Bold',
-		color: 'black',
+		color: 'white',
 		textAlign: 'center',
 	},
 
@@ -448,14 +459,13 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		backgroundColor: 'rgba(208, 4, 4, 0.78)',
-
-		borderWidth: 3.5,
+		backgroundColor: 'rgba(208, 4, 4, 0.67)',
+		borderWidth: 2.5,
 		borderColor: 'white',
 		borderRadius: 10,
 		padding: 27,
 		width: '85%',
-		borderColor: 'yellow',
+		borderColor: 'rgb(255,214, 0)',
 	},
 
 	playerBoardHeader: {
@@ -463,8 +473,8 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
-		borderColor: 'yellow',
-		borderBottomWidth: 5,
+		borderColor: 'rgb(255,214, 0)',
+		borderBottomWidth: 2.5,
 		borderRadius: 3.1,
 		paddingBottom: 12.5,
 	},

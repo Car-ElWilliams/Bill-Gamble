@@ -43,7 +43,7 @@ export default function Chicken({ navigation }) {
 	}
 
 	return (
-		<View style={styles.HomeContainer}>
+		<View style={styles.ChickenContainer}>
 			<SafeAreaView>
 				{/*<Text style={{ ...styles.TextStandard, marginTop: -2, marginBottom: 25, fontSize: 40 }}>
 					Gamble Time
@@ -83,7 +83,7 @@ export default function Chicken({ navigation }) {
 						...styles.TextStandard,
 						color: 'white',
 						marginTop: -20.5,
-						fontSize: 17,
+						fontSize: 18,
 						textDecorationLine: 'underline',
 						fontFamily: 'Montserrat_800ExtraBold_Italic',
 						position: 'relative',
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 	RiskColor: {
 		backgroundColor: 'rgba(255, 60, 60, .95)',
 	},
-	HomeContainer: {
+	ChickenContainer: {
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
