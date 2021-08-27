@@ -16,6 +16,9 @@ import Context from '../Context';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 import TrophySVG from '../components/TrophySVG.js';
 import CashSVG from '../components/CashSVG.js';
+import PizzaSVG from '../components/PizzaSVG.js';
+import ExcitingSVG from '../components/ExcitingSVG.js';
+import NormalModeSVG from '../components/NormalModeSVG.js';
 import QuestionMark from '../components/QuestionMark.js';
 import constantStyle from '../constants/primeColors.js';
 
@@ -29,9 +32,9 @@ export default function Home({ navigation }) {
 
 	function showOrHideScore() {
 		if (showSavedScore) {
-			return setShowSavedScore(true);
+			return setShowSavedScore(false);
 		}
-		return setShowSavedScore(false);
+		return setShowSavedScore(true);
 	}
 
 	function showOrHideInformation() {
@@ -132,7 +135,13 @@ export default function Home({ navigation }) {
 			{/*Modal Showing Informtion About The App*/}
 
 			<Modal animationType='slide' visible={showInformation} transparent={true}>
-				<View style={{ flex: 1, verticalAlign: 'center', alignItems: 'center' }}>
+				<View
+					style={{
+						flex: 1,
+						verticalAlign: 'center',
+						alignItems: 'center',
+					}}
+				>
 					<TouchableOpacity
 						onPress={() => {
 							[showOrHideInformation(), console.log('information:', showInformation)];
@@ -141,25 +150,26 @@ export default function Home({ navigation }) {
 							backgroundColor: 'rgb(0,200,255)',
 							height: '100%',
 							width: '100%',
-							borderRadius: 15,
-							padding: 15,
+							paddingLeft: 15,
+							paddingRight: 15,
 						}}
 					>
 						<View
 							style={{
-								flex: 2,
+								flex: 1.5,
 								flexDirection: 'column',
 								alignItems: 'center',
-								backgroundColor: 'yellow',
+								//backgroundColor: 'yellow',
+								marginTop: '-2%',
+								marginBottom: 20,
 							}}
 						>
 							<Text
 								style={{
 									color: 'white',
-									fontFamily: constantStyle.defaultFont,
+									fontFamily: constantStyle.blackFont,
 									fontSize: 40,
-									marginTop: '-5%',
-									marginBottom: '10%',
+									marginBottom: 15,
 								}}
 							>
 								Bill Gamble?
@@ -175,6 +185,9 @@ export default function Home({ navigation }) {
 								Let’s say you had a great night out with your friends {'\n'} and you all decided to
 								buy a pizza.
 							</Text>
+							<View style={{ width: '80%', height: '35%', marginTop: 20, marginBottom: 15 }}>
+								<PizzaSVG></PizzaSVG>
+							</View>
 							<Text
 								style={{
 									color: 'white',
@@ -184,8 +197,16 @@ export default function Home({ navigation }) {
 								}}
 							>
 								Instead of splitting the bill you decide to use {'\n'}{' '}
-								<Text style={{ fontFamily: 'Montserrat_800ExtraBold' }}>Bill Gamble</Text> and let
-								chance decide how much each will pay!
+								<Text
+									style={{
+										fontFamily: constantStyle.blackFont,
+										fontSize: 14,
+										color: 'rgb(255, 210, 0)',
+									}}
+								>
+									Bill Gamble
+								</Text>{' '}
+								and let chance decide how much each will pay!
 							</Text>
 						</View>
 						<View
@@ -198,7 +219,7 @@ export default function Home({ navigation }) {
 								height: '10%',
 							}}
 						>
-							<View style={{ width: '15%', height: '70%' }}>
+							<View style={{ width: '13%', height: '55%' }}>
 								<Image
 									style={{ borderRadius: 12, maxWidth: '100%', maxHeight: '100%' }}
 									//source={require('../assets/InfoAppIcon.png')}
@@ -209,29 +230,32 @@ export default function Home({ navigation }) {
 								{' '}
 								+{' '}
 							</Text>
-							<View style={{ width: '15%', height: '35%' }}>
+							<View style={{ width: '20%', height: '50%' }}>
 								<CashSVG />
 							</View>
 							<Text style={{ color: 'white', fontSize: 30, fontFamily: 'Montserrat_800ExtraBold' }}>
 								{' '}
 								={' '}
 							</Text>
-							<Text
+							<View style={{ width: '40%' }}>
+								<ExcitingSVG></ExcitingSVG>
+							</View>
+							{/*<Text
 								style={{
 									color: 'rgb(255,184,0)',
 									fontSize: 25,
 									fontFamily: 'Montserrat_800ExtraBold',
 								}}
-							>
+								>
 								EXCITING!
-							</Text>
+							</Text>*/}
 						</View>
-						<View style={{ flex: 1 }}>
+						<View style={{ flex: 0, marginVertical: 25 }}>
 							<Text
 								style={{
 									color: 'white',
-									fontFamily: constantStyle.defaultFont,
-									fontSize: 40,
+									fontFamily: constantStyle.blackFont,
+									fontSize: 35,
 									marginBottom: '5%',
 									textAlign: 'center',
 								}}
@@ -254,6 +278,7 @@ export default function Home({ navigation }) {
 								flex: 1,
 								flexDirection: 'row',
 								justifyContent: 'space-around',
+								//backgroundColor: 'blue',
 							}}
 						>
 							<View
@@ -261,18 +286,24 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: '90%',
+									height: '67.5%',
 								}}
 							>
 								<Text
 									style={{
 										color: 'green',
 										fontSize: 18,
-										fontFamily: constantStyle.defaultFont,
+										fontFamily: constantStyle.blackFont,
+										borderBottomWidth: 3,
+										borderColor: 'white',
+										marginBottom: 10,
 									}}
 								>
 									Normal Mode
 								</Text>
+								{/*<View style={{ width: '120%', height: '10%' }}>
+									<NormalModeSVG></NormalModeSVG>
+								</View>*/}
 								<View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
 									<View
 										style={{
@@ -302,6 +333,9 @@ export default function Home({ navigation }) {
 												color: 'white',
 												//height: '33%',
 												width: '70%',
+												textShadowColor: 'rgba(0, 0, 0, 0.2)',
+												textShadowOffset: { width: 0.5, height: 1.7 },
+												textShadowRadius: 2,
 											}}
 										>
 											50% chance of splitting the bill
@@ -334,8 +368,8 @@ export default function Home({ navigation }) {
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '100%',
-												textShadowColor: 'rgba(0, 0, 0, 0.25)',
-												textShadowOffset: { width: 0, height: 1.5 },
+												textShadowColor: 'rgba(0, 0, 0, 0.2)',
+												textShadowOffset: { width: 0.5, height: 1.7 },
 												textShadowRadius: 2,
 											}}
 										>
@@ -349,14 +383,17 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: '90%',
+									height: '67.5%',
 								}}
 							>
 								<Text
 									style={{
-										color: 'red',
+										color: 'rgb(255, 40, 40)',
 										fontSize: 18,
-										fontFamily: constantStyle.defaultFont,
+										fontFamily: constantStyle.blackFont,
+										borderBottomWidth: 3,
+										borderColor: 'white',
+										marginBottom: 10,
 									}}
 								>
 									Risky Mode
@@ -374,7 +411,7 @@ export default function Home({ navigation }) {
 											style={{
 												textAlign: 'center',
 												fontSize: 30,
-												color: 'red',
+												color: 'rgb(255, 40, 40)',
 												alignItems: 'center',
 												marginLeft: -10,
 												paddingRight: 10,
@@ -390,6 +427,9 @@ export default function Home({ navigation }) {
 												color: 'white',
 												//height: '33%',
 												width: '70%',
+												textShadowColor: 'rgba(0, 0, 0, 0.2)',
+												textShadowOffset: { width: 0.5, height: 1.7 },
+												textShadowRadius: 2,
 											}}
 										>
 											1% chance of splitting the bill
@@ -407,7 +447,7 @@ export default function Home({ navigation }) {
 											style={{
 												textAlign: 'center',
 												fontSize: 30,
-												color: 'red',
+												color: 'rgb(255, 40, 40)',
 												alignItems: 'center',
 												marginLeft: -10,
 												paddingRight: 10,
@@ -422,6 +462,9 @@ export default function Home({ navigation }) {
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '85%',
+												textShadowColor: 'rgba(0, 0, 0, 0.2)',
+												textShadowOffset: { width: 0.5, height: 1.7 },
+												textShadowRadius: 2,
 											}}
 										>
 											One person can pay for everything
