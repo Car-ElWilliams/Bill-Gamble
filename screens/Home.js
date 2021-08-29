@@ -31,6 +31,9 @@ export default function Home({ navigation }) {
 	const [showSavedScore, setShowSavedScore] = useState(false);
 	const [showInformation, setShowInformation] = useState(false);
 
+	//console.log(Dimensions.get('window').height);
+	//console.log(Dimensions.get('window').width);
+
 	function showOrHideScore() {
 		if (showSavedScore) {
 			return setShowSavedScore(false);
@@ -167,8 +170,7 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.blackFont,
-									fontSize: Dimensions.get('window').width < 1080 ? 35 : 40,
-
+									fontSize: Dimensions.get('window').width < 380 ? 35 : 40,
 									marginBottom: 15,
 								}}
 							>
@@ -178,7 +180,7 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
+									fontSize: Dimensions.get('window').width < 380 ? 11.5 : 13,
 									textAlign: 'center',
 								}}
 							>
@@ -187,8 +189,8 @@ export default function Home({ navigation }) {
 							</Text>
 							<View
 								style={{
-									width: Dimensions.get('window').height < 1500 ? '75%' : '80%',
-									height: Dimensions.get('window').height < 1500 ? '30%' : '35%',
+									width: Dimensions.get('window').height < 699 ? '75%' : '80%',
+									height: Dimensions.get('window').height < 699 ? '30%' : '35%',
 									marginTop: 20,
 									marginBottom: 15,
 								}}
@@ -199,7 +201,7 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
+									fontSize: Dimensions.get('window').width < 380 ? 11.5 : 13,
 
 									textAlign: 'center',
 								}}
@@ -228,8 +230,8 @@ export default function Home({ navigation }) {
 						>
 							<View
 								style={{
-									width: Dimensions.get('window').height < 1500 ? '11%' : '13%',
-									height: Dimensions.get('window').height < 1500 ? '46%' : '55%',
+									width: Dimensions.get('window').height < 699 ? '11%' : '13%',
+									height: Dimensions.get('window').height < 699 ? '46%' : '55%',
 								}}
 							>
 								<Image
@@ -243,8 +245,8 @@ export default function Home({ navigation }) {
 							</Text>
 							<View
 								style={{
-									width: Dimensions.get('window').height < 1500 ? '15%' : '20%',
-									height: Dimensions.get('window').height < 1500 ? '40%' : '50%',
+									width: Dimensions.get('window').height < 699 ? '15%' : '20%',
+									height: Dimensions.get('window').height < 699 ? '40%' : '50%',
 								}}
 							>
 								<CashSVG />
@@ -253,23 +255,23 @@ export default function Home({ navigation }) {
 								{' '}
 								={' '}
 							</Text>
-							<View style={{ width: Dimensions.get('window').height < 1500 ? '35%' : '40%' }}>
+							<View style={{ width: Dimensions.get('window').height < 699 ? '35%' : '40%' }}>
 								<ExcitingSVG></ExcitingSVG>
 							</View>
 						</View>
 						<View
 							style={{
 								flex: 0,
-								marginTop: Dimensions.get('window').height < 1500 ? 10 : 25,
-								marginBottom: Dimensions.get('window').height < 1500 ? 0 : 25,
+								marginTop: Dimensions.get('window').height < 699 ? 10 : 25,
+								marginBottom: Dimensions.get('window').height < 699 ? 0 : 25,
 							}}
 						>
 							<Text
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.blackFont,
-									fontSize: Dimensions.get('window').width < 1080 ? 32 : 35,
-									marginBottom: Dimensions.get('window').height < 1500 ? '2%' : '5%',
+									fontSize: Dimensions.get('window').width < 380 ? 32 : 35,
+									marginBottom: Dimensions.get('window').height < 699 ? '2%' : '5%',
 									textAlign: 'center',
 								}}
 							>
@@ -279,9 +281,9 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
+									fontSize: Dimensions.get('window').width < 380 ? 11.5 : 13,
 									textAlign: 'center',
-									marginBottom: Dimensions.get('window').height < 1500 ? 15 : 0,
+									marginBottom: Dimensions.get('window').height < 699 ? 15 : 0,
 								}}
 							>
 								Bill Gamble offers you two modes depending on how much everyone is willing to lose
@@ -300,7 +302,7 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: Dimensions.get('window').height < 1500 ? '80%' : '67.5%',
+									height: Dimensions.get('window').height < 699 ? '70%' : '67.5%',
 								}}
 							>
 								<Text
@@ -341,7 +343,7 @@ export default function Home({ navigation }) {
 											style={{
 												textAlign: 'center',
 												fontFamily: constantStyle.defaultFont,
-												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
+												fontSize: Dimensions.get('window').width < 380 ? 10.5 : 12,
 
 												color: 'white',
 												//height: '33%',
@@ -377,7 +379,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
+												fontSize: Dimensions.get('window').width < 380 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '100%',
@@ -396,7 +398,7 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: Dimensions.get('window').height < 1500 ? '80%' : '67.5%',
+									height: Dimensions.get('window').height < 699 ? '80%' : '67.5%',
 								}}
 							>
 								<Text
@@ -435,7 +437,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
+												fontSize: Dimensions.get('window').width < 380 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												//height: '33%',
@@ -471,7 +473,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
+												fontSize: Dimensions.get('window').width < 380 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '85%',

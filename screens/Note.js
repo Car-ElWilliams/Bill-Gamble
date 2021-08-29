@@ -130,7 +130,7 @@ export default function BillAmount({ route, navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: 'Montserrat_600SemiBold_Italic',
-									fontSize: Dimensions.get('window').width < 1080 ? 13 : 14.5,
+									fontSize: Dimensions.get('window').width < 380 ? 13 : 14.5,
 
 									marginTop: 15,
 								}}
@@ -175,13 +175,13 @@ let svgNoteImageMaxHeight;
 let svgNoteImageMarginBottom;
 let svgNoteImageMarginTop;
 
-if (Dimensions.get('window').height >= 1500) {
+if (Dimensions.get('window').height >= 699) {
 	svgNoteImageMaxHeight = '28%';
 	svgNoteImageMarginBottom = '6%';
 	svgNoteImageMarginTop = '11%';
 }
 
-if (Dimensions.get('window').height < 1500) {
+if (Dimensions.get('window').height < 699) {
 	svgNoteImageMaxHeight = '17.5%';
 	svgNoteImageMarginBottom = '1%';
 	svgNoteImageMarginTop = Dimensions.get('window').height * 0.05;
@@ -219,8 +219,8 @@ const styles = StyleSheet.create({
 	},
 
 	RecieptSVGContainer: {
-		width: Dimensions.get('window').width < 1080 ? '40%' : '50.5%',
-		minHeight: Dimensions.get('window').height < 1500 ? '22%' : '25%',
+		width: Dimensions.get('window').width < 380 ? '40%' : '50.5%',
+		minHeight: Dimensions.get('window').height < 699 ? '22%' : '25%',
 		maxHeight: svgNoteImageMaxHeight,
 		//backgroundColor: 'green',
 		//backgroundColor: constantStyle.primaryThemeColor,
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
 	BillAmountText: {
 		color: 'white',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: Dimensions.get('window').width < 1080 ? 36 : 38,
+		fontSize: Dimensions.get('window').width < 380 ? 36 : 38,
 		marginTop: 15,
 		marginBottom: '9%',
 	},
@@ -258,8 +258,8 @@ const styles = StyleSheet.create({
 		borderColor: 'rgb(255, 218, 68)',
 		borderRadius: 15,
 		backgroundColor: 'rgb(252,0,0)',
-		padding: Dimensions.get('window').width < 1080 ? 7.5 : 10,
-		fontSize: Dimensions.get('window').width < 1080 ? 28 : 30,
+		padding: Dimensions.get('window').width < 380 ? 7.5 : 10,
+		fontSize: Dimensions.get('window').width < 380 ? 28 : 30,
 
 		fontFamily: 'Montserrat_700Bold',
 		color: 'white',
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
 	NextButtonInnerText: {
 		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: Dimensions.get('window').width < 1080 ? 20 : 25,
+		fontSize: Dimensions.get('window').width < 380 ? 20 : 25,
 	},
 
 	BackButton: {
@@ -287,6 +287,6 @@ const styles = StyleSheet.create({
 	BackButtonText: {
 		color: 'rgba(0,0,0,0.77)',
 		fontFamily: constantStyle.defaultFont,
-		fontSize: Dimensions.get('window').width < 1080 ? 14 : 16,
+		fontSize: Dimensions.get('window').width < 380 ? 14 : 16,
 	},
 });

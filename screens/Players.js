@@ -445,7 +445,6 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		padding: 27,
 		width: '85%',
-		//height: Dimensions.get('window').height < 1500 ? '63%' : '80%',
 		borderColor: 'rgb(255,214, 0)',
 	},
 
@@ -490,6 +489,6 @@ const styles = StyleSheet.create({
 	BackButtonText: {
 		color: 'rgba(0,0,0,0.77)',
 		fontFamily: constantStyle.defaultFont,
-		fontSize: Dimensions.get('window').width < 1080 ? 14 : 16,
+		fontSize: Dimensions.get('window').width < 380 ? 14 : 16,
 	},
 });

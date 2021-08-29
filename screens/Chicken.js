@@ -96,11 +96,11 @@ export default function Chicken({ navigation }) {
 				<Text
 					style={{
 						color: '	rgb(255,214,0)',
-						fontSize: Dimensions.get('window').width < 1080 ? 25 : 33,
+						fontSize: Dimensions.get('window').width < 380 ? 25 : 33,
 
 						alignSelf: 'center',
 						fontFamily: 'Montserrat_800ExtraBold_Italic',
-						marginBottom: Dimensions.get('window').width < 1080 ? 10 : 5,
+						marginBottom: Dimensions.get('window').width < 380 ? 10 : 5,
 					}}
 				>
 					{billValue}
