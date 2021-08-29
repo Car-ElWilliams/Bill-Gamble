@@ -175,13 +175,13 @@ let svgNoteImageMaxHeight;
 let svgNoteImageMarginBottom;
 let svgNoteImageMarginTop;
 
-if (Dimensions.get('window').height >= 699) {
+if (Dimensions.get('window').height >= 680) {
 	svgNoteImageMaxHeight = '28%';
 	svgNoteImageMarginBottom = '6%';
 	svgNoteImageMarginTop = '11%';
 }
 
-if (Dimensions.get('window').height < 699) {
+if (Dimensions.get('window').height < 680) {
 	svgNoteImageMaxHeight = '17.5%';
 	svgNoteImageMarginBottom = '1%';
 	svgNoteImageMarginTop = Dimensions.get('window').height * 0.05;
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
 
 	RecieptSVGContainer: {
 		width: Dimensions.get('window').width < 380 ? '40%' : '50.5%',
-		minHeight: Dimensions.get('window').height < 699 ? '22%' : '25%',
+		minHeight: Dimensions.get('window').height < 680 ? '22%' : '25%',
 		maxHeight: svgNoteImageMaxHeight,
 		//backgroundColor: 'green',
 		//backgroundColor: constantStyle.primaryThemeColor,
