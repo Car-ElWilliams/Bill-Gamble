@@ -15,6 +15,7 @@ import { Button } from 'react-native-paper';
 import Context from '../Context';
 import Ads from '../components/Ads';
 import RecieptSVG from '../components/RecieptSVG';
+import constantStyle from '../constants/primeColors.js';
 
 export default function BillAmount({ route, navigation }) {
 	//UseContext
@@ -36,14 +37,14 @@ export default function BillAmount({ route, navigation }) {
 	useEffect(() => {
 		enableNextButton();
 
-		if (currentBillValue < 499) {
+		if (currentBillValue === null) {
 			setMoneyText('Show me the money...');
 		}
-		if (currentBillValue > 99) {
+		if (currentBillValue < 299 && currentBillValue > 0) {
 			setMoneyText('Good luck! You will need it ;)');
 		}
 
-		if (currentBillValue > 499) {
+		if (currentBillValue > 299) {
 			setMoneyText("Now we're talking!");
 		}
 		if (currentBillValue > 999) {
@@ -87,7 +88,7 @@ export default function BillAmount({ route, navigation }) {
 					})()}
 					style={styles.KeyboardAvoidingView}
 				>
-					<ScrollView styles={{ alignSelf: 'flexStart 	' }} bounces={false}>
+					<ScrollView bounces={false}>
 						{riskyLevel ? (
 							<View id='Banner-Risky' style={styles.riskyBanner}>
 								<Text style={styles.riskyBannerText}>Risk Level: HIGH</Text>
@@ -110,6 +111,7 @@ export default function BillAmount({ route, navigation }) {
 							<TextInput
 								label='Enter Bill Amount'
 								placeholder='500'
+								placeholderTextColor='rgba(255, 255, 255, 0.85)'
 								keyboardType='number-pad'
 								onChangeText={e => {
 									const regex = new RegExp(/^[0-9\b]+$/);
@@ -126,10 +128,11 @@ export default function BillAmount({ route, navigation }) {
 							></TextInput>
 							<Text
 								style={{
-									color: 'orange',
+									color: 'white',
 									fontFamily: 'Montserrat_600SemiBold_Italic',
-									fontSize: 13,
-									marginTop: 9,
+									fontSize: Dimensions.get('window').width < 1080 ? 13 : 14.5,
+
+									marginTop: 15,
 								}}
 							>
 								{moneyText}
@@ -172,14 +175,14 @@ let svgNoteImageMaxHeight;
 let svgNoteImageMarginBottom;
 let svgNoteImageMarginTop;
 
-if (Dimensions.get('window').height > 640) {
+if (Dimensions.get('window').height >= 1500) {
 	svgNoteImageMaxHeight = '28%';
 	svgNoteImageMarginBottom = '6%';
 	svgNoteImageMarginTop = '11%';
 }
 
-if (Dimensions.get('window').height <= 640) {
-	svgNoteImageMaxHeight = '25%';
+if (Dimensions.get('window').height < 1500) {
+	svgNoteImageMaxHeight = '17.5%';
 	svgNoteImageMarginBottom = '1%';
 	svgNoteImageMarginTop = Dimensions.get('window').height * 0.05;
 }
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
 		//flexDirection: 'column',
 		//justifyContent: 'center',
 		//backgroundColor: '#D00404',
-		backgroundColor: 'white',
+		backgroundColor: constantStyle.primaryThemeColor,
 		height: '100%',
 	},
 
@@ -201,7 +204,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
-		backgroundColor: '#fff',
+		backgroundColor: constantStyle.primaryThemeColor,
 		minHeight: 600,
 		maxHeight: 900,
 	},
@@ -216,19 +219,20 @@ const styles = StyleSheet.create({
 	},
 
 	RecieptSVGContainer: {
-		width: '100%',
-		maxWidth: '50.5%',
-		minHeight: '25%',
+		width: Dimensions.get('window').width < 1080 ? '40%' : '50.5%',
+		minHeight: Dimensions.get('window').height < 1500 ? '22%' : '25%',
 		maxHeight: svgNoteImageMaxHeight,
-		backgroundColor: 'green',
-		backgroundColor: '#fff',
+		//backgroundColor: 'green',
+		//backgroundColor: constantStyle.primaryThemeColor,
+		//backgroundColor: 'rgb(255, 218,68)',
+
 		marginTop: svgNoteImageMarginTop,
 		marginBottom: svgNoteImageMarginBottom,
 	},
 
 	riskyBanner: {
 		flex: 1,
-		backgroundColor: '#D00404',
+		backgroundColor: constantStyle.riskyBannerColor,
 		height: heightRiskLevelBanner,
 		justifyContent: 'center',
 	},
@@ -241,46 +245,48 @@ const styles = StyleSheet.create({
 		marginTop: marginTopRiskLevelBanner,
 	},
 	BillAmountText: {
-		color: 'rgb(255, 40, 40)',
+		color: 'white',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 36,
+		fontSize: Dimensions.get('window').width < 1080 ? 36 : 38,
 		marginTop: 15,
-		marginBottom: 25,
+		marginBottom: '9%',
 	},
 
 	BillInput: {
 		width: '70%',
-		borderWidth: 6,
-		borderColor: 'rgb(255, 40, 40)',
-		borderRadius: 20,
-		backgroundColor: '#fff',
-		padding: 10,
-		fontSize: 30,
+		borderWidth: 3,
+		borderColor: 'rgb(255, 218, 68)',
+		borderRadius: 15,
+		backgroundColor: 'rgb(252,0,0)',
+		padding: Dimensions.get('window').width < 1080 ? 7.5 : 10,
+		fontSize: Dimensions.get('window').width < 1080 ? 28 : 30,
+
 		fontFamily: 'Montserrat_700Bold',
-		color: 'orange',
+		color: 'white',
 	},
 
 	nextButton: {
 		marginTop: 53,
-		backgroundColor: 'rgb(255, 40, 40)',
+		borderWidth: 2.5,
+		borderColor: 'rgb(255, 218, 68)',
+		backgroundColor: 'rgb(252,0,0)',
 		borderRadius: 40,
-		width: '60%',
+		width: '50%',
 	},
 
 	NextButtonInnerText: {
 		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: 20,
-		padding: 5,
+		fontSize: Dimensions.get('window').width < 1080 ? 20 : 25,
 	},
 
 	BackButton: {
-		marginTop: 20,
+		marginTop: 22.5,
 	},
 
 	BackButtonText: {
-		color: '#000',
-		fontFamily: 'Montserrat_700Bold',
-		fontSize: 12,
+		color: 'rgba(0,0,0,0.77)',
+		fontFamily: constantStyle.defaultFont,
+		fontSize: Dimensions.get('window').width < 1080 ? 14 : 16,
 	},
 });

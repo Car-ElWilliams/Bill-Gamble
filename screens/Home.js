@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -11,14 +11,15 @@ import {
 	Dimensions,
 	Image,
 } from 'react-native';
+
 import { Button } from 'react-native-paper';
+
 import Context from '../Context';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
 import TrophySVG from '../components/TrophySVG.js';
 import CashSVG from '../components/CashSVG.js';
 import PizzaSVG from '../components/PizzaSVG.js';
 import ExcitingSVG from '../components/ExcitingSVG.js';
-import NormalModeSVG from '../components/NormalModeSVG.js';
 import QuestionMark from '../components/QuestionMark.js';
 import constantStyle from '../constants/primeColors.js';
 
@@ -46,9 +47,9 @@ export default function Home({ navigation }) {
 
 	function renderAllPlayers() {
 		if (allPlayerNames) {
-			console.log(scoreResults);
+			scoreResults;
 			return allPlayerNames.map((players, i) => {
-				console.log(players, 'test');
+				players, 'test';
 				return (
 					<View key={players + i}>
 						<Text
@@ -132,8 +133,6 @@ export default function Home({ navigation }) {
 				<QuestionMark />
 			</TouchableOpacity>
 
-			{/*Modal Showing Informtion About The App*/}
-
 			<Modal animationType='slide' visible={showInformation} transparent={true}>
 				<View
 					style={{
@@ -144,7 +143,7 @@ export default function Home({ navigation }) {
 				>
 					<TouchableOpacity
 						onPress={() => {
-							[showOrHideInformation(), console.log('information:', showInformation)];
+							[showOrHideInformation(), ('information:', showInformation)];
 						}}
 						style={{
 							backgroundColor: 'rgb(0,200,255)',
@@ -168,7 +167,8 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.blackFont,
-									fontSize: 40,
+									fontSize: Dimensions.get('window').width < 1080 ? 35 : 40,
+
 									marginBottom: 15,
 								}}
 							>
@@ -178,21 +178,29 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: 13,
+									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
 									textAlign: 'center',
 								}}
 							>
 								Let’s say you had a great night out with your friends {'\n'} and you all decided to
 								buy a pizza.
 							</Text>
-							<View style={{ width: '80%', height: '35%', marginTop: 20, marginBottom: 15 }}>
+							<View
+								style={{
+									width: Dimensions.get('window').height < 1500 ? '75%' : '80%',
+									height: Dimensions.get('window').height < 1500 ? '30%' : '35%',
+									marginTop: 20,
+									marginBottom: 15,
+								}}
+							>
 								<PizzaSVG></PizzaSVG>
 							</View>
 							<Text
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: 13,
+									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
+
 									textAlign: 'center',
 								}}
 							>
@@ -212,51 +220,56 @@ export default function Home({ navigation }) {
 						<View
 							style={{
 								flex: 0,
-								//backgroundColor: '#FFF, fontFamily: 'Montserrat_800ExtraBold'FFF',
 								alignItems: 'center',
 								flexDirection: 'row',
 								justifyContent: 'center',
 								height: '10%',
 							}}
 						>
-							<View style={{ width: '13%', height: '55%' }}>
+							<View
+								style={{
+									width: Dimensions.get('window').height < 1500 ? '11%' : '13%',
+									height: Dimensions.get('window').height < 1500 ? '46%' : '55%',
+								}}
+							>
 								<Image
-									style={{ borderRadius: 12, maxWidth: '100%', maxHeight: '100%' }}
-									//source={require('../assets/InfoAppIcon.png')}
-									source={require('../assets/bill-gamble-icon-correct.png')}
+									style={{ borderRadius: 4, maxWidth: '100%', maxHeight: '100%' }}
+									source={require('../assets/InfoAppIconHome.png')}
 								></Image>
 							</View>
 							<Text style={{ color: 'white', fontSize: 30, fontFamily: 'Montserrat_800ExtraBold' }}>
 								{' '}
 								+{' '}
 							</Text>
-							<View style={{ width: '20%', height: '50%' }}>
+							<View
+								style={{
+									width: Dimensions.get('window').height < 1500 ? '15%' : '20%',
+									height: Dimensions.get('window').height < 1500 ? '40%' : '50%',
+								}}
+							>
 								<CashSVG />
 							</View>
 							<Text style={{ color: 'white', fontSize: 30, fontFamily: 'Montserrat_800ExtraBold' }}>
 								{' '}
 								={' '}
 							</Text>
-							<View style={{ width: '40%' }}>
+							<View style={{ width: Dimensions.get('window').height < 1500 ? '35%' : '40%' }}>
 								<ExcitingSVG></ExcitingSVG>
 							</View>
-							{/*<Text
-								style={{
-									color: 'rgb(255,184,0)',
-									fontSize: 25,
-									fontFamily: 'Montserrat_800ExtraBold',
-								}}
-								>
-								EXCITING!
-							</Text>*/}
 						</View>
-						<View style={{ flex: 0, marginVertical: 25 }}>
+						<View
+							style={{
+								flex: 0,
+								marginTop: Dimensions.get('window').height < 1500 ? 10 : 25,
+								marginBottom: Dimensions.get('window').height < 1500 ? 0 : 25,
+							}}
+						>
 							<Text
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.blackFont,
-									fontSize: 35,
-									marginBottom: '5%',
+									fontSize: Dimensions.get('window').width < 1080 ? 32 : 35,
+									marginBottom: Dimensions.get('window').height < 1500 ? '2%' : '5%',
 									textAlign: 'center',
 								}}
 							>
@@ -266,8 +279,9 @@ export default function Home({ navigation }) {
 								style={{
 									color: 'white',
 									fontFamily: constantStyle.defaultFont,
-									fontSize: 13,
+									fontSize: Dimensions.get('window').width < 1080 ? 11.5 : 13,
 									textAlign: 'center',
+									marginBottom: Dimensions.get('window').height < 1500 ? 15 : 0,
 								}}
 							>
 								Bill Gamble offers you two modes depending on how much everyone is willing to lose
@@ -286,7 +300,7 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: '67.5%',
+									height: Dimensions.get('window').height < 1500 ? '80%' : '67.5%',
 								}}
 							>
 								<Text
@@ -301,9 +315,7 @@ export default function Home({ navigation }) {
 								>
 									Normal Mode
 								</Text>
-								{/*<View style={{ width: '120%', height: '10%' }}>
-									<NormalModeSVG></NormalModeSVG>
-								</View>*/}
+
 								<View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
 									<View
 										style={{
@@ -328,8 +340,9 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: 12,
 												fontFamily: constantStyle.defaultFont,
+												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
+
 												color: 'white',
 												//height: '33%',
 												width: '70%',
@@ -364,7 +377,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: 12,
+												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '100%',
@@ -383,12 +396,12 @@ export default function Home({ navigation }) {
 									flex: 0,
 									alignItems: 'center',
 									width: '40%',
-									height: '67.5%',
+									height: Dimensions.get('window').height < 1500 ? '80%' : '67.5%',
 								}}
 							>
 								<Text
 									style={{
-										color: 'rgb(255, 40, 40)',
+										color: 'rgba(243, 30, 30,.95)',
 										fontSize: 18,
 										fontFamily: constantStyle.blackFont,
 										borderBottomWidth: 3,
@@ -411,7 +424,7 @@ export default function Home({ navigation }) {
 											style={{
 												textAlign: 'center',
 												fontSize: 30,
-												color: 'rgb(255, 40, 40)',
+												color: 'rgba(243, 30, 30,.95)',
 												alignItems: 'center',
 												marginLeft: -10,
 												paddingRight: 10,
@@ -422,7 +435,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: 12,
+												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												//height: '33%',
@@ -447,7 +460,7 @@ export default function Home({ navigation }) {
 											style={{
 												textAlign: 'center',
 												fontSize: 30,
-												color: 'rgb(255, 40, 40)',
+												color: 'rgba(243, 30, 30,.95)',
 												alignItems: 'center',
 												marginLeft: -10,
 												paddingRight: 10,
@@ -458,7 +471,7 @@ export default function Home({ navigation }) {
 										<Text
 											style={{
 												textAlign: 'center',
-												fontSize: 12,
+												fontSize: Dimensions.get('window').width < 1080 ? 10.5 : 12,
 												fontFamily: constantStyle.defaultFont,
 												color: 'white',
 												width: '85%',
@@ -477,10 +490,10 @@ export default function Home({ navigation }) {
 				</View>
 			</Modal>
 
-			{scoreResults.length === 0 && (
+			{scoreResults.length > 0 && (
 				<TouchableOpacity
 					onPress={() => {
-						return [showOrHideScore(), console.log(showSavedScore)];
+						return [showOrHideScore(), showSavedScore];
 					}}
 					style={{
 						height: 'auto',
@@ -502,7 +515,7 @@ export default function Home({ navigation }) {
 				<Modal animationType='slide' visible={showSavedScore} transparent={true}>
 					<TouchableOpacity
 						onPress={() => {
-							return [showOrHideScore(), console.log(showSavedScore)];
+							return [showOrHideScore(), showSavedScore];
 						}}
 						style={{
 							flex: 1,
@@ -566,8 +579,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		//opacity: 0,
-
 		backgroundColor: constantStyle.primaryThemeColor,
 	},
 
@@ -577,6 +588,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		marginTop: TransparentLogoMarginTop,
 	},
+
 	Header: {
 		marginTop: 15,
 		marginBottom: 75,

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
-import { render } from 'react-dom';
 import {
 	StyleSheet,
 	Text,
 	View,
+	Dimensions,
 	ScrollView,
 	KeyboardAvoidingView,
 	Platform,
@@ -11,12 +11,11 @@ import {
 	SafeAreaView,
 	TouchableOpacity,
 } from 'react-native';
+
 import { Button } from 'react-native-paper';
 import Context from '../Context';
 import PlayerTrashCan from '../components/PlayerTrashCan';
 import constantStyle from '../constants/primeColors.js';
-import Ads from '../components/Ads';
-
 export default function BillAmount({ route, navigation }) {
 	//UseContext
 	const { allPlayerNames, setAllPlayerNames } = useContext(Context);
@@ -54,8 +53,6 @@ export default function BillAmount({ route, navigation }) {
 		} else {
 			setDisablePlayerTextInput(false);
 		}
-
-		//console.log(playerArray.length, playerNumberCount);
 	}, [playerArray]);
 
 	function renderPlayers() {
@@ -135,12 +132,10 @@ export default function BillAmount({ route, navigation }) {
 
 	const clearText = useCallback(() => {
 		playerInputRef.current.setNativeProps({ text: '' });
-
-		//console.log(playerInputRef.current.text);
 	});
 
 	function checkEmptyField(playerName) {
-		console.log('name of added player', getPlayersFromInput);
+		'name of added player', getPlayersFromInput;
 		if (getPlayersFromInput === '') {
 			return setPlaceholderName('Name?');
 		}
@@ -152,11 +147,11 @@ export default function BillAmount({ route, navigation }) {
 			checkMaxPlayerCountAndAddPlayers();
 		}
 
-		console.log(playerNumberCount);
+		playerNumberCount;
 		if (playerNumberCount === 5) {
 			setErrorMessage('Max players reached');
-			console.log(errorMessage);
-			console.log(playerNumberCount);
+			errorMessage;
+			playerNumberCount;
 		}
 
 		return [checkMaxPlayerCountAndAddPlayers(), setPlaceholderName('')];
@@ -263,7 +258,6 @@ export default function BillAmount({ route, navigation }) {
 								ref={playerInputRef}
 								label={labelForPlayers}
 								placeholder={placeholderName}
-								//placeholderTextColor='rgba(217, 193, 108, 0.9)'
 								placeholderTextColor='rgba(15, 7, 7, 0.24)'
 								//autoFocus={true}
 								onChangeText={e => {
@@ -352,7 +346,7 @@ export default function BillAmount({ route, navigation }) {
 								style={{
 									textAlign: 'center',
 									fontFamily: 'Montserrat_700Bold',
-									fontSize: 10,
+									fontSize: 12,
 									marginTop: 11,
 									marginBottom: -10,
 									color: 'white',
@@ -387,15 +381,10 @@ const styles = StyleSheet.create({
 		backgroundColor: 'red',
 	},
 	rootContainer: {
-		//flex: 1,
-		//flexDirection: 'column',
-		//justifyContent: 'center',
-		//backgroundColor: '#D00404',
-		//},
 		flex: -0,
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'center',
+		//justifyContent: 'center',
 		backgroundColor: constantStyle.primaryThemeColor,
 	},
 
@@ -408,19 +397,10 @@ const styles = StyleSheet.create({
 		flex: -1,
 	},
 
-	RecieptSVGContainer: {
-		width: '100%',
-		maxWidth: '52.5%',
-		maxHeight: '35%',
-		backgroundColor: 'green',
-		backgroundColor: '#fff',
-		marginTop: 7.5,
-	},
-
 	riskyBanner: {
 		width: '100%',
 		flex: 1,
-		backgroundColor: '#D00404',
+		backgroundColor: constantStyle.riskyBannerColor,
 		height: heightRiskLevelBanner,
 		justifyContent: 'center',
 	},
@@ -465,6 +445,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		padding: 27,
 		width: '85%',
+		//height: Dimensions.get('window').height < 1500 ? '63%' : '80%',
 		borderColor: 'rgb(255,214, 0)',
 	},
 
@@ -477,6 +458,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 2.5,
 		borderRadius: 3.1,
 		paddingBottom: 12.5,
+		marginBottom: 10,
 	},
 
 	addButton: {
@@ -485,7 +467,9 @@ const styles = StyleSheet.create({
 
 	DoneButton: {
 		marginTop: 55,
-		backgroundColor: 'orange',
+		borderWidth: 2,
+		borderColor: 'rgb(255, 218, 68)',
+		backgroundColor: 'rgba(208, 4, 4, 0.67)',
 		borderRadius: 40,
 		width: 280,
 		alignSelf: 'center',
@@ -493,19 +477,19 @@ const styles = StyleSheet.create({
 	},
 	DoneButtonText: {
 		color: '#fff',
-		fontFamily: 'Montserrat_700Bold',
-		fontSize: 20,
-		padding: 5,
+		fontFamily: 'Montserrat_900Black',
+		fontSize: 25,
+		padding: 1,
 	},
 
 	BackButton: {
-		marginTop: 35,
+		marginTop: 30,
+		marginBottom: 10,
 	},
 
 	BackButtonText: {
-		color: '#fff',
-		fontFamily: 'Montserrat_700Bold',
-		fontSize: 14,
-		paddingBottom: 30,
+		color: 'rgba(0,0,0,0.77)',
+		fontFamily: constantStyle.defaultFont,
+		fontSize: Dimensions.get('window').width < 1080 ? 14 : 16,
 	},
 });

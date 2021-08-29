@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ImageBackground, Dimensions } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Audio } from 'expo-av';
 import TransparentLogo from '../assets/bill-gamble-logo-transparent.png';
@@ -25,7 +25,7 @@ export default function Chicken({ navigation }) {
 	useEffect(() => {
 		chickenSound
 			? () => {
-					return [console.log('Unloading Sound'), chickenSound.unloadAsync()];
+					return ['Unloading Sound', chickenSound.unloadAsync()];
 			  }
 			: undefined;
 	});
@@ -33,12 +33,12 @@ export default function Chicken({ navigation }) {
 	//! Functions
 
 	async function playSound() {
-		console.log('Loading Sound');
+		('Loading Sound');
 		const { sound } = await Audio.Sound.createAsync(
 			require('../assets/Chicken-www.fesliyanstudios.com.mp3')
 		);
 		setChickenSound(sound);
-		console.log('Playing Sound');
+		('Playing Sound');
 		await sound.playAsync();
 	}
 
@@ -57,7 +57,7 @@ export default function Chicken({ navigation }) {
 						if (mounted) {
 							return [navigation.navigate('Results'), setMounted(false)];
 						} else {
-							console.log(mounted);
+							mounted;
 						}
 					}}
 					style={{ ...styles.Buttons, backgroundColor: 'green' }}
@@ -70,7 +70,7 @@ export default function Chicken({ navigation }) {
 						if (mounted) {
 							return [navigation.navigate('Home'), playSound(), setMounted(false)];
 						} else {
-							console.log(mounted);
+							mounted;
 						}
 					}}
 					style={{ ...styles.Buttons, backgroundColor: 'red', marginBottom: 50 }}
@@ -96,10 +96,11 @@ export default function Chicken({ navigation }) {
 				<Text
 					style={{
 						color: '	rgb(255,214,0)',
-						fontSize: 33,
+						fontSize: Dimensions.get('window').width < 1080 ? 25 : 33,
+
 						alignSelf: 'center',
 						fontFamily: 'Montserrat_800ExtraBold_Italic',
-						marginBottom: 5,
+						marginBottom: Dimensions.get('window').width < 1080 ? 10 : 5,
 					}}
 				>
 					{billValue}

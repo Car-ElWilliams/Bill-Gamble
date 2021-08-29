@@ -3,18 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="331b55d9-2c51-4d57-bb4a-30e358e4f9c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/fonts/Montserrat-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/fonts/Montserrat-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/fonts/Montserrat-ExtraBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/android-splash-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/android-splash-screen.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/LoadingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoadingScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/tools/AlertBox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Chicken.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Note.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Players.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Results.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/NormalModeSVG.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/RecieptSVG.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/RecieptSVG.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/primeColors.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/primeColors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Note.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Note.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Players.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Players.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,11 +47,11 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="100" width="1080" height="520" key="AVDManager" timestamp="1629905453510">
+    <state x="100" y="100" width="1080" height="520" key="AVDManager" timestamp="1630242553405">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="-1770" y="51" width="1620" height="780" key="AVDManager/0.0.1280.720/-1920.-99.1920.1080@-1920.-99.1920.1080" timestamp="1624645213996" />
-    <state x="100" y="100" width="1080" height="520" key="AVDManager/0.0.1280.720/-1920.-99.1920.1080@0.0.1280.720" timestamp="1629905453510" />
+    <state x="100" y="100" width="1080" height="520" key="AVDManager/0.0.1280.720/-1920.-99.1920.1080@0.0.1280.720" timestamp="1630242553405" />
     <state x="100" y="100" width="1080" height="520" key="AVDManager/0.0.1280.720@0.0.1280.720" timestamp="1629379388959" />
     <state x="421" y="115" key="FileChooserDialogImpl" timestamp="1623658446615">
       <screen x="0" y="0" width="1280" height="720" />

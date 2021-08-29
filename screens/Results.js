@@ -35,13 +35,13 @@ export default function Results({ navigation }) {
 
 	useEffect(() => {
 		const belowZero = currentValue => currentValue >= 0;
-		console.log(amountToPay.every(belowZero));
+		amountToPay.every(belowZero);
 		if (amountToPay.every(belowZero) === false) {
 			if (riskyLevel) {
-				console.log('negative value was removed');
+				('negative value was removed');
 				randomizeRiskyResults();
 			} else if (!riskyLevel) {
-				console.log('negative value was removed');
+				('negative value was removed');
 				randomizeNormalResults();
 			}
 		} else {
@@ -62,7 +62,7 @@ export default function Results({ navigation }) {
 	function randomizeNormalResults() {
 		const RandomPayOrEvenPay = Math.floor(Math.random() * 2) + 1;
 
-		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
+		'RandomPayOrEvenPay:', RandomPayOrEvenPay;
 
 		if (RandomPayOrEvenPay === 1) {
 			return [normalModeRandomPay(), setSplit(false)];
@@ -100,7 +100,7 @@ export default function Results({ navigation }) {
 		let player5;
 		let player6;
 
-		//console.log(Math.floor((0.8 / howManyPlayers) * billValue));
+		//(Math.floor((0.8 / howManyPlayers) * billValue));
 
 		switch (howManyPlayers) {
 			case 2:
@@ -162,7 +162,7 @@ export default function Results({ navigation }) {
 	function randomizeRiskyResults() {
 		const RandomPayOrEvenPay = Math.floor(Math.random() * 101);
 
-		console.log('RandomPayOrEvenPay:', RandomPayOrEvenPay);
+		'RandomPayOrEvenPay:', RandomPayOrEvenPay;
 
 		if (RandomPayOrEvenPay === 50) {
 			//1% chance of splitting evenly
@@ -190,7 +190,7 @@ export default function Results({ navigation }) {
 				setAmountToPay(shuffleArray([player1, player2]));
 
 				//setTimeout(function () {
-				//	console.log('setScore', scoreResults, amountToPay);
+				//	('setScore', scoreResults, amountToPay);
 				//}, 1000);
 				break;
 
@@ -240,7 +240,7 @@ export default function Results({ navigation }) {
 		function shuffleArray(array) {
 			//Fisher Yates Baby!
 
-			//console.log('array coming in', array);
+			//('array coming in', array);
 			var currentIndex = array.length,
 				randomIndex;
 			while (0 !== currentIndex) {
@@ -248,7 +248,7 @@ export default function Results({ navigation }) {
 				currentIndex--;
 				[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 			}
-			//console.log('array coming out', array);
+			//('array coming out', array);
 			return array;
 		}
 
@@ -285,7 +285,7 @@ export default function Results({ navigation }) {
 		return setWinner(allPlayerNames[foundWinnerIndex]);
 	}
 	useEffect(() => {
-		console.log('WINNER CHANGED TO ', winner, 'LOSER CHANGED TO', loser);
+		'WINNER CHANGED TO ', winner, 'LOSER CHANGED TO', loser;
 	}, [winner, setWinner, loser, setLoser]);
 
 	useEffect(() => {

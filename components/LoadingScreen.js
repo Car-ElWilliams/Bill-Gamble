@@ -11,6 +11,7 @@ import {
 import LoadingImage from '../assets/android-splash-screen.png';
 import { ProgressBar, Colors } from 'react-native-paper';
 import Context from '../Context';
+import constantStyle from '../constants/primeColors.js';
 
 export default function LoadingScreen(props) {
 	//UseContext
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: Dimensions.get('window').height,
 		flex: 1,
-		backgroundColor: 'rgb(255, 40, 40)',
+		backgroundColor: constantStyle.primaryThemeColor,
 	},
 	LoadingImage: {
 		position: 'absolute',

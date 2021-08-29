@@ -12,7 +12,6 @@ import Results from './screens/Results';
 import Context from './Context';
 
 import AppLoading from 'expo-app-loading';
-import { Asset } from 'expo-asset';
 
 import {
 	useFonts,
