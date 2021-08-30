@@ -111,7 +111,7 @@ export default function BillAmount({ route, navigation }) {
 							<TextInput
 								label='Enter Bill Amount'
 								placeholder='500'
-								placeholderTextColor='rgba(255, 255, 255, 0.85)'
+								placeholderTextColor='rgba(15, 7, 7, 0.24)'
 								keyboardType='number-pad'
 								onChangeText={e => {
 									const regex = new RegExp(/^[0-9\b]+$/);
@@ -255,29 +255,30 @@ const styles = StyleSheet.create({
 	BillInput: {
 		width: '70%',
 		borderWidth: 3,
-		borderColor: 'rgb(255, 218, 68)',
-		borderRadius: 15,
-		backgroundColor: 'rgb(252,0,0)',
+		borderColor: 'rgb(255, 255, 255)',
+		borderRadius: 100,
+		backgroundColor: 'rgb(255,255,255)',
 		padding: Dimensions.get('window').width < 380 ? 7.5 : 10,
 		fontSize: Dimensions.get('window').width < 380 ? 28 : 30,
 
 		fontFamily: 'Montserrat_700Bold',
-		color: 'white',
+		color: 'rgb(49, 49, 49)',
 	},
 
 	nextButton: {
 		marginTop: 53,
-		borderWidth: 2.5,
-		borderColor: 'rgb(255, 218, 68)',
-		backgroundColor: 'rgb(252,0,0)',
-		borderRadius: 40,
-		width: '50%',
+		//borderWidth: 1.2,
+		borderColor: 'rgb(255, 255, 255)',
+		backgroundColor: 'rgba(24,150,21,0)',
+		//borderRadius: 40,
+		width: '40%',
 	},
 
 	NextButtonInnerText: {
 		color: '#fff',
 		fontFamily: 'Montserrat_700Bold',
-		fontSize: Dimensions.get('window').width < 380 ? 20 : 25,
+		fontSize: Dimensions.get('window').width < 380 ? 22 : 30,
+		textDecorationLine: 'underline',
 	},
 
 	BackButton: {

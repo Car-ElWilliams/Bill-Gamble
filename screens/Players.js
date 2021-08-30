@@ -64,7 +64,6 @@ export default function BillAmount({ route, navigation }) {
 						style={{
 							flex: 1,
 							flexDirection: 'row',
-
 							alignItems: 'center',
 						}}
 					>
@@ -74,6 +73,7 @@ export default function BillAmount({ route, navigation }) {
 								fontFamily: 'Montserrat_800ExtraBold_Italic',
 								justifyContent: 'flex-start',
 								width: '90%',
+								color: 'black',
 							}}
 						>
 							{i + 1}#{'  '}
@@ -83,6 +83,9 @@ export default function BillAmount({ route, navigation }) {
 									fontSize: 27,
 									fontFamily: 'Montserrat_800ExtraBold_Italic',
 									width: '110%',
+									//textDecorationLine: 'underline',
+									borderWidth: 2,
+									borderBottomColor: 'black',
 								}}
 							>
 								{players}
@@ -147,6 +150,10 @@ export default function BillAmount({ route, navigation }) {
 			checkMaxPlayerCountAndAddPlayers();
 		}
 
+		if (playerNumberCount >= 1) {
+			setShowMinimumPlayer(false);
+		}
+
 		playerNumberCount;
 		if (playerNumberCount === 5) {
 			setErrorMessage('Max players reached');
@@ -187,10 +194,10 @@ export default function BillAmount({ route, navigation }) {
 
 	function enableAddButton() {
 		if (playerArray.length > 1) {
-			return [setDisableButton(false), setShowMinimumPlayer(false)];
+			return [setDisableButton(false)];
 		}
 
-		return [setDisableButton(true), setShowMinimumPlayer(true)];
+		return [setDisableButton(true)];
 	}
 
 	function checkIdenticalPlayer(name) {
@@ -332,9 +339,13 @@ export default function BillAmount({ route, navigation }) {
 							</View>
 						</View>
 						<Button
-							disabled={disableButton}
 							onPress={() => {
-								return [submitAllPlayers(), navigation.navigate('Chicken')];
+								if (disableButton) {
+									setShowMinimumPlayer(true);
+								} else {
+									setShowMinimumPlayer(false);
+									return [submitAllPlayers(), navigation.navigate('Chicken')];
+								}
 							}}
 							style={styles.DoneButton}
 							labelStyle={styles.DoneButtonText}
@@ -422,14 +433,14 @@ const styles = StyleSheet.create({
 
 	PlayerInput: {
 		width: '70%',
-		borderWidth: 2.5,
-		borderColor: 'rgb(255,214, 0)',
-		borderRadius: 20,
-		backgroundColor: 'rgba(208, 4, 4, 0.67)',
+		//borderWidth: 2,
+		//borderColor: 'rgb(0,0, 0)',
+		borderRadius: 16,
+		backgroundColor: 'rgba(255, 255, 255,1)',
 		padding: 10,
 		fontSize: 37,
 		fontFamily: 'Montserrat_700Bold',
-		color: 'white',
+		color: 'rgb(49,49,49)',
 		textAlign: 'center',
 	},
 
@@ -439,13 +450,12 @@ const styles = StyleSheet.create({
 	},
 
 	playerBoard: {
-		backgroundColor: 'rgba(208, 4, 4, 0.67)',
-		borderWidth: 2.5,
-		borderColor: 'white',
+		//backgroundColor: 'rgba(255, 255, 255, 1)',
+		//borderWidth: 2.5,
 		borderRadius: 10,
 		padding: 27,
 		width: '85%',
-		borderColor: 'rgb(255,214, 0)',
+		//borderColor: 'black',
 	},
 
 	playerBoardHeader: {
@@ -453,7 +463,7 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 35,
 		fontFamily: 'Montserrat_800ExtraBold_Italic',
-		borderColor: 'rgb(255,214, 0)',
+		borderColor: 'black',
 		borderBottomWidth: 2.5,
 		borderRadius: 3.1,
 		paddingBottom: 12.5,
@@ -467,18 +477,19 @@ const styles = StyleSheet.create({
 	DoneButton: {
 		marginTop: 55,
 		borderWidth: 2,
-		borderColor: 'rgb(255, 218, 68)',
-		backgroundColor: 'rgba(208, 4, 4, 0.67)',
-		borderRadius: 40,
-		width: 280,
+		//borderColor: 'rgb(255, 218, 68)',
+		//backgroundColor: 'rgba(208, 4, 4, 0.67)',
+		//borderRadius: 40,
+		//width: 280,
 		alignSelf: 'center',
 		color: 'red',
 	},
 	DoneButtonText: {
 		color: '#fff',
 		fontFamily: 'Montserrat_900Black',
-		fontSize: 25,
+		fontSize: 30,
 		padding: 1,
+		textDecorationLine: 'underline',
 	},
 
 	BackButton: {

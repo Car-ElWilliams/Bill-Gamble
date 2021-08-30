@@ -1,8 +1,8 @@
 {
 	"expo": {
-		"name": "Bill Gamble - Split the bill the exciting way",
+		"name": "Bill Gamble - Split the pizza the exciting way",
 		"slug": "bill-gamble",
-		"version": "1.0.21",
+		"version": "1.0.3",
 		"orientation": "portrait",
 		"icon": "./assets/bill-gamble-icon-correct.png",
 		"splash": {
