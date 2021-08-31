@@ -39,6 +39,9 @@ export default function BillAmount({ route, navigation }) {
 
 	//! Functions
 
+	console.log(Dimensions.get('window').width);
+	console.log(Dimensions.get('window').height);
+
 	useEffect(() => {
 		enableAddButton();
 
@@ -240,7 +243,7 @@ export default function BillAmount({ route, navigation }) {
 						<Text
 							style={{
 								...styles.EnterPlayerText,
-								fontSize: 40,
+								fontSize: Dimensions.get('window').width < 412 ? 35 : 40,
 								textAlign: 'center',
 								marginTop: 70,
 								marginBottom: 55,
