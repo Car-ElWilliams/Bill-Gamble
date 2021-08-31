@@ -550,7 +550,6 @@ export default function Home({ navigation }) {
 					</TouchableOpacity>
 				</Modal>
 			)}
-			{/*<Ads />*/}
 		</SafeAreaView>
 	);
 }

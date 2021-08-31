@@ -10,6 +10,7 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
+	PixelRatio,
 } from 'react-native';
 
 import { Button } from 'react-native-paper';
@@ -37,10 +38,13 @@ export default function BillAmount({ route, navigation }) {
 
 	const [showMinimumPlayer, setShowMinimumPlayer] = useState(false);
 
-	//! Functions
+	let adjustedFontsize = 40;
 
-	console.log(Dimensions.get('window').width);
-	console.log(Dimensions.get('window').height);
+	if (PixelRatio.get() > 2) {
+		adjustedFontsize = 42;
+	}
+
+	//! Functions
 
 	useEffect(() => {
 		enableAddButton();
@@ -243,13 +247,14 @@ export default function BillAmount({ route, navigation }) {
 						<Text
 							style={{
 								...styles.EnterPlayerText,
-								fontSize: Dimensions.get('window').width < 412 ? 35 : 40,
+								//fontSize: Dimensions.get('window').width < 412 ? 34 : 40,
+								fontSize: adjustedFontsize,
 								textAlign: 'center',
 								marginTop: 70,
 								marginBottom: 55,
 							}}
 						>
-							Enter player names
+							Enter{'\n'}player names
 						</Text>
 						{/*<Text
 							style={{
@@ -380,7 +385,6 @@ export default function BillAmount({ route, navigation }) {
 					>
 						<Text>Back</Text>
 					</Button>
-					{/*<Ads />*/}
 				</ScrollView>
 			</KeyboardAvoidingView>
 		</SafeAreaView>
@@ -403,6 +407,8 @@ const styles = StyleSheet.create({
 	},
 
 	SafeAreaView: {
+		minHeight: '100%',
+		backgroundColor: constantStyle.primaryThemeColor,
 		marginHorizontal: 0,
 	},
 
@@ -435,7 +441,7 @@ const styles = StyleSheet.create({
 	},
 
 	PlayerInput: {
-		width: '70%',
+		width: '75%',
 		//borderWidth: 2,
 		//borderColor: 'rgb(0,0, 0)',
 		borderRadius: 16,
@@ -478,12 +484,8 @@ const styles = StyleSheet.create({
 	},
 
 	DoneButton: {
-		marginTop: 55,
+		marginTop: 40,
 		borderWidth: 2,
-		//borderColor: 'rgb(255, 218, 68)',
-		//backgroundColor: 'rgba(208, 4, 4, 0.67)',
-		//borderRadius: 40,
-		//width: 280,
 		alignSelf: 'center',
 		color: 'red',
 	},
@@ -496,8 +498,8 @@ const styles = StyleSheet.create({
 	},
 
 	BackButton: {
-		marginTop: 30,
-		marginBottom: 10,
+		marginTop: 20,
+		marginBottom: 20,
 	},
 
 	BackButtonText: {

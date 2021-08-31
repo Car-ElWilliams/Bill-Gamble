@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-paper';
 import Context from '../Context';
-import Ads from '../components/Ads';
 import RecieptSVG from '../components/RecieptSVG';
 import constantStyle from '../constants/primeColors.js';
 
@@ -158,8 +157,6 @@ export default function BillAmount({ route, navigation }) {
 								<Text>Back</Text>
 							</Button>
 						</View>
-
-						{/*<Ads />*/}
 					</ScrollView>
 				</KeyboardAvoidingView>
 			</SafeAreaView>
