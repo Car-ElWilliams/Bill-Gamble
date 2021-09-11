@@ -4,5 +4,5 @@ export default {
 	blackFont: 'Montserrat_900Black',
 	blackFontItalics: 'Montserrat_900Black_Italic',
 	normalModeColor: 'green',
-	riskyBannerColor: 'rgb(150, 0, 0)',
+	riskyBannerColor: 'rgb(160, 0, 0)',
 };

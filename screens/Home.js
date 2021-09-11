@@ -100,7 +100,7 @@ export default function Home({ navigation }) {
 				style={styles.Buttons}
 				labelStyle={styles.ButtonInnerText}
 				mode='contained'
-				color='#D00404'
+				color={constantStyle.riskyBannerColor}
 				onPress={() => {
 					return [
 						navigation.navigate('Note', {
@@ -139,6 +139,7 @@ export default function Home({ navigation }) {
 						flex: 1,
 						verticalAlign: 'center',
 						alignItems: 'center',
+						justifyContent: 'center',
 					}}
 				>
 					<TouchableOpacity
@@ -168,7 +169,7 @@ export default function Home({ navigation }) {
 									color: 'white',
 									fontFamily: constantStyle.blackFont,
 									fontSize: Dimensions.get('window').width < 380 ? 35 : 40,
-									marginBottom: 15,
+									marginVertical: 15,
 								}}
 							>
 								Bill Gamble?
@@ -615,6 +616,6 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat_700Bold',
 		marginTop: 10,
 		marginBottom: 30,
-		fontSize: 10,
+		fontSize: 10.77,
 	},
 });

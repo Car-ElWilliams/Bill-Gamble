@@ -28,6 +28,12 @@
 				"googleMobileAdsAppId": "ca-app-pub-6661657557871667~2917398370"
 			}
 		},
+
+		"androidNavigationBar": {
+			"barStyle": "light-content",
+			"backgroundColor": "#000000"
+		},
+
 		"web": {
 			"favicon": "./assets/favicon.png"
 		},

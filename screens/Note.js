@@ -164,8 +164,8 @@ export default function BillAmount({ route, navigation }) {
 	);
 }
 
-const heightRiskLevelBanner = Platform.OS === 'ios' ? 55 : 70;
-const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 10;
+const heightRiskLevelBanner = Platform.OS === 'ios' ? 55 : 75;
+const marginTopRiskLevelBanner = Platform.OS === 'ios' ? -10 : 15;
 //const windowHeight = Dimensions.get('screen').height;
 
 let svgNoteImageMaxHeight;
@@ -229,9 +229,11 @@ const styles = StyleSheet.create({
 
 	riskyBanner: {
 		flex: 1,
+		flexDirection: 'row',
 		backgroundColor: constantStyle.riskyBannerColor,
 		height: heightRiskLevelBanner,
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	riskyBannerText: {
 		alignItems: 'center',
@@ -272,10 +274,13 @@ const styles = StyleSheet.create({
 	},
 
 	NextButtonInnerText: {
-		color: '#fff',
+		color: 'rgb(248,248,0)',
 		fontFamily: 'Montserrat_700Bold',
 		fontSize: Dimensions.get('window').width < 380 ? 22 : 30,
-		textDecorationLine: 'underline',
+		//textDecorationLine: 'underline',
+		textShadowColor: 'rgba(0, 0, 0, 0.17)',
+		textShadowOffset: { width: 0.5, height: 3 },
+		textShadowRadius: 2,
 	},
 
 	BackButton: {

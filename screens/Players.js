@@ -49,22 +49,24 @@ export default function BillAmount({ route, navigation }) {
 	useEffect(() => {
 		enableAddButton();
 
-		if (playerArray.length === 7) {
+		if (playerArray.length === 7 || allPlayerNames.length === 7) {
 			setLabelForPlayers('Max Players Reached');
 		} else {
 			setLabelForPlayers(`Enter player ${playerNumberCount + 1} name`);
 		}
 
-		if (playerArray.length === 7) {
+		if (playerArray.length === 7 || allPlayerNames.length == 7) {
 			setDisablePlayerTextInput(true);
 		} else {
 			setDisablePlayerTextInput(false);
 		}
-	}, [playerArray]);
+	}, [playerArray, allPlayerNames]);
 
 	function renderPlayers() {
+		let player = allPlayerNames ? allPlayerNames : playerArray;
+		console.log(player);
 		return [
-			playerArray.map((players, i) => {
+			player.map((players, i) => {
 				return (
 					<View
 						key={players + i}
@@ -100,7 +102,7 @@ export default function BillAmount({ route, navigation }) {
 						</Text>
 						<TouchableOpacity
 							onPress={() => {
-								return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
+								return [removePlayer(players, i), setPlayerNumberCount(player.length - 1)];
 							}}
 							style={{ padding: 12 }}
 						>
@@ -113,7 +115,7 @@ export default function BillAmount({ route, navigation }) {
 									//marginLeft: 12,
 								}}
 								onPress={() => {
-									return [removePlayer(players, i), setPlayerNumberCount(playerArray.length - 1)];
+									return [removePlayer(players, i), setPlayerNumberCount(player.length - 1)];
 								}}
 							>
 								<PlayerTrashCan />
@@ -126,9 +128,12 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function removePlayer(playerToRemove, indexToRemove) {
+		let setPlayers = allPlayerNames ? setAllPlayerNames : setPlayerArray;
+		let players = allPlayerNames ? allPlayerNames : playerArray;
+
 		return [
-			setPlayerArray(
-				playerArray.filter((player, index) => {
+			setPlayers(
+				players.filter((player, index) => {
 					//Works...
 					return index !== indexToRemove;
 				})
@@ -137,7 +142,8 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function submitAllPlayers() {
-		setAllPlayerNames(playerArray);
+		let players = allPlayerNames ? allPlayerNames : playerArray;
+		setAllPlayerNames(players);
 	}
 
 	const clearText = useCallback(() => {
@@ -153,7 +159,7 @@ export default function BillAmount({ route, navigation }) {
 			return false;
 		}
 
-		if (playerArray === 6) {
+		if (playerArray === 6 || allPlayerNames === 6) {
 			checkMaxPlayerCountAndAddPlayers();
 		}
 
@@ -172,10 +178,13 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function checkMaxPlayerCountAndAddPlayers() {
+		let setPlayers = allPlayerNames ? setAllPlayerNames : setPlayerArray;
+		let players = allPlayerNames ? allPlayerNames : playerArray;
+
 		if (playerNumberCount <= 5) {
 			return [
-				setPlayerArray([...playerArray, getPlayersFromInput]),
-				setPlayerNumberCount(playerArray.length + 1),
+				setPlayers([...players, getPlayersFromInput]),
+				setPlayerNumberCount(players.length + 1),
 				clearText(),
 				setGetplayersFromInput(''),
 				React.memo(() => {
@@ -200,7 +209,7 @@ export default function BillAmount({ route, navigation }) {
 	}, []);
 
 	function enableAddButton() {
-		if (playerArray.length > 1) {
+		if (playerArray.length > 1 || allPlayerNames.length > 1) {
 			return [setDisableButton(false)];
 		}
 
@@ -208,7 +217,7 @@ export default function BillAmount({ route, navigation }) {
 	}
 
 	function checkIdenticalPlayer(name) {
-		if (playerArray.includes(name)) {
+		if (playerArray.includes(name) || allPlayerNames.includes(name)) {
 			setErrorMessage('Identical player exists');
 			return true;
 		} else {
@@ -330,10 +339,10 @@ export default function BillAmount({ route, navigation }) {
 						>
 							<Text
 								style={{
-									color: '#fff',
-									fontSize: 30,
+									color: 'rgba(30,30,30, 0.9)',
+									fontSize: 33,
 									fontFamily: 'Montserrat_900Black',
-									textDecorationLine: 'underline',
+									marginTop: 5,
 									textAlign: 'center',
 								}}
 							>
@@ -343,7 +352,7 @@ export default function BillAmount({ route, navigation }) {
 						<View style={styles.playerBoardContainer}>
 							<View style={styles.playerBoard}>
 								<Text style={styles.playerBoardHeader}>PLAYERS</Text>
-								<View>{playerArray.length !== 0 && renderPlayers()}</View>
+								<View>{renderPlayers()}</View>
 							</View>
 						</View>
 						<Button
@@ -410,6 +419,7 @@ const styles = StyleSheet.create({
 		minHeight: '100%',
 		backgroundColor: constantStyle.primaryThemeColor,
 		marginHorizontal: 0,
+		paddingBottom: 10,
 	},
 
 	KeyboardAvoidingView: {
@@ -441,7 +451,7 @@ const styles = StyleSheet.create({
 	},
 
 	PlayerInput: {
-		width: '75%',
+		minWidth: '60%',
 		//borderWidth: 2,
 		//borderColor: 'rgb(0,0, 0)',
 		borderRadius: 16,
@@ -484,17 +494,20 @@ const styles = StyleSheet.create({
 	},
 
 	DoneButton: {
-		marginTop: 40,
+		marginTop: 50,
 		borderWidth: 2,
 		alignSelf: 'center',
 		color: 'red',
 	},
 	DoneButtonText: {
-		color: '#fff',
 		fontFamily: 'Montserrat_900Black',
 		fontSize: 30,
 		padding: 1,
-		textDecorationLine: 'underline',
+		color: 'rgb(248,248,0)',
+		fontFamily: 'Montserrat_700Bold',
+		textShadowColor: 'rgba(0, 0, 0, 0.2)',
+		textShadowOffset: { width: 0.5, height: 3 },
+		textShadowRadius: 2,
 	},
 
 	BackButton: {
