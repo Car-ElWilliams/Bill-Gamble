@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoadingScreen from './components/LoadingScreen';
-import Home from './screens/Home.js';
+import Home from './screens/Home/Home.js';
 import Note from './screens/Note';
 import Players from './screens/Players';
 import Chicken from './screens/Chicken';
